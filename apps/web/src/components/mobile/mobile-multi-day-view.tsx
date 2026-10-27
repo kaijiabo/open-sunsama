@@ -9,6 +9,7 @@ import {
 import type { CalendarEvent, TimeBlock } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { declinedEventClass } from "@/lib/declined-event";
+import { isNotReplied } from "@/lib/event-response";
 import { ScrollArea } from "@/components/ui";
 import {
   HOUR_HEIGHT,
@@ -214,7 +215,9 @@ export function MobileMultiDayView({
                       onClick={() => onEventClick(event)}
                       style={{ top, height }}
                       className={cn(
-                        "absolute inset-x-0.5 z-9 overflow-hidden rounded border-l-2 border-muted-foreground/40 bg-muted/70 px-1 text-left text-[10px] leading-tight text-foreground active:brightness-95",
+                        "absolute inset-x-0.5 z-9 overflow-hidden rounded border-l-2 border-muted-foreground/40 px-1 text-left text-[10px] leading-tight text-foreground active:brightness-95",
+                        // Not replied: an outline instead of the fill.
+                        isNotReplied(event) ? "bg-background ring-1 ring-inset ring-muted-foreground/40" : "bg-muted/70",
                         declinedEventClass(event)
                       )}
                     >

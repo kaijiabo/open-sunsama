@@ -9,6 +9,7 @@ import {
 import type { CalendarEvent } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { declinedEventClass } from "@/lib/declined-event";
+import { eventSurface, responseLabel } from "@/lib/event-response";
 import { CalendarDays } from "lucide-react";
 import {
   calculateYFromTime,
@@ -208,7 +209,7 @@ export function ExternalEvent({
               // between sub-columns to keep them visually distinct.
               left: `calc(${(100 / layout.columnCount) * layout.lane}% + ${layout.lane === 0 ? "4px" : "1px"})`,
               width: `calc(${100 / layout.columnCount - COLUMN_GAP_PCT}% - ${layout.lane === 0 ? "4px" : "1px"})`,
-              backgroundColor: hexToRgba(color, 0.2),
+              ...eventSurface(event, color, hexToRgba(color, 0.2)),
               borderColor: color,
               // Suppress iOS Safari's text-selection callout on
               // long-press — it would otherwise race with our 400ms
@@ -319,6 +320,9 @@ export function ExternalEvent({
               />
               <span>{calendarName}</span>
             </div>
+            {responseLabel(event) && (
+              <p className="text-xs text-muted-foreground">{responseLabel(event)}</p>
+            )}
             {event.location && (
               <p className="text-xs text-muted-foreground">📍 {event.location}</p>
             )}
@@ -365,7 +369,7 @@ export function AllDayEvent({
               className
             )}
             style={{
-              backgroundColor: hexToRgba(color, 0.15),
+              ...eventSurface(event, color, hexToRgba(color, 0.15)),
               borderLeft: `3px solid ${hexToRgba(color, 0.6)}`,
             }}
             onClick={handleClick}
@@ -393,6 +397,9 @@ export function AllDayEvent({
               />
               <span>{calendarName}</span>
             </div>
+            {responseLabel(event) && (
+              <p className="text-xs text-muted-foreground">{responseLabel(event)}</p>
+            )}
             {event.location && (
               <p className="text-xs text-muted-foreground">📍 {event.location}</p>
             )}

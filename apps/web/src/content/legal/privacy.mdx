@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last updated: January 30, 2026**
+**Last updated: November 20, 2026**
 
 Open Sunsama ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-agent-friendly task management and time blocking application.
 
@@ -88,6 +88,24 @@ We retain your information for as long as your account is active or as needed to
 - Your tasks, time blocks, and personal data are permanently deleted within 30 days
 - Anonymized usage data may be retained for analytical purposes
 - Backups are purged according to our retention schedule
+
+## Google User Data
+
+When you connect a Google account under **Settings → Calendars**, Open Sunsama asks Google for these permissions:
+
+- **See your calendars and events** (`calendar.readonly`): we read your calendar list and the events in the calendars you turn on, and show them on your calendar and board next to your tasks.
+- **Edit events in your calendars** (`calendar.events`): we create, update or delete an event only when you do so in Open Sunsama, such as creating an event, moving a meeting on the calendar, or deleting an event.
+- **Your email address and basic profile** (`userinfo.email`, `userinfo.profile`): we use these to label the connected account in your settings.
+
+How we handle this data:
+
+- **Storage:** Google access and refresh tokens are encrypted at rest. Synced calendars and events are stored in our database so the app can show them quickly.
+- **Who can see it:** only you. Our staff do not read your calendar data, except when you ask us to for support, when it is needed for security (such as investigating abuse), or when the law requires it.
+- **Sharing:** we do not sell Google user data and do not use it for advertising. We share it only with the infrastructure providers that host Open Sunsama, and with AI agents or API clients that **you** authorize with the `calendar:read` scope, so they can see your schedule on your behalf.
+- **AI models:** we do not use Google user data to develop, improve or train generalized artificial intelligence or machine learning models.
+- **Deletion:** disconnecting the account in **Settings → Calendars** deletes its tokens, calendars and events from our database right away. Deleting your Open Sunsama account deletes all of it too. You can also revoke access at any time at [myaccount.google.com/permissions](https://myaccount.google.com/permissions).
+
+Open Sunsama's use and transfer to any other app of information received from Google APIs will adhere to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements.
 
 ## Third-Party Services
 

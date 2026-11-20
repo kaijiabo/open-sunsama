@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, type QueryClient } from "@tanstack/react-query";
 import type {
   CalendarAccount,
   Calendar,
@@ -643,6 +643,12 @@ export function useDeleteCalendarEvent() {
  * stopped halfway (#205). The callback saves the account server-side, so the
  * app just refetches calendars when its window regains focus.
  */
+let focusQueryClient: QueryClient | undefined;
+let stopRefetchOnFocusTimer: ReturnType<typeof setTimeout> | undefined;
+function refetchCalendarsOnFocus() {
+  void focusQueryClient?.invalidateQueries({ queryKey: calendarKeys.all });
+}
+
 export function useInitiateOAuth() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -662,12 +668,13 @@ export function useInitiateOAuth() {
           title: "Finish connecting in your browser",
           description: "Your calendars appear here once you approve access.",
         });
-        const deadline = Date.now() + 15 * 60 * 1000;
-        const onFocus = () => {
-          void queryClient.invalidateQueries({ queryKey: calendarKeys.all });
-          if (Date.now() > deadline) window.removeEventListener("focus", onFocus);
-        };
-        window.addEventListener("focus", onFocus);
+        focusQueryClient = queryClient;
+        window.addEventListener("focus", refetchCalendarsOnFocus);
+        clearTimeout(stopRefetchOnFocusTimer);
+        stopRefetchOnFocusTimer = setTimeout(
+          () => window.removeEventListener("focus", refetchCalendarsOnFocus),
+          15 * 60 * 1000
+        );
         return;
       }
       window.location.href = authUrl;

@@ -185,7 +185,9 @@ export function seedDayCaches(
       continue;
     }
 
-    queryClient.setQueryData(cacheKey, dayTasks);
+    // Stamp it with when the range started, not now, so a newer range
+    // (started after this one) is still allowed to replace it.
+    queryClient.setQueryData(cacheKey, dayTasks, { updatedAt: rangeStartedAt });
   }
 }
 
@@ -212,6 +214,6 @@ export function seedSubtaskCaches(queryClient: QueryClient, data: TaskRangeData)
     ) {
       continue;
     }
-    queryClient.setQueryData(cacheKey, list);
+    queryClient.setQueryData(cacheKey, list, { updatedAt: data.fetchStartedAt });
   }
 }

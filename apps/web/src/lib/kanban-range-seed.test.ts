@@ -117,4 +117,24 @@ describe("seedDayCaches", () => {
 
     expect(qc.getQueryData<Subtask[]>(subtaskKeys.list("new"))).toEqual([sub]);
   });
+
+  it("lets a newer range replace subtasks seeded from an older one", () => {
+    const sub = { id: "s1", taskId: "new" } as Subtask;
+    const range = (fetchStartedAt: number, subs: Subtask[]) => ({
+      tasks: [task("new")],
+      subtasksByTaskId: { new: subs },
+      truncated: false,
+      fetchStartedAt,
+    });
+
+    // An older range (started at 2s) is seeded at 4s, while a newer range
+    // (started at 3s, after the subtask was saved) is still in flight.
+    vi.setSystemTime(4_000);
+    seedSubtaskCaches(qc, range(2_000, []));
+
+    vi.setSystemTime(5_000);
+    seedSubtaskCaches(qc, range(3_000, [sub]));
+
+    expect(qc.getQueryData<Subtask[]>(subtaskKeys.list("new"))).toEqual([sub]);
+  });
 });

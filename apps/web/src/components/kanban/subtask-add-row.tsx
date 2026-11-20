@@ -65,7 +65,7 @@ export const SubtaskAddRow = React.forwardRef<
       <span
         className={cn(
           "flex shrink-0 items-center justify-center rounded-full border-[1.5px] transition-colors",
-          size.check.replace("mt-0.5 ", ""),
+          size.check,
           "border-muted-foreground/30 text-muted-foreground/80",
           "group-focus-within/add:border-primary/60 group-focus-within/add:text-primary"
         )}

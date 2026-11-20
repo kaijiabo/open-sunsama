@@ -141,12 +141,19 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   const more = row.getByRole("button", { name: /^More options/ });
   await expect(more).toBeVisible();
   expect((await row.boundingBox())!.height).toBeLessThanOrEqual(48);
-  expect((await row.getByRole("button", { name: "Gather project ideas", exact: true }).boundingBox())!.x).toBe(draftLeft);
+  const editTitle = row.getByRole("button", { name: "Gather project ideas", exact: true });
+  expect((await editTitle.boundingBox())!.x).toBe(draftLeft);
+  await editTitle.press("Space");
+  const input = row.getByRole("textbox", { name: "Edit subtask" });
+  await input.fill("Review the ideas");
+  await input.press("Enter");
+  await expect(row.getByRole("button", { name: "Review the ideas", exact: true })).toBeVisible();
   await more.press("Space");
   const options = page.getByRole("dialog", { name: "Subtask options" });
   await options.getByRole("button", { name: /^Planned time/ }).click();
   await options.getByRole("button", { name: "15 min", exact: true }).click();
   await expect(options).toBeHidden();
+  await expect(more).toHaveText("0:15");
   await more.click();
   await expect(options.getByRole("button", { name: /Planned time.*0:15/ })).toBeVisible();
   await page.keyboard.press("Escape");
@@ -158,6 +165,13 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   await row.getByRole("button", { name: "Stop subtask timer" }).click();
   expect((await stopped).ok()).toBe(true);
   await expect(start).toBeVisible();
+  await more.click();
+  await options.getByRole("button", { name: /^Actual time/ }).click();
+  await options.getByRole("button", { name: "5 min", exact: true }).click();
+  await more.click();
+  await expect(options.getByRole("button", { name: /Actual time.*0:05/ })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(options).toBeHidden();
   const completed = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/subtasks/"));
   await row.getByRole("checkbox").click();
   expect((await completed).ok()).toBe(true);
@@ -165,6 +179,29 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   await more.click();
   await options.getByRole("button", { name: "Delete subtask" }).click();
   await expect(row).toHaveCount(0);
+});
+
+test("Space picks up and drops a subtask without starting its task timer", async ({ page }) => {
+  const session = await register();
+  const task = await api<{ id: string }>("POST", "/tasks", { title: "Order the checklist" }, session.token);
+  const list = `/tasks/${task.id}/subtasks`;
+  for (const [position, title] of ["First item", "Second item"].entries()) {
+    await api("POST", list, { title, position }, session.token);
+  }
+  await signInWithToken(page, session);
+  await page.goto(`/app/focus/${task.id}`);
+  const handle = page.getByRole("button", { name: "Reorder subtask" }).first();
+  const rows = page.locator("[data-subtask-id]");
+  const firstId = await rows.first().getAttribute("data-subtask-id");
+  const secondId = await rows.nth(1).getAttribute("data-subtask-id");
+  const announcement = page.getByRole("status").filter({ hasText: "Draggable item" });
+  await handle.press("Space", { delay: 80 });
+  await expect(announcement).toContainText(`over droppable area ${firstId}`);
+  await page.keyboard.press("ArrowDown");
+  await expect(announcement).toContainText(`over droppable area ${secondId}`);
+  await page.keyboard.press("Space");
+  await expect.poll(async () => (await api<{ title: string }[]>("GET", list, undefined, session.token)).map((item) => item.title)).toEqual(["Second item", "First item"]);
+  await expect(page.getByRole("button", { name: "Start timer", exact: true })).toBeVisible();
 });
 
 test("shows and resizes a time block on the full calendar", async ({ page }) => {

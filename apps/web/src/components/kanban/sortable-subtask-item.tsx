@@ -103,29 +103,7 @@ export function SortableSubtaskItem({
       )}
       onMouseEnter={() => setHoveredSubtaskId(subtask.id)}
       onMouseLeave={() => setHoveredSubtaskId(null)}
-      onKeyDown={(event) => {
-        if (event.key === " " && (event.target as HTMLElement).closest("button")) {
-          event.stopPropagation();
-        }
-      }}
     >
-      {/* Drag handle sits in the left gutter so checkboxes line up with the
-          add row. Hidden on touch, where there is no hover to reveal it. */}
-      <button
-        type="button"
-        {...attributes}
-        {...listeners}
-        aria-label="Reorder subtask"
-        className={cn(
-          "absolute -left-4 top-1.5 hidden h-5 w-4 items-center justify-center rounded sm:flex",
-          "cursor-grab touch-none text-muted-foreground/40 opacity-0 transition-opacity",
-          "hover:text-muted-foreground group-hover:opacity-100 focus-visible:opacity-100 active:cursor-grabbing",
-          isDragging && "opacity-100"
-        )}
-      >
-        <GripVertical className="h-3.5 w-3.5" />
-      </button>
-
       <button
         type="button"
         role="checkbox"
@@ -135,6 +113,7 @@ export function SortableSubtaskItem({
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
           size.check,
+          size.checkOffset,
           size.checkTarget,
           subtaskCheckState(subtask.completed)
         )}
@@ -154,7 +133,8 @@ export function SortableSubtaskItem({
           aria-label="Edit subtask"
           className={cn(
             "min-w-0 flex-1 border-none bg-transparent p-0 outline-hidden focus:ring-0",
-            size.text
+            size.text,
+            large && "max-lg:py-2.5"
           )}
         />
       ) : (
@@ -163,8 +143,8 @@ export function SortableSubtaskItem({
           disabled={!onUpdate}
           onClick={() => onUpdate && setIsEditing(true)}
           className={cn(
-            "min-w-0 flex-1 break-words rounded-sm text-left transition-colors",
-            large && "max-lg:min-h-11",
+            "min-w-0 flex-1 break-words rounded-sm text-left transition-colors focus-visible:ring-1 focus-visible:ring-ring",
+            large && "max-lg:py-2.5",
             size.text,
             onUpdate && "cursor-text",
             subtask.completed &&
@@ -174,6 +154,23 @@ export function SortableSubtaskItem({
           {subtask.title}
         </button>
       )}
+
+      <button
+        type="button"
+        {...attributes}
+        {...listeners}
+        aria-label="Reorder subtask"
+        className={cn(
+          "absolute -left-4 top-1.5 hidden h-5 w-4 items-center justify-center rounded sm:flex",
+          "cursor-grab touch-none text-muted-foreground opacity-0 transition-opacity",
+          "hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-1 focus-visible:ring-ring active:cursor-grabbing",
+          large &&
+            "sm:max-lg:static sm:max-lg:size-11 sm:max-lg:shrink-0 sm:max-lg:[@media(hover:none)]:opacity-100",
+          isDragging && "opacity-100"
+        )}
+      >
+        <GripVertical className="h-3.5 w-3.5" />
+      </button>
 
       {showTiming && (
         <SubtaskTiming

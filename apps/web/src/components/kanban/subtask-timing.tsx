@@ -95,14 +95,24 @@ function MobileSubtaskOptions({
         <button
           type="button"
           aria-label={`More options for ${subtask.title}`}
-          className="flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+          aria-description={
+            subtask.estimatedMins
+              ? `Planned time: ${formatDuration(subtask.estimatedMins)}`
+              : undefined
+          }
+          className="flex h-11 w-14 items-center justify-end gap-1.5 rounded-md pr-1.5 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
         >
-          <Ellipsis className="size-4" />
+          {subtask.estimatedMins ? (
+            <span className="text-xs tabular-nums">
+              {formatDuration(subtask.estimatedMins)}
+            </span>
+          ) : null}
+          <Ellipsis className="size-3.5 shrink-0" />
         </button>
       </PopoverTrigger>
       <PopoverContent
         align="end"
-        className="w-auto p-0"
+        className="w-auto p-0 [&_button:focus-visible]:ring-1 [&_button:focus-visible]:ring-ring"
         aria-label="Subtask options"
       >
         {field ? (
@@ -125,7 +135,7 @@ function MobileSubtaskOptions({
                   key={label}
                   disabled={ticking}
                   onClick={() => setField(label)}
-                  className="flex min-h-11 w-full items-center gap-2 rounded-md px-2.5 text-sm enabled:hover:bg-accent"
+                  className="flex min-h-11 w-full items-center gap-2 rounded-md px-2.5 text-sm enabled:hover:bg-accent disabled:text-muted-foreground"
                 >
                   {label} time
                   <span className="ml-auto text-xs tabular-nums text-muted-foreground">
@@ -196,13 +206,15 @@ export function SubtaskTiming({
           type="button"
           {...timerProps}
           className={cn(
-            "flex h-11 min-w-11 items-center justify-center gap-1 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground disabled:invisible",
+            "flex h-11 min-w-11 items-center justify-end gap-1 rounded-md pr-2.5 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring disabled:invisible",
             running &&
-              "px-1 text-xs tabular-nums text-emerald-600 dark:text-emerald-400"
+              "text-xs tabular-nums text-emerald-700 dark:text-emerald-400"
           )}
         >
-          <TimerIcon className="size-4" />
           {running && formatClock(seconds)}
+          <span className="flex size-6 items-center justify-center rounded-full border border-current/40">
+            <TimerIcon className="size-3.5" />
+          </span>
         </button>
         <MobileSubtaskOptions
           subtask={subtask}
@@ -242,7 +254,7 @@ export function SubtaskTiming({
         type="button"
         {...timerProps}
         className={cn(
-          "flex h-7 w-[4.5rem] items-center justify-center gap-1.5 rounded-md border text-[11px] font-semibold uppercase tracking-wider transition-[opacity,colors]",
+          "flex h-7 w-[4.5rem] items-center justify-center gap-1.5 rounded-md border text-[11px] font-semibold uppercase tracking-wider transition-[opacity,colors] focus-visible:ring-1 focus-visible:ring-ring",
           running
             ? "border-emerald-500 text-emerald-500 hover:bg-emerald-500/10"
             : subtask.completed

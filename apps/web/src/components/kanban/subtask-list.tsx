@@ -100,6 +100,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
           size.check,
+          size.checkOffset,
           size.checkTarget,
           subtaskCheckState(subtask.completed)
         )}
@@ -110,6 +111,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
         className={cn(
           "min-w-0 flex-1 break-words",
           size.text,
+          large && "max-lg:py-2.5",
           subtask.completed &&
             "text-muted-foreground line-through decoration-muted-foreground/50"
         )}
@@ -124,7 +126,8 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
           "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
           "opacity-0 transition-opacity hover:bg-muted hover:text-foreground",
           "group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
-          large && "max-lg:my-0 max-lg:size-11 max-lg:opacity-100"
+          large &&
+            "max-lg:my-0 max-lg:size-11 max-lg:justify-end max-lg:pr-1.5 max-lg:opacity-100 focus-visible:ring-1 focus-visible:ring-ring"
         )}
       >
         <X className="h-3.5 w-3.5" />

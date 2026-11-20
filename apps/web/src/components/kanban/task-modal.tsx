@@ -250,6 +250,8 @@ export function TaskModal({
       // Space to toggle timer (same as focus mode)
       if (
         (e.key === " " || e.code === "Space") &&
+        !e.defaultPrevented &&
+        !(e.target instanceof Element && e.target.closest("button")) &&
         !e.repeat &&
         !e.shiftKey &&
         !e.ctrlKey &&

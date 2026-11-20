@@ -31,10 +31,12 @@ function useLiveSeconds(subtask: Subtask) {
 function TimeField({
   value,
   label,
+  subtaskTitle,
   onChange,
 }: {
   value: number | null;
   label: string;
+  subtaskTitle: string;
   onChange: (mins: number | null) => void;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -43,9 +45,9 @@ function TimeField({
       <PopoverTrigger asChild>
         <button
           type="button"
-          aria-label={`${label} time: ${value ? formatDuration(value) : "none"}`}
+          aria-label={`${label} time for ${subtaskTitle}: ${value ? formatDuration(value) : "none"}`}
           className={cn(
-            "w-14 rounded px-1 text-right text-sm tabular-nums transition-colors hover:bg-accent hover:text-foreground",
+            "w-14 rounded px-1 text-right text-sm tabular-nums transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring",
             value ? "text-muted-foreground" : "text-muted-foreground/40"
           )}
         >
@@ -243,12 +245,14 @@ export function SubtaskTiming({
         <TimeField
           value={subtask.actualMins}
           label="Actual"
+          subtaskTitle={subtask.title}
           onChange={(mins) => save({ actualMins: mins })}
         />
       )}
       <TimeField
         value={subtask.estimatedMins}
         label="Planned"
+        subtaskTitle={subtask.title}
         onChange={(mins) => save({ estimatedMins: mins })}
       />
       <button

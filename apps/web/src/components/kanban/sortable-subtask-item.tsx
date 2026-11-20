@@ -158,7 +158,7 @@ export function SortableSubtaskItem({
           onBlur={handleSave}
           onKeyDown={handleKeyDown}
           data-escape-local="true"
-          aria-label="Edit subtask"
+          aria-label={`Edit subtask: ${subtask.title}`}
           className={cn(
             "min-w-0 flex-1 border-none bg-transparent p-0 outline-hidden focus:ring-0",
             size.text,
@@ -168,6 +168,7 @@ export function SortableSubtaskItem({
       ) : (
         <button
           type="button"
+          aria-label={`Edit subtask: ${subtask.title}`}
           ref={(button) => {
             if (button && returnFocus.current) {
               returnFocus.current = false;

@@ -141,13 +141,13 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   const more = row.getByRole("button", { name: /^More options/ });
   await expect(more).toBeVisible();
   expect((await row.boundingBox())!.height).toBeLessThanOrEqual(48);
-  const editTitle = row.getByRole("button", { name: "Gather project ideas", exact: true });
+  const editTitle = row.getByRole("button", { name: "Edit subtask: Gather project ideas", exact: true });
   expect((await editTitle.boundingBox())!.x).toBe(draftLeft);
   await editTitle.press("Space");
   const input = row.getByRole("textbox", { name: "Edit subtask" });
   await input.fill("Review the ideas");
   await input.press("Enter");
-  const renamed = row.getByRole("button", { name: "Review the ideas", exact: true });
+  const renamed = row.getByRole("button", { name: "Edit subtask: Review the ideas", exact: true });
   await expect(renamed).toBeFocused();
   await renamed.press("Enter");
   await input.fill("Unsaved change");
@@ -242,6 +242,13 @@ for (const surface of ["Focus", "desktop editor", "tablet editor"]) {
       await page.goto(`/app/focus/${task.id}`);
     } else {
       await page.locator(`[data-task-id="${task.id}"]`).first().click();
+    }
+    if (surface !== "tablet editor") {
+      for (const title of ["Gather ideas", "Review ideas"]) {
+        for (const field of ["Actual", "Planned"]) {
+          await expect(page.getByRole("button", { name: `${field} time for ${title}: none`, exact: true })).toBeVisible();
+        }
+      }
     }
     const rows = page.locator("[data-subtask-id]");
     const handle = rows.first().getByRole("button", { name: "Reorder subtask" });

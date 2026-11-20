@@ -53,6 +53,7 @@ pub fn run() {
             commands::get_settings,
             commands::set_settings,
             commands::is_desktop,
+            commands::uses_24_hour_clock,
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application")

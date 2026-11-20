@@ -28,6 +28,7 @@ import {
 } from "@open-sunsama/utils";
 import { auth, requireScopes, type AuthVariables } from "../middleware/auth.js";
 import { publishEvent } from "../lib/websocket/index.js";
+import { assertProjectOwned } from "../services/projects.js";
 import {
   format,
   addDays,
@@ -49,6 +50,7 @@ const createTaskSeriesSchema = z
     notes: z.string().optional(),
     estimatedMins: z.number().int().positive().optional(),
     priority: z.enum(["P0", "P1", "P2", "P3"]).optional(),
+    projectId: uuidSchema.nullable().optional(),
     recurrenceType: z.enum(RECURRENCE_TYPES),
     daysOfWeek: z.array(z.number().int().min(0).max(6)).optional(),
     dayOfMonth: z.number().int().min(1).max(31).optional(),
@@ -95,6 +97,7 @@ const updateTaskSeriesSchema = z.object({
   notes: z.string().nullable().optional(),
   estimatedMins: z.number().int().positive().nullable().optional(),
   priority: z.enum(["P0", "P1", "P2", "P3"]).optional(),
+  projectId: uuidSchema.nullable().optional(),
   recurrenceType: z.enum(RECURRENCE_TYPES).optional(),
   daysOfWeek: z.array(z.number().int().min(0).max(6)).optional(),
   dayOfMonth: z.number().int().min(1).max(31).nullable().optional(),
@@ -442,6 +445,7 @@ taskSeriesRouter.post(
     const userId = c.get("userId");
     const data = c.req.valid("json");
     const db = getDb();
+    await assertProjectOwned(userId, data.projectId);
 
     // Get user's timezone
     const [user] = await db
@@ -465,6 +469,7 @@ taskSeriesRouter.post(
         notes: data.notes ?? null,
         estimatedMins: data.estimatedMins ?? null,
         priority: data.priority ?? "P2",
+        projectId: data.projectId ?? null,
         recurrenceType: data.recurrenceType,
         daysOfWeek: data.daysOfWeek ?? null,
         dayOfMonth: data.dayOfMonth ?? null,
@@ -501,6 +506,7 @@ taskSeriesRouter.post(
         estimatedMins: data.estimatedMins ?? null,
         priority: data.priority ?? "P2",
         position,
+        projectId: newSeries.projectId,
         seriesId: newSeries.id,
         seriesInstanceNumber: 1,
       })
@@ -590,6 +596,7 @@ taskSeriesRouter.patch(
     const { id } = c.req.valid("param");
     const updates = c.req.valid("json");
     const db = getDb();
+    await assertProjectOwned(userId, updates.projectId);
 
     const [existing] = await db
       .select()
@@ -602,6 +609,8 @@ taskSeriesRouter.patch(
     }
 
     const updateData: Record<string, unknown> = { updatedAt: new Date() };
+    if (updates.projectId !== undefined)
+      updateData.projectId = updates.projectId;
 
     if (updates.title !== undefined) updateData.title = updates.title;
     if (updates.notes !== undefined) updateData.notes = updates.notes;
@@ -630,6 +639,28 @@ taskSeriesRouter.patch(
       .set(updateData)
       .where(and(eq(taskSeries.id, id), eq(taskSeries.userId, userId)))
       .returning();
+
+    // A routine's project applies to its open instances too, so the ones
+    // already on the board don't keep the old project.
+    if (updatedSeries && updates.projectId !== undefined) {
+      const moved = await db
+        .update(tasks)
+        .set({ projectId: updatedSeries.projectId, updatedAt: new Date() })
+        .where(
+          and(
+            eq(tasks.seriesId, id),
+            eq(tasks.userId, userId),
+            isNull(tasks.completedAt)
+          )
+        )
+        .returning({ id: tasks.id, scheduledDate: tasks.scheduledDate });
+      for (const task of moved) {
+        publishEvent(userId, "task:updated", {
+          taskId: task.id,
+          scheduledDate: task.scheduledDate,
+        });
+      }
+    }
 
     if (updatedSeries) {
       publishEvent(userId, "task-series:updated", { seriesId: id });
@@ -796,6 +827,7 @@ taskSeriesRouter.post(
         notes: series.notes,
         estimatedMins: series.estimatedMins,
         priority: series.priority,
+        projectId: series.projectId,
         updatedAt: new Date(),
       })
       .where(

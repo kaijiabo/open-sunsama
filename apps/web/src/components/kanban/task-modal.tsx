@@ -79,6 +79,12 @@ import { PriorityIcon, PRIORITY_META } from "@/components/ui/priority-badge";
 import { WithShortcut } from "@/components/ui/with-shortcut";
 import { useCreateTaskSeries } from "@/hooks/useTaskSeries";
 import {
+  useProject,
+  useProjectFilter,
+  defaultProjectId,
+} from "@/hooks/useProjects";
+import { ProjectDot, ProjectMenu } from "@/components/projects/project-menu";
+import {
   formatClock,
   isSingleClick,
   useTaskTimerToggle,
@@ -124,6 +130,9 @@ export function TaskModal({
   const [actualMins, setActualMins] = React.useState<number | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
   const [priorityOpen, setPriorityOpen] = React.useState(false);
+  const [projectOpen, setProjectOpen] = React.useState(false);
+  const [projectFilter] = useProjectFilter();
+  const [draftProjectId, setDraftProjectId] = React.useState<string | null>(null);
 
   // Grow the title field to fit long titles.
   React.useLayoutEffect(() => {
@@ -150,6 +159,7 @@ export function TaskModal({
     setDescription("");
     setPlannedMins(null);
     setDraftPriority("P2");
+    setDraftProjectId(defaultProjectId(projectFilter));
     setDraftDate(createDefaults?.scheduledDate ?? null);
     setDraftSubtasks([]);
   }, [open, isCompose]);
@@ -226,6 +236,13 @@ export function TaskModal({
       id: task.id,
       data: { priority: newPriority },
     });
+  };
+
+  // Handle project change
+  const handleProjectChange = async (projectId: string | null) => {
+    if (isCompose) setDraftProjectId(projectId);
+    if (!task) return;
+    await updateTask.mutateAsync({ id: task.id, data: { projectId } });
   };
 
   usePriorityShortcut(open, (priority) => {
@@ -487,6 +504,7 @@ export function TaskModal({
       priority: task.priority,
       scheduledDate: task.scheduledDate ?? undefined,
       estimatedMins: task.estimatedMins ?? undefined,
+      projectId: task.projectId,
     });
     toast({ title: "Task duplicated" });
   };
@@ -508,6 +526,7 @@ export function TaskModal({
         scheduledDate: draftDate ?? undefined,
         estimatedMins: plannedMins ?? undefined,
         priority: draftPriority,
+        projectId: draftProjectId,
       });
       // In order, so the checklist keeps the order it was typed in.
       for (const [position, st] of draftSubtasks.entries()) {
@@ -540,6 +559,7 @@ export function TaskModal({
           title,
           notes: description,
           priority: draftPriority,
+          projectId: draftProjectId,
           scheduledDate: draftDate,
           estimatedMins: plannedMins,
           actualMins: null,
@@ -549,6 +569,8 @@ export function TaskModal({
       : null);
 
   // If no task data at all (never opened), render nothing
+  const project = useProject(renderTask?.projectId);
+
   if (!renderTask) return null;
 
   const handleExpandToFocus = () => {
@@ -565,6 +587,7 @@ export function TaskModal({
       notes: renderTask.notes ?? undefined,
       priority: renderTask.priority,
       estimatedMins: renderTask.estimatedMins ?? undefined,
+      projectId: renderTask.projectId,
     });
   };
 
@@ -637,6 +660,31 @@ export function TaskModal({
               onChange={(p) => {
                 void handlePriorityChange(p);
                 setPriorityOpen(false);
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+        <Popover open={projectOpen} onOpenChange={setProjectOpen}>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              className={cn(fieldButton, "max-w-44")}
+              aria-label={`Project: ${project?.name ?? "none"}`}
+            >
+              <span className={cn(fieldValue, "max-w-full")}>
+                <ProjectDot color={project?.color} />
+                <span className={cn("truncate", project && "text-foreground")}>
+                  {project?.name ?? "No project"}
+                </span>
+              </span>
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <ProjectMenu
+              value={renderTask.projectId ?? null}
+              onChange={(id) => {
+                void handleProjectChange(id);
+                setProjectOpen(false);
               }}
             />
           </PopoverContent>

@@ -21,6 +21,8 @@ import { EDIT_ESTIMATE_EVENT } from "@/components/task-shortcuts-handler";
 import { PRIORITY_META } from "@/components/ui/priority-badge";
 import { PriorityMenu } from "./priority-menu";
 import { TaskSourceChips } from "./task-source-chip";
+import { useProject } from "@/hooks/useProjects";
+import { ProjectDot, ProjectMenu } from "@/components/projects/project-menu";
 
 interface TaskCardContentProps {
   task: Task;
@@ -84,6 +86,8 @@ export function TaskCardContent({
   }, [task.id]);
   const [priorityOpen, setPriorityOpen] = React.useState(false);
   const [durationOpen, setDurationOpen] = React.useState(false);
+  const [projectOpen, setProjectOpen] = React.useState(false);
+  const project = useProject(task.projectId);
 
   const handlePriorityChange = (priority: TaskPriority) => {
     onUpdateTask?.({ priority });
@@ -196,8 +200,36 @@ export function TaskCardContent({
     )
   );
 
+  // The project the task belongs to; click it to move the task.
+  const projectChip = project && (
+    <Popover open={projectOpen} onOpenChange={setProjectOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          onClick={(e) => e.stopPropagation()}
+          disabled={!onUpdateTask}
+          aria-label={`Project: ${project.name}`}
+          className="ml-auto flex min-w-0 max-w-[60%] items-center gap-1.5 rounded px-1 text-[11px] text-muted-foreground transition-colors enabled:hover:text-foreground focus:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+        >
+          <ProjectDot color={project.color} className="h-1.5 w-1.5" />
+          <span className="truncate">{project.name}</span>
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="end">
+        <ProjectMenu
+          value={task.projectId}
+          onChange={(projectId) => {
+            onUpdateTask?.({ projectId });
+            setProjectOpen(false);
+          }}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+
   const hasSubtasks = !!subtasks?.length && !subtasksHidden;
-  const showMeta = !!formattedTime || task.priority !== "P2" || !!tag;
+  const showMeta =
+    !!formattedTime || task.priority !== "P2" || !!tag || !!project;
 
   return (
     <div
@@ -275,7 +307,8 @@ export function TaskCardContent({
             </span>
           )}
           {priorityChip}
-          {tag && (
+          {projectChip}
+          {tag && !project && (
             <span
               className="ml-auto text-[11px]"
               style={{ color: tagColor || "hsl(var(--muted-foreground))" }}

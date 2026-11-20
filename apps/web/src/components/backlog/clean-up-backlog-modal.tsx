@@ -74,6 +74,7 @@ function CheckBox({ state }: { state: CheckState }) {
 interface CleanUpBacklogModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  projectId?: string;
 }
 
 /**
@@ -88,23 +89,25 @@ interface CleanUpBacklogModalProps {
 export function CleanUpBacklogModal({
   open,
   onOpenChange,
+  projectId,
 }: CleanUpBacklogModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-2xl flex-col gap-0 overflow-hidden p-0">
-        <CleanUpBacklogBody onClose={() => onOpenChange(false)} />
+        <CleanUpBacklogBody key={projectId} projectId={projectId} onClose={() => onOpenChange(false)} />
       </DialogContent>
     </Dialog>
   );
 }
 
-function CleanUpBacklogBody({ onClose }: { onClose: () => void }) {
+function CleanUpBacklogBody({ onClose, projectId }: { onClose: () => void; projectId?: string }) {
   // Filter to pending server-side so the `limit` paginates the tasks this
   // modal actually manages — otherwise completed undated tasks could fill the
   // first page and hide/undercount the pending backlog.
   const { data: tasks, isLoading } = useTasks({
     backlog: true,
     completed: false,
+    projectId,
     limit: 500,
   });
   const batchDelete = useBatchDeleteTasks();

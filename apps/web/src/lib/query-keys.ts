@@ -46,6 +46,12 @@ export const taskKeys = {
     [...taskKeys.rangeAll(), { from, to }] as const,
 };
 
+export const projectKeys = {
+  all: ["projects"] as const,
+  list: (includeArchived: boolean) =>
+    [...projectKeys.all, "list", { includeArchived }] as const,
+};
+
 export const timerKeys = {
   active: () => ["tasks", "timer", "active"] as const,
 };

@@ -55,6 +55,9 @@ export interface TaskSeries {
   /** Priority level (inherited by generated instances) */
   priority: "P0" | "P1" | "P2" | "P3";
 
+  /** Project (inherited by generated instances); null = no project */
+  projectId: string | null;
+
   /** Type of recurrence pattern */
   recurrenceType: RecurrenceType;
 
@@ -143,6 +146,9 @@ export interface CreateTaskSeriesInput {
   /** Priority level (P0=Critical, P1=High, P2=Medium, P3=Low) */
   priority?: "P0" | "P1" | "P2" | "P3";
 
+  /** Project the generated tasks are filed under */
+  projectId?: string | null;
+
   /** Type of recurrence pattern */
   recurrenceType: RecurrenceType;
 
@@ -210,6 +216,9 @@ export interface UpdateTaskSeriesInput {
 
   /** Updated priority level */
   priority?: "P0" | "P1" | "P2" | "P3";
+
+  /** Updated project (use null to clear); also applied to open instances */
+  projectId?: string | null;
 
   /** Updated recurrence type */
   recurrenceType?: RecurrenceType;

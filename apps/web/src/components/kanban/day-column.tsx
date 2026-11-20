@@ -17,6 +17,7 @@ import {
 } from "@dnd-kit/sortable";
 import type { Task } from "@open-sunsama/types";
 import { useTasks } from "@/hooks/useTasks";
+import { useProjectFilter, matchesProjectFilter } from "@/hooks/useProjects";
 import { useTimeBlocks } from "@/hooks/useTimeBlocks";
 import { useCalendarEvents } from "@/hooks/useCalendars";
 import { useAuth } from "@/hooks/useAuth";
@@ -141,8 +142,10 @@ export function DayColumn({
   // when React Query refetches or optimistic updates change the data mid-drag
   // Board-level search: match on the title and the plain text of the notes.
   const query = searchQuery.trim().toLowerCase();
+  const [projectFilter] = useProjectFilter();
   const matchesQuery = React.useCallback(
     (task: Task) => {
+      if (!matchesProjectFilter(task, projectFilter)) return false;
       if (!query) return true;
       const notes = task.notes?.replace(/<[^>]*>/g, " ") ?? "";
       return (
@@ -150,7 +153,7 @@ export function DayColumn({
         notes.toLowerCase().includes(query)
       );
     },
-    [query]
+    [query, projectFilter]
   );
 
   const pendingTasks = React.useMemo(() => {

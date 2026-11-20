@@ -9,6 +9,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { ApiClient, type ApiClientConfig } from "./lib/api-client.js";
 import { registerTaskTools } from "./tools/tasks.js";
+import { registerProjectTools } from "./tools/projects.js";
 import { registerTimeBlockTools } from "./tools/time-blocks.js";
 import { registerSubtaskTools } from "./tools/subtasks.js";
 import { registerUserTools } from "./tools/user.js";
@@ -26,6 +27,7 @@ export const MCP_SERVER_INFO = {
 } as const;
 
 const INSTRUCTIONS = `Open Sunsama is the user's daily planner: tasks scheduled on dates (or in the backlog), subtasks, time blocks on a calendar, Ideas boards with columns, cards and checklists, and read-only events from their connected Google, Outlook and iCloud calendars.
+- Tasks can belong to one project (work, a private project, ...). Call list_projects for the IDs; a project's backlog is list_tasks with its projectId, backlog true and completed false.
 - Dates are YYYY-MM-DD in the user's timezone; call get_user_profile if you need the timezone.
 - Use get_schedule_for_day to see a whole day at once (meetings and time blocks) before planning it, and plan time blocks around the meetings.
 - Prefer schedule_task to move work between days and link_task_to_time_block to put a task on the calendar.
@@ -38,6 +40,7 @@ export function createOpenSunsamaMcpServer(
   const server = new McpServer(MCP_SERVER_INFO, { instructions: INSTRUCTIONS });
 
   registerTaskTools(server, apiClient);
+  registerProjectTools(server, apiClient);
   registerTimeBlockTools(server, apiClient);
   registerSubtaskTools(server, apiClient);
   registerCalendarEventTools(server, apiClient);

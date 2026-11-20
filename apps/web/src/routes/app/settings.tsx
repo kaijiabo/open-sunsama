@@ -13,6 +13,7 @@ import {
   Monitor,
   Repeat,
   Plug,
+  Folder,
 } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSearch, useNavigate } from "@tanstack/react-router";
@@ -37,6 +38,7 @@ import {
   CalendarSettings,
   DesktopSettings,
   RoutinesSettings,
+  ProjectsSettings,
   IntegrationsSettings,
 } from "@/components/settings";
 
@@ -45,6 +47,7 @@ type SettingsTab =
   | "security"
   | "appearance"
   | "tasks"
+  | "projects"
   | "routines"
   | "calendars"
   | "integrations"
@@ -58,6 +61,7 @@ const TABS: { id: SettingsTab; label: string; icon: React.ElementType }[] = [
   { id: "security", label: "Security", icon: Lock },
   { id: "appearance", label: "Appearance", icon: Palette },
   { id: "tasks", label: "Tasks", icon: ListTodo },
+  { id: "projects", label: "Projects", icon: Folder },
   { id: "routines", label: "Routines", icon: Repeat },
   { id: "calendars", label: "Calendars", icon: CalendarDays },
   { id: "integrations", label: "Integrations", icon: Plug },
@@ -77,6 +81,8 @@ function SettingsContent({ tab }: { tab: SettingsTab }) {
       return <AppearanceSettings />;
     case "tasks":
       return <TaskSettings />;
+    case "projects":
+      return <ProjectsSettings />;
     case "routines":
       return <RoutinesSettings />;
     case "calendars":

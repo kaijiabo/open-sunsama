@@ -24,6 +24,7 @@ import { WithShortcut, KeyCaps } from "@/components/ui/with-shortcut";
 import { MonthGrid } from "@/components/ui/month-grid";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { SHORTCUTS, formatShortcut } from "@/hooks/useKeyboardShortcuts";
+import { ProjectFilterButton } from "@/components/projects/project-filter";
 
 // Extended sort option that includes direction
 export type SortOption = "position" | "priority-desc" | "priority-asc" | "createdAt-desc" | "createdAt-asc";
@@ -224,6 +225,9 @@ export function KanbanBoardToolbar({
             </WithShortcut>
           ))}
         </div>
+
+        {/* Show one project's tasks, here and in the backlog */}
+        <ProjectFilterButton />
 
         {/* Filter the visible day columns down to matching cards */}
         <ViewSearch

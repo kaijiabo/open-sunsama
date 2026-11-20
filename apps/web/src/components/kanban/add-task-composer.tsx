@@ -14,6 +14,12 @@ import { PriorityIcon, PRIORITY_META } from "@/components/ui/priority-badge";
 import { PriorityMenu } from "./priority-menu";
 import { DatePickerPopover } from "./task-date-picker";
 import { parseSubtaskTitles } from "./subtask-add-row";
+import {
+  useProject,
+  useProjectFilter,
+  defaultProjectId,
+} from "@/hooks/useProjects";
+import { ProjectDot, ProjectMenu } from "@/components/projects/project-menu";
 
 interface DraftLine {
   id: number;
@@ -51,6 +57,8 @@ interface AddTaskComposerProps {
   placeholder?: string;
   /** A quiet note on where it goes, e.g. "Adding to Ideas". */
   context?: string;
+  /** Hide the project chip where a project doesn't apply (ideas). */
+  showProject?: boolean;
 }
 
 function dateLabel(date: string | null): string {
@@ -78,6 +86,7 @@ export function AddTaskComposer({
   showPosition = true,
   placeholder = "Task description…",
   context,
+  showProject = !onSubmit,
 }: AddTaskComposerProps) {
   const [title, setTitle] = React.useState(initialTitle);
   const [date, setDate] = React.useState<string | null>(scheduledDate);
@@ -85,6 +94,13 @@ export function AddTaskComposer({
   const [priority, setPriority] = React.useState<TaskPriority>("P2");
   const [plannedOpen, setPlannedOpen] = React.useState(false);
   const [priorityOpen, setPriorityOpen] = React.useState(false);
+  // A new task starts in the project the views are filtered to.
+  const [projectFilter] = useProjectFilter();
+  const [projectId, setProjectId] = React.useState<string | null>(() =>
+    defaultProjectId(projectFilter)
+  );
+  const [projectOpen, setProjectOpen] = React.useState(false);
+  const project = useProject(projectId);
   usePriorityShortcut(true, (value) => {
     setPriority(value);
     setPriorityOpen(false);
@@ -131,6 +147,7 @@ export function AddTaskComposer({
         scheduledDate: date ?? undefined,
         estimatedMins: planned ?? undefined,
         priority,
+        projectId: showProject ? projectId : undefined,
       })
       .then(async (task) => {
         // Explicit positions keep the typed order; the requests run in parallel.
@@ -400,6 +417,39 @@ export function AddTaskComposer({
               />
             </PopoverContent>
           </Popover>
+
+          {showProject && (
+            <Popover open={projectOpen} onOpenChange={setProjectOpen}>
+              <PopoverTrigger asChild>
+                <WithShortcut label="Project" side="bottom">
+                  <button
+                    type="button"
+                    aria-label={`Project: ${project?.name ?? "none"}`}
+                    className={cn(chip, "max-w-36", project && "text-foreground")}
+                  >
+                    <ProjectDot color={project?.color} />
+                    {project && <span className="truncate">{project.name}</span>}
+                  </button>
+                </WithShortcut>
+              </PopoverTrigger>
+              <PopoverContent
+                className="w-auto p-0"
+                align="end"
+                onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  refocus();
+                }}
+              >
+                <ProjectMenu
+                  value={projectId}
+                  onChange={(id) => {
+                    setProjectId(id);
+                    setProjectOpen(false);
+                  }}
+                />
+              </PopoverContent>
+            </Popover>
+          )}
 
           {showPosition && (
           <WithShortcut

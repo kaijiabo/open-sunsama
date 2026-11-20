@@ -8,7 +8,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Task } from "@open-sunsama/types";
-import { useTasks, useCompleteTask } from "@/hooks/useTasks";
+import { useTasks, useCompleteTask, useUpdateTask } from "@/hooks/useTasks";
 import { TaskCardContent } from "@/components/kanban/task-card-content";
 import { TaskContextMenu } from "@/components/kanban/task-context-menu";
 import { useTasksDnd } from "@/lib/dnd/tasks-dnd-context";
@@ -17,6 +17,12 @@ import { Button, ScrollArea, Skeleton } from "@/components/ui";
 import { AddTaskModal } from "@/components/kanban/add-task-modal.lazy";
 import { TaskModal } from "@/components/kanban/task-modal.lazy";
 import { CleanUpBacklogModal } from "@/components/backlog/clean-up-backlog-modal";
+import {
+  useProject,
+  useProjectFilter,
+  matchesProjectFilter,
+} from "@/hooks/useProjects";
+import { ProjectFilterButton } from "@/components/projects/project-filter";
 
 /**
  * The backlog (tasks without a date) as the content of a side panel: a drop
@@ -34,6 +40,11 @@ export function BacklogPanel({ className }: { className?: string }) {
     limit: BACKLOG_LIMIT,
   });
   const { activeTask, isDragging } = useTasksDnd();
+  // With a project chosen this is that project's backlog.
+  const [projectFilter] = useProjectFilter();
+  const filteredProject = useProject(
+    projectFilter === "all" || projectFilter === "none" ? null : projectFilter
+  );
 
   // If we hit exactly the limit, there may be more tasks than shown
   const maybeTruncated = (tasks?.length ?? 0) >= BACKLOG_LIMIT;
@@ -50,7 +61,9 @@ export function BacklogPanel({ className }: { className?: string }) {
   // Separate pending and completed tasks
   // CRITICAL: Preserve the actively dragged task to prevent removeChild DOM errors
   const { pendingTasks, completedTasks } = React.useMemo(() => {
-    const all = tasks ?? [];
+    const all = (tasks ?? []).filter((task) =>
+      matchesProjectFilter(task, projectFilter)
+    );
     let pending = all
       .filter((task) => !task.completedAt)
       .sort((a, b) => a.position - b.position);
@@ -65,7 +78,7 @@ export function BacklogPanel({ className }: { className?: string }) {
     }
 
     return { pendingTasks: pending, completedTasks: completed };
-  }, [tasks, isDragging, activeTask]);
+  }, [tasks, isDragging, activeTask, projectFilter]);
 
   return (
     <div
@@ -82,7 +95,7 @@ export function BacklogPanel({ className }: { className?: string }) {
 
       {/* Header */}
       <div className="flex h-12 flex-shrink-0 items-center justify-between px-3">
-        <div className="flex items-center gap-1.5">
+        <div className="flex min-w-0 items-center gap-1.5">
           <span className="text-sm font-semibold">Backlog</span>
           {pendingTasks.length > 0 && (
             <span className="text-xs text-muted-foreground">
@@ -90,7 +103,8 @@ export function BacklogPanel({ className }: { className?: string }) {
             </span>
           )}
         </div>
-        <div className="flex items-center gap-0.5">
+        <div className="flex min-w-0 items-center gap-0.5">
+          <ProjectFilterButton className="max-w-28" />
           {pendingTasks.length > 0 && (
             <Button
               variant="ghost"
@@ -126,7 +140,9 @@ export function BacklogPanel({ className }: { className?: string }) {
           ) : pendingTasks.length === 0 && completedTasks.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <p className="text-sm text-muted-foreground">
-                No unscheduled tasks
+                {filteredProject
+                  ? `No unscheduled tasks in ${filteredProject.name}`
+                  : "No unscheduled tasks"}
               </p>
               <p className="text-xs text-muted-foreground/70 mt-1">
                 Drag a card here to take it off its day
@@ -184,6 +200,7 @@ export function BacklogPanel({ className }: { className?: string }) {
       <CleanUpBacklogModal
         open={isCleanupOpen}
         onOpenChange={setIsCleanupOpen}
+        projectId={projectFilter === "all" ? undefined : projectFilter}
       />
       <TaskModal
         task={selectedTask}
@@ -212,6 +229,7 @@ function SortableBacklogTaskCard({
   onSelect,
 }: SortableBacklogTaskCardProps) {
   const completeTask = useCompleteTask();
+  const updateTask = useUpdateTask();
   const {
     attributes,
     listeners,
@@ -287,6 +305,7 @@ function SortableBacklogTaskCard({
           }}
           onClick={onTaskClick}
           onHoverChange={() => {}}
+          onUpdateTask={(data) => updateTask.mutate({ id: task.id, data })}
         />
 
         {/* Drop indicator line - below */}

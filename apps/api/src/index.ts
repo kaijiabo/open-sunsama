@@ -29,6 +29,7 @@ import { calendarsRouter } from "./routes/calendars.js";
 import { calendarEventsRouter } from "./routes/calendar-events.js";
 import { releasesRouter } from "./routes/releases.js";
 import { taskSeriesRouter } from "./routes/task-series.js";
+import { projectsRouter } from "./routes/projects.js";
 import { ideasRouter } from "./routes/ideas.js";
 import { ideaSubtasksRouter } from "./routes/idea-subtasks.js";
 import { integrationsRouter } from "./routes/integrations.js";
@@ -196,6 +197,7 @@ app.route("/calendars", calendarsRouter);
 app.route("/calendar-events", calendarEventsRouter);
 app.route("/releases", releasesRouter);
 app.route("/task-series", taskSeriesRouter);
+app.route("/projects", projectsRouter);
 app.route("/ideas", ideasRouter);
 app.route("/ideas", ideaSubtasksRouter); // /ideas/:ideaId/subtasks
 app.route("/integrations", integrationsRouter);

@@ -15,6 +15,11 @@ import {
   SheetTrigger,
 } from "@/components/ui";
 import { TaskCardContent } from "@/components/kanban/task-card-content";
+import {
+  useProjectFilter,
+  matchesProjectFilter,
+  defaultProjectId,
+} from "@/hooks/useProjects";
 import { TaskContextMenu } from "@/components/kanban/task-context-menu";
 import { CleanUpBacklogModal } from "@/components/backlog/clean-up-backlog-modal";
 
@@ -41,9 +46,14 @@ export function MobileBacklogSheet({ trigger, onTaskClick }: MobileBacklogSheetP
   const createTask = useCreateTask();
   const completeTask = useCompleteTask();
 
+  const [projectFilter] = useProjectFilter();
   const backlogTasks = React.useMemo(() => {
-    return tasks?.filter((task) => !task.completedAt) ?? [];
-  }, [tasks]);
+    return (
+      tasks?.filter(
+        (task) => !task.completedAt && matchesProjectFilter(task, projectFilter)
+      ) ?? []
+    );
+  }, [tasks, projectFilter]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +61,7 @@ export function MobileBacklogSheet({ trigger, onTaskClick }: MobileBacklogSheetP
 
     await createTask.mutateAsync({
       title: newTaskTitle.trim(),
+      projectId: defaultProjectId(projectFilter),
     });
 
     setNewTaskTitle("");
@@ -221,7 +232,11 @@ export function MobileBacklogSheet({ trigger, onTaskClick }: MobileBacklogSheetP
       </SheetContent>
     </Sheet>
 
-    <CleanUpBacklogModal open={isCleanupOpen} onOpenChange={setIsCleanupOpen} />
+    <CleanUpBacklogModal
+      open={isCleanupOpen}
+      onOpenChange={setIsCleanupOpen}
+      projectId={projectFilter === "all" ? undefined : projectFilter}
+    />
     </>
   );
 }

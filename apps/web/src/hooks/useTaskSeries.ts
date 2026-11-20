@@ -170,6 +170,8 @@ export function useUpdateTaskSeries() {
     onSuccess: (data, { id }) => {
       queryClient.setQueryData(taskSeriesKeys.detail(id), data);
       queryClient.invalidateQueries({ queryKey: taskSeriesKeys.lists() });
+      // A new project (or title, via sync) reaches the open instances.
+      queryClient.invalidateQueries({ queryKey: taskKeys.all });
 
       toast({
         title: "Recurring task updated",

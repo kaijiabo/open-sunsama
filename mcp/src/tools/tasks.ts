@@ -20,6 +20,10 @@ function formatTask(task: Task): string {
     `Status: ${task.completedAt ? "Completed" : "Pending"}`,
   ];
 
+  if (task.projectId) {
+    lines.push(`Project ID: ${task.projectId}`);
+  }
+
   if (task.estimatedMins) {
     lines.push(`Estimated: ${task.estimatedMins} minutes`);
   }
@@ -54,7 +58,8 @@ function formatTaskList(tasks: Task[]): string {
     .map((task, index) => {
       const status = task.completedAt ? "[x]" : "[ ]";
       const scheduled = task.scheduledDate ?? "Backlog";
-      return `${index + 1}. ${status} [${task.priority}] ${task.title}\n   ID: ${task.id} | Scheduled: ${scheduled}`;
+      const project = task.projectId ? ` | Project ID: ${task.projectId}` : "";
+      return `${index + 1}. ${status} [${task.priority}] ${task.title}\n   ID: ${task.id} | Scheduled: ${scheduled}${project}`;
     })
     .join("\n\n");
 }
@@ -98,6 +103,8 @@ Examples:
 - List incomplete tasks: { "completed": false }
 - List completed tasks: { "completed": true }
 - List backlog tasks: { "backlog": true }
+- List a project's backlog: { "projectId": "<project id>", "backlog": true, "completed": false }
+- List tasks without a project: { "projectId": "none" }
 - Combine filters: { "date": "2024-01-15", "completed": false }
 
 Date format: YYYY-MM-DD
@@ -129,6 +136,12 @@ Pagination: Use "page" and "limit" for large result sets.`,
         .describe(
           "If true, only return tasks without a scheduled date (backlog tasks)."
         ),
+      projectId: z
+        .string()
+        .optional()
+        .describe(
+          "Only tasks in this project (ID from list_projects), or 'none' for tasks without a project."
+        ),
       sortBy: z
         .enum(["priority", "position", "createdAt"])
         .optional()
@@ -155,6 +168,7 @@ Pagination: Use "page" and "limit" for large result sets.`,
           to: input.to,
           completed: input.completed,
           backlog: input.backlog,
+          projectId: input.projectId,
           sortBy: input.sortBy,
           page: input.page,
           limit: input.limit,
@@ -219,7 +233,7 @@ Example: { "id": "task_abc123" }`,
     `Create a new task.
 
 Required: title
-Optional: notes, scheduledDate, estimatedMins, priority
+Optional: notes, scheduledDate, estimatedMins, priority, projectId (from list_projects)
 
 Priority levels:
 - P0: Critical/Urgent (highest priority)
@@ -257,6 +271,10 @@ Examples:
         .enum(["P0", "P1", "P2", "P3"])
         .optional()
         .describe("Priority level (P0=highest, P3=lowest). Default: P2."),
+      projectId: z
+        .string()
+        .optional()
+        .describe("Project to file the task under (ID from list_projects)."),
     },
     async (input) => {
       try {
@@ -266,6 +284,7 @@ Examples:
           scheduledDate: input.scheduledDate,
           estimatedMins: input.estimatedMins,
           priority: input.priority,
+          projectId: input.projectId,
         });
 
         if (!response.success || !response.data) {
@@ -292,9 +311,9 @@ Examples:
     "update_task",
     `Update an existing task. Only provide fields you want to change.
 
-You can update: title, notes, scheduledDate, estimatedMins, actualMins, priority
+You can update: title, notes, scheduledDate, estimatedMins, actualMins, priority, projectId
 
-To clear a field, set it to null (for notes, scheduledDate, estimatedMins, actualMins).
+To clear a field, set it to null (for notes, scheduledDate, estimatedMins, actualMins, projectId).
 To mark complete/incomplete, use the dedicated complete_task/uncomplete_task tools instead.
 
 Examples:
@@ -338,6 +357,13 @@ Examples:
         .enum(["P0", "P1", "P2", "P3"])
         .optional()
         .describe("New priority level."),
+      projectId: z
+        .string()
+        .nullable()
+        .optional()
+        .describe(
+          "Move the task to this project (ID from list_projects). Set to null to remove it from its project."
+        ),
     },
     async (input) => {
       try {

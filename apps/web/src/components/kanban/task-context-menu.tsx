@@ -13,6 +13,7 @@ import {
   Trash2,
   Archive,
   Repeat,
+  Folder,
   Flag,
 } from "lucide-react";
 import type { Task, CreateTaskSeriesInput, TaskPriority } from "@open-sunsama/types";
@@ -42,6 +43,8 @@ import { useCreateTaskSeries } from "@/hooks/useTaskSeries";
 import { formatShortcut, SHORTCUTS } from "@/hooks/useKeyboardShortcuts";
 import { toast } from "@/hooks/use-toast";
 import { RepeatConfigDialog } from "./repeat-config-popover";
+import { useProjects } from "@/hooks/useProjects";
+import { ProjectDot } from "@/components/projects/project-menu";
 import { cn } from "@/lib/utils";
 
 const PRIORITIES: TaskPriority[] = ["P0", "P1", "P2", "P3"];
@@ -66,6 +69,7 @@ export function TaskContextMenu({
   const reorderTasks = useReorderTasks();
   const autoSchedule = useAutoSchedule();
   const createTaskSeries = useCreateTaskSeries();
+  const { data: projects } = useProjects();
 
   // State for repeat config dialog
   const [repeatDialogOpen, setRepeatDialogOpen] = React.useState(false);
@@ -188,6 +192,11 @@ export function TaskContextMenu({
     });
   };
 
+  const handleProjectChange = async (projectId: string | null) => {
+    if (projectId === (task.projectId ?? null)) return;
+    await updateTask.mutateAsync({ id: task.id, data: { projectId } });
+  };
+
   const handleToggleHideSubtasks = async () => {
     const newHiddenState = !task.subtasksHidden;
     await updateTask.mutateAsync({
@@ -206,6 +215,7 @@ export function TaskContextMenu({
       priority: task.priority,
       scheduledDate: task.scheduledDate ?? undefined,
       estimatedMins: task.estimatedMins ?? undefined,
+      projectId: task.projectId,
     });
 
     toast({
@@ -222,6 +232,7 @@ export function TaskContextMenu({
       notes: task.notes ?? undefined,
       priority: task.priority,
       estimatedMins: task.estimatedMins ?? undefined,
+      projectId: task.projectId,
     });
   };
 
@@ -334,6 +345,36 @@ export function TaskContextMenu({
                 >
                   <PriorityIcon priority={priority} />
                   <span>{PRIORITY_LABELS[priority]}</span>
+                </ContextMenuItem>
+              ))}
+            </ContextMenuSubContent>
+          </ContextMenuSub>
+
+          {/* Project */}
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>
+              <Folder className="mr-2 h-4 w-4" />
+              Project
+            </ContextMenuSubTrigger>
+            <ContextMenuSubContent className="max-h-80 overflow-y-auto">
+              <ContextMenuItem
+                onClick={() => handleProjectChange(null)}
+                className={cn("gap-2", !task.projectId && "bg-accent")}
+              >
+                <ProjectDot color={null} />
+                <span className="text-muted-foreground">No project</span>
+              </ContextMenuItem>
+              {(projects ?? []).map((project) => (
+                <ContextMenuItem
+                  key={project.id}
+                  onClick={() => handleProjectChange(project.id)}
+                  className={cn(
+                    "gap-2",
+                    task.projectId === project.id && "bg-accent"
+                  )}
+                >
+                  <ProjectDot color={project.color} />
+                  <span className="max-w-48 truncate">{project.name}</span>
                 </ContextMenuItem>
               ))}
             </ContextMenuSubContent>

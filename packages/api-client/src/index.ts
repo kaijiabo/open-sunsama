@@ -59,6 +59,10 @@ export { createAuthApi, type AuthApi };
 import { createTasksApi, type TasksApi, type TasksListResponse } from "./tasks.js";
 export { createTasksApi, type TasksApi, type TasksListResponse };
 
+// Projects API
+import { createProjectsApi, type ProjectsApi } from "./projects.js";
+export { createProjectsApi, type ProjectsApi };
+
 // Subtasks API
 import { createSubtasksApi, type SubtasksApi } from "./subtasks.js";
 export { createSubtasksApi, type SubtasksApi };
@@ -119,6 +123,10 @@ export type {
   ReorderTasksInput,
   TaskFilterInput,
   TaskStats,
+  // Project types
+  Project,
+  CreateProjectInput,
+  UpdateProjectInput,
   // Subtask types
   Subtask,
   CreateSubtaskInput,
@@ -188,6 +196,8 @@ export function createApi(config: ApiClientConfig) {
     auth: createAuthApi(client),
     /** Tasks API methods */
     tasks: createTasksApi(client),
+    /** Projects API methods */
+    projects: createProjectsApi(client),
     /** Subtasks API methods */
     subtasks: createSubtasksApi(client),
     /** Time blocks API methods */

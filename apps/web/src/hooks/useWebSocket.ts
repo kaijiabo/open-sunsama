@@ -9,6 +9,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import {
   taskKeys,
+  projectKeys,
   timerKeys,
   timeBlockKeys,
   workSessionKeys,
@@ -165,6 +166,17 @@ function handleWebSocketEvent(
       ) {
         batcher.schedule(timeBlockKeys.lists());
         batcher.schedule(workSessionKeys.all);
+      }
+      break;
+
+    case "project:created":
+    case "project:updated":
+    case "project:deleted":
+      batcher.schedule(projectKeys.all);
+      // Deleting a project clears it from its tasks.
+      if (event.type === "project:deleted") {
+        batcher.schedule(taskKeys.lists());
+        batcher.schedule(taskKeys.rangeAll());
       }
       break;
 

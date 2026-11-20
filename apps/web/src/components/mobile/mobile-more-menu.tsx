@@ -7,6 +7,7 @@ import {
   Palette,
   ListTodo,
   Repeat,
+  Folder,
   CalendarDays,
   Bell,
   Key,
@@ -198,6 +199,12 @@ export function MobileMoreMenu({ onLogout }: MobileMoreMenuProps) {
           icon: ListTodo,
           label: "Task defaults",
           href: "/app/settings?tab=tasks",
+        },
+        {
+          id: "projects",
+          icon: Folder,
+          label: "Projects",
+          href: "/app/settings?tab=projects",
         },
         {
           id: "routines",

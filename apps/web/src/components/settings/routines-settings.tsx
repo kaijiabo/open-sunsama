@@ -20,7 +20,11 @@ import {
   useTaskSeriesList,
   useStopTaskSeries,
   useDeleteTaskSeriesInstances,
+  useUpdateTaskSeries,
 } from "@/hooks/useTaskSeries";
+import { useProject } from "@/hooks/useProjects";
+import { ProjectDot, ProjectMenu } from "@/components/projects/project-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   getScheduleDescription,
   formatTimeOfDay,
@@ -72,7 +76,8 @@ export function RoutinesSettings() {
         <h2 className="text-lg font-semibold">Routines</h2>
         <p className="text-sm text-muted-foreground mt-1">
           Manage your recurring tasks. Create a routine by right-clicking any
-          task and selecting "Repeat..."
+          task and selecting "Repeat...". A routine's project applies to every
+          task it creates.
         </p>
       </div>
 
@@ -161,6 +166,9 @@ interface RoutineRowProps {
 }
 
 function RoutineRow({ series, onStop, onDelete }: RoutineRowProps) {
+  const updateSeries = useUpdateTaskSeries();
+  const project = useProject(series.projectId);
+  const [projectOpen, setProjectOpen] = React.useState(false);
   const scheduleDesc = getScheduleDescription({
     recurrenceType: series.recurrenceType,
     frequency: series.frequency,
@@ -190,6 +198,33 @@ function RoutineRow({ series, onStop, onDelete }: RoutineRowProps) {
       </div>
 
       <div className="flex items-center gap-3 text-xs text-muted-foreground shrink-0">
+        {/* The project every task of this routine is filed under */}
+        <Popover open={projectOpen} onOpenChange={setProjectOpen}>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              aria-label={`Project: ${project?.name ?? "none"}`}
+              className="flex h-7 max-w-32 items-center gap-1.5 rounded-md px-2 transition-colors hover:bg-accent hover:text-foreground focus:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+            >
+              <ProjectDot color={project?.color} />
+              <span className={project ? "truncate text-foreground" : "truncate"}>
+                {project?.name ?? "No project"}
+              </span>
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="end">
+            <ProjectMenu
+              value={series.projectId ?? null}
+              onChange={(projectId) => {
+                setProjectOpen(false);
+                if (projectId !== (series.projectId ?? null)) {
+                  updateSeries.mutate({ id: series.id, input: { projectId } });
+                }
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+
         <div className="text-right hidden sm:block">
           <div className="text-muted-foreground/70">Started</div>
           <div className="font-medium text-foreground">

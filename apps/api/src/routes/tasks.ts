@@ -40,6 +40,7 @@ import {
   logWorkSession,
 } from "../lib/timer-service.js";
 import { moveBlocksWithTasks } from "../services/task-blocks.js";
+import { assertProjectOwned } from "../services/projects.js";
 import { format, subDays } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { getPgBoss, JOBS } from "../lib/pgboss.js";
@@ -72,6 +73,9 @@ tasksRouter.get(
     else if (filters.backlog === "false")
       conditions.push(isNotNull(tasks.scheduledDate));
     if (filters.priority) conditions.push(eq(tasks.priority, filters.priority));
+    if (filters.projectId === "none") conditions.push(isNull(tasks.projectId));
+    else if (filters.projectId)
+      conditions.push(eq(tasks.projectId, filters.projectId));
     if (filters.search) {
       // Every whitespace-separated term must appear in the title or the notes,
       // so "web analytics" matches a title where the words aren't adjacent.
@@ -197,6 +201,7 @@ tasksRouter.post(
     const userId = c.get("userId");
     const data = c.req.valid("json");
     const db = getDb();
+    await assertProjectOwned(userId, data.projectId);
 
     let position = data.position;
     if (position === undefined) {
@@ -225,6 +230,7 @@ tasksRouter.post(
         estimatedMins: data.estimatedMins ?? null,
         priority: data.priority ?? "P2",
         position,
+        projectId: data.projectId ?? null,
       })
       .returning();
 
@@ -345,6 +351,7 @@ tasksRouter.patch(
     const userId = c.get("userId");
     const { id } = c.req.valid("param");
     const updates = c.req.valid("json");
+    await assertProjectOwned(userId, updates.projectId);
     return withTimerTransition(getDb(), userId, async (db, publishEvent) => {
 
       const [existing] = await db
@@ -369,6 +376,8 @@ tasksRouter.patch(
       if (updates.position !== undefined) updateData.position = updates.position;
       if (updates.subtasksHidden !== undefined)
         updateData.subtasksHidden = updates.subtasksHidden;
+      if (updates.projectId !== undefined)
+        updateData.projectId = updates.projectId;
       let timerStopped: number | null = null;
       if (updates.actualMins !== undefined) {
         // A typed actual time replaces what the timer logged; a running timer

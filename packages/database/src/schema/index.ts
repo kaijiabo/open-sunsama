@@ -18,6 +18,9 @@ export {
 } from "./tasks";
 export type { Task, NewTask, UpdateTask, TaskPriority } from "./tasks";
 
+export { projects, projectsRelations } from "./projects";
+export type { Project, NewProject } from "./projects";
+
 export {
   taskSeries,
   taskSeriesRelations,

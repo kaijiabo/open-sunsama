@@ -47,6 +47,12 @@ const TOOL_METADATA: Record<string, ToolMetadata> = {
   schedule_task: { title: "Schedule task", scopes: ["tasks:write"], idempotent: true },
   reorder_tasks: { title: "Reorder tasks", scopes: ["tasks:write"], idempotent: true },
 
+  // Projects
+  list_projects: { title: "List projects", scopes: ["tasks:read"], readOnly: true },
+  create_project: { title: "Create project", scopes: ["tasks:write"] },
+  update_project: { title: "Update project", scopes: ["tasks:write"], idempotent: true },
+  delete_project: { title: "Delete project", scopes: ["tasks:write"], destructive: true, idempotent: true },
+
   // Subtasks
   list_subtasks: { title: "List subtasks", scopes: ["tasks:read"], readOnly: true },
   create_subtask: { title: "Create subtask", scopes: ["tasks:write"] },

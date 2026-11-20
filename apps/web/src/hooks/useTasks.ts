@@ -376,11 +376,13 @@ export function useCreateTask() {
         description: `"${newTask.title}" has been created.`,
       });
     },
-    onSettled: () => {
+    onSettled: async () => {
       // Refetch the board's range so it holds the new task without relying
       // on the WebSocket echo. The day caches keep their current data until
-      // the refetch returns, so the new card does not flicker.
-      queryClient.invalidateQueries({ queryKey: taskKeys.rangeAll() });
+      // the refetch returns, so the new card does not flicker. Cancel first:
+      // invalidation reuses an in-flight first load, which predates the task.
+      await queryClient.cancelQueries({ queryKey: taskKeys.rangeAll() });
+      void queryClient.invalidateQueries({ queryKey: taskKeys.rangeAll() });
     },
   });
 }

@@ -1,7 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
 import type { Task, Subtask, TaskFilterInput } from "@open-sunsama/types";
 import { addDays, format } from "date-fns";
-import { taskKeys } from "@/lib/query-keys";
+import { taskKeys, subtaskKeys } from "@/lib/query-keys";
 
 export interface TaskRangeData {
   tasks: Task[];
@@ -186,5 +186,32 @@ export function seedDayCaches(
     }
 
     queryClient.setQueryData(cacheKey, dayTasks);
+  }
+}
+
+/**
+ * Write the range query's subtasks into each per-task subtask cache, with
+ * the same guards as the day caches: subtasks added after the range request
+ * started (the composer saves them right after the task) must survive.
+ */
+export function seedSubtaskCaches(queryClient: QueryClient, data: TaskRangeData) {
+  // `?? {}` guards a cache entry persisted by an older build, where this
+  // field was a Map and rehydrates as undefined or a bare object.
+  for (const [taskId, list] of Object.entries(data.subtasksByTaskId ?? {})) {
+    const cacheKey = subtaskKeys.list(taskId);
+    const existing = queryClient.getQueryData<Subtask[]>(cacheKey);
+    if (existing && existing.some((s) => s.id.startsWith("optimistic-"))) {
+      continue;
+    }
+    const updatedAt = queryClient.getQueryState(cacheKey)?.dataUpdatedAt;
+    if (
+      existing &&
+      data.fetchStartedAt !== undefined &&
+      updatedAt &&
+      updatedAt >= data.fetchStartedAt
+    ) {
+      continue;
+    }
+    queryClient.setQueryData(cacheKey, list);
   }
 }

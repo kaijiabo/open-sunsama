@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Subtask } from "@open-sunsama/types";
 import { addDays, format, subDays } from "date-fns";
 import { getApi } from "@/lib/api";
-import { taskKeys, subtaskKeys } from "@/lib/query-keys";
-import { fetchTaskRange, seedDayCaches } from "@/lib/kanban-range-seed";
+import { taskKeys } from "@/lib/query-keys";
+import { fetchTaskRange, seedDayCaches, seedSubtaskCaches } from "@/lib/kanban-range-seed";
 import { useAuth } from "@/hooks/useAuth";
 
 /**
@@ -103,17 +102,7 @@ export function useKanbanRangePrefetch(options: RangePrefetchOptions = {}) {
     // Seed the per-task subtask caches too, so the kanban's subtask
     // batcher never has to fire — `useSubtasks(taskId)` will read from
     // these fresh cache entries (within the 60s default staleTime).
-    // `?? {}` guards a cache entry persisted by an older build, where
-    // this field was a Map and rehydrates as undefined or a bare object.
-    for (const [taskId, list] of Object.entries(data.subtasksByTaskId ?? {})) {
-      const cacheKey = subtaskKeys.list(taskId);
-      const existing = queryClient.getQueryData<Subtask[]>(cacheKey);
-      // Don't clobber a list that contains an in-flight optimistic insert.
-      if (existing && existing.some((s) => s.id.startsWith("optimistic-"))) {
-        continue;
-      }
-      queryClient.setQueryData(cacheKey, list);
-    }
+    seedSubtaskCaches(queryClient, data);
   }, [data, queryClient, queryKey, bufferDays, centerString]);
 
   return query;

@@ -2,7 +2,9 @@ import { QueryClient } from "@tanstack/react-query";
 import type { Task } from "@open-sunsama/types";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { taskKeys } from "./query-keys";
-import { dayCacheKey, fetchTaskRange, seedDayCaches } from "./kanban-range-seed";
+import { dayCacheKey, fetchTaskRange, seedDayCaches, seedSubtaskCaches } from "./kanban-range-seed";
+import { subtaskKeys } from "./query-keys";
+import type { Subtask } from "@open-sunsama/types";
 
 const DAY = "2026-11-20";
 const rangeKey = taskKeys.range("2026-11-19", "2026-11-21");
@@ -97,5 +99,22 @@ describe("seedDayCaches", () => {
     expect(qc.getQueryData<Task[]>(dayCacheKey(DAY))?.map((t) => t.id)).toEqual(
       ["a", "from-elsewhere"]
     );
+  });
+
+  it("keeps subtasks saved while an older range fetch was in flight", async () => {
+    vi.setSystemTime(2_000);
+    const range = startRangeFetch(qc, [task("new")]);
+
+    // The composer saves a subtask after the range request started.
+    vi.setSystemTime(3_000);
+    const sub = { id: "s1", taskId: "new" } as Subtask;
+    qc.setQueryData(subtaskKeys.list("new"), [sub]);
+
+    vi.setSystemTime(4_000);
+    range.respond();
+    const data = await range.done;
+    seedSubtaskCaches(qc, { ...data, subtasksByTaskId: { new: [] } });
+
+    expect(qc.getQueryData<Subtask[]>(subtaskKeys.list("new"))).toEqual([sub]);
   });
 });

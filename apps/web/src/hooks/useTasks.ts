@@ -376,6 +376,12 @@ export function useCreateTask() {
         description: `"${newTask.title}" has been created.`,
       });
     },
+    onSettled: () => {
+      // Refetch the board's range so it holds the new task without relying
+      // on the WebSocket echo. The day caches keep their current data until
+      // the refetch returns, so the new card does not flicker.
+      queryClient.invalidateQueries({ queryKey: taskKeys.rangeAll() });
+    },
   });
 }
 

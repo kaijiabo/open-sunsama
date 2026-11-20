@@ -46,6 +46,7 @@ import {
   type LayoutResult,
 } from "@/components/calendar/event-layout";
 import { isCalendarReadOnlyForUi } from "@/lib/calendar-providers";
+import { eventSurface } from "@/lib/event-response";
 import { useDragToCreate } from "@/hooks/useDragToCreate";
 import {
   useCalendarDnd,
@@ -555,7 +556,7 @@ export function KanbanCalendarPanel({
                   declinedEventClass(event)
                 )}
                 style={{
-                  backgroundColor: hexToRgba(color, 0.15),
+                  ...eventSurface(event, color, hexToRgba(color, 0.15)),
                   borderLeft: `2px solid ${hexToRgba(color, 0.6)}`,
                 }}
                 title={event.title}

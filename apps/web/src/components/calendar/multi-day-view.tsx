@@ -13,6 +13,7 @@ import {
 import type { CalendarEvent, TimeBlock, WorkSession } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { declinedEventClass } from "@/lib/declined-event";
+import { eventSurface } from "@/lib/event-response";
 import { ScrollArea } from "@/components/ui";
 import {
   HOUR_HEIGHT,
@@ -231,7 +232,7 @@ function MultiDayEvent({
         height: `${Math.max(height - 2, 16)}px`,
         left: `${leftPct}%`,
         width: `${widthPct}%`,
-        backgroundColor: hexToRgba(color, 0.2),
+        ...eventSurface(event, color, hexToRgba(color, 0.2)),
         borderColor: color,
       }}
       onClick={(e) => {
@@ -661,7 +662,7 @@ export function MultiDayView({
                       left: `calc(${leftPct}% + 2px)`,
                       width: `calc(${widthPct}% - 4px)`,
                       height: "20px",
-                      backgroundColor: hexToRgba(color, 0.18),
+                      ...eventSurface(span.event, color, hexToRgba(color, 0.18)),
                       borderLeft: `3px solid ${hexToRgba(color, 0.7)}`,
                     }}
                     title={span.event.title}

@@ -2,7 +2,11 @@ import * as React from "react";
 import { X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SubtaskAddRow } from "./subtask-add-row";
-import { useSubtaskStyles, subtaskCheckState } from "./subtask-size";
+import {
+  useSubtaskSize,
+  useSubtaskStyles,
+  subtaskCheckState,
+} from "./subtask-size";
 
 export interface Subtask {
   id: string;
@@ -79,6 +83,7 @@ interface SubtaskItemProps {
 
 function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
   const size = useSubtaskStyles();
+  const large = useSubtaskSize() === "lg";
   return (
     <div
       className={cn(
@@ -95,6 +100,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
           size.check,
+          size.checkTarget,
           subtaskCheckState(subtask.completed)
         )}
       >
@@ -117,7 +123,8 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
         className={cn(
           "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
           "opacity-0 transition-opacity hover:bg-muted hover:text-foreground",
-          "group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
+          "group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
+          large && "max-lg:my-0 max-lg:size-11 max-lg:opacity-100"
         )}
       >
         <X className="h-3.5 w-3.5" />

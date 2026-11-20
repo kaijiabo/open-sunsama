@@ -13,12 +13,14 @@ export const SUBTASK_STYLES = {
   md: {
     row: "min-h-8 gap-2.5 py-1.5",
     check: "mt-0.5 h-4 w-4",
+    checkTarget: "",
     checkIcon: "h-2.5 w-2.5",
     text: "text-sm leading-5",
   },
   lg: {
-    row: "min-h-9 gap-3.5 py-1.5",
-    check: "mt-0.5 h-5 w-5",
+    row: "min-h-9 gap-3.5 py-1.5 max-lg:min-h-11 max-lg:items-center max-lg:py-0",
+    check: "mt-0.5 h-5 w-5 max-lg:mt-0",
+    checkTarget: "relative max-lg:before:absolute max-lg:before:-inset-[13px]",
     checkIcon: "h-3 w-3",
     text: "text-base leading-6",
   },

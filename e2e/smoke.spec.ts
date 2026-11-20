@@ -116,6 +116,57 @@ test("creates a task, adds a subtask and completes it", async ({ page }) => {
   expect(subtasks.map((s) => s.title)).toEqual(["Collect feedback", "Draft the outline"]);
 });
 
+test("keeps mobile subtasks in one row from creation through timing", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const session = await register();
+  await signInWithToken(page, session);
+  await page.goto("/app");
+  await page.getByRole("button", { name: /^Add task on/ }).click();
+  const composer = page.getByRole("dialog", { name: "New task" });
+  const title = "Plan the studio day";
+  await composer.getByRole("textbox", { name: "Task title" }).fill(title);
+  const add = composer.getByRole("textbox", { name: "Add a subtask" });
+  await add.fill("Gather project ideas");
+  await add.press("Enter");
+  const draftTitle = composer.getByText("Gather project ideas");
+  await expect(draftTitle).toBeVisible();
+  const draftLeft = (await draftTitle.boundingBox())!.x;
+  await composer.getByRole("button", { name: "Add task", exact: true }).click();
+  await expect(composer).toBeHidden();
+  await page.locator("[data-task-id]").filter({ hasText: title }).click();
+
+  const editor = page.getByRole("dialog", { name: title });
+  const row = editor.locator("[data-subtask-id]");
+  const start = row.getByRole("button", { name: "Start subtask timer" });
+  const more = row.getByRole("button", { name: /^More options/ });
+  await expect(more).toBeVisible();
+  expect((await row.boundingBox())!.height).toBeLessThanOrEqual(48);
+  expect((await row.getByRole("button", { name: "Gather project ideas", exact: true }).boundingBox())!.x).toBe(draftLeft);
+  await more.press("Space");
+  const options = page.getByRole("dialog", { name: "Subtask options" });
+  await options.getByRole("button", { name: /^Planned time/ }).click();
+  await options.getByRole("button", { name: "15 min", exact: true }).click();
+  await expect(options).toBeHidden();
+  await more.click();
+  await expect(options.getByRole("button", { name: /Planned time.*0:15/ })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(options).toBeHidden();
+  const started = page.waitForResponse((response) => response.url().endsWith("/timer/start"));
+  await start.click();
+  expect((await started).ok()).toBe(true);
+  const stopped = page.waitForResponse((response) => response.url().endsWith("/timer/stop"));
+  await row.getByRole("button", { name: "Stop subtask timer" }).click();
+  expect((await stopped).ok()).toBe(true);
+  await expect(start).toBeVisible();
+  const completed = page.waitForResponse((response) => response.request().method() === "PATCH" && response.url().includes("/subtasks/"));
+  await row.getByRole("checkbox").click();
+  expect((await completed).ok()).toBe(true);
+  await expect(start).toBeHidden();
+  await more.click();
+  await options.getByRole("button", { name: "Delete subtask" }).click();
+  await expect(row).toHaveCount(0);
+});
+
 test("shows and resizes a time block on the full calendar", async ({ page }) => {
   await page.clock.setFixedTime(new Date(`${today}T09:00:00Z`));
   const session = await register();

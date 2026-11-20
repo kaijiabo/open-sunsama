@@ -1,8 +1,12 @@
 import * as React from "react";
-import { Pause, Play } from "lucide-react";
+import { ChevronRight, Ellipsis, Pause, Play, Trash2 } from "lucide-react";
 import type { Subtask } from "@open-sunsama/types";
 import { cn, formatDuration } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { DurationPicker } from "@/components/ui/duration-picker";
 import { useUpdateSubtask } from "@/hooks/useSubtasks";
 import {
@@ -63,19 +67,161 @@ function TimeField({
   );
 }
 
+type TimeFieldLabel = "Actual" | "Planned";
+
+function MobileSubtaskOptions({
+  subtask,
+  seconds,
+  onSave,
+  onDelete,
+}: {
+  subtask: Subtask;
+  seconds: number;
+  onSave: (field: TimeFieldLabel, value: number | null) => void;
+  onDelete: () => void;
+}) {
+  const [open, setOpen] = React.useState(false);
+  const [field, setField] = React.useState<TimeFieldLabel | null>(null);
+  const values = { Actual: subtask.actualMins, Planned: subtask.estimatedMins };
+  return (
+    <Popover
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (next) setField(null);
+      }}
+    >
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          aria-label={`More options for ${subtask.title}`}
+          className="flex size-11 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
+        >
+          <Ellipsis className="size-4" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent
+        align="end"
+        className="w-auto p-0"
+        aria-label="Subtask options"
+      >
+        {field ? (
+          <DurationPicker
+            label={field}
+            value={values[field]}
+            onClose={() => setOpen(false)}
+            onChange={(value) => {
+              onSave(field, value);
+              setOpen(false);
+            }}
+          />
+        ) : (
+          <div className="w-52 p-1">
+            {(["Actual", "Planned"] as const).map((label) => {
+              const ticking = label === "Actual" && !!subtask.timerStartedAt;
+              return (
+                <button
+                  type="button"
+                  key={label}
+                  disabled={ticking}
+                  onClick={() => setField(label)}
+                  className="flex min-h-11 w-full items-center gap-2 rounded-md px-2.5 text-sm enabled:hover:bg-accent"
+                >
+                  {label} time
+                  <span className="ml-auto text-xs tabular-nums text-muted-foreground">
+                    {ticking
+                      ? formatClock(seconds)
+                      : values[label]
+                        ? formatDuration(values[label])
+                        : "Set"}
+                  </span>
+                  <ChevronRight
+                    className={cn(
+                      "size-3.5 text-muted-foreground",
+                      ticking && "invisible"
+                    )}
+                  />
+                </button>
+              );
+            })}
+            <div className="my-1 border-t" />
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                onDelete();
+              }}
+              className="flex min-h-11 w-full items-center gap-2 rounded-md px-2.5 text-sm text-destructive hover:bg-destructive/10 dark:text-red-400"
+            >
+              <Trash2 className="size-3.5" /> Delete subtask
+            </button>
+          </div>
+        )}
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 /**
  * A subtask's Actual and Planned times and its Start / Stop button, as in
  * Sunsama's task view. Starting a subtask times its task too.
  */
-export function SubtaskTiming({ subtask }: { subtask: Subtask }) {
+export function SubtaskTiming({
+  subtask,
+  onMobileDelete,
+}: {
+  subtask: Subtask;
+  onMobileDelete?: () => void;
+}) {
   const toggle = useSubtaskTimerToggle();
   const update = useUpdateSubtask();
   const { running, seconds } = useLiveSeconds(subtask);
-  const save = (data: { actualMins?: number | null; estimatedMins?: number | null }) =>
-    update.mutate({ taskId: subtask.taskId, subtaskId: subtask.id, data });
+  const save = (data: {
+    actualMins?: number | null;
+    estimatedMins?: number | null;
+  }) => update.mutate({ taskId: subtask.taskId, subtaskId: subtask.id, data });
+  const timerProps = {
+    "aria-label": running ? "Stop subtask timer" : "Start subtask timer",
+    disabled: subtask.completed && !running,
+    onClick: (event: React.MouseEvent) => {
+      if (isSingleClick(event)) void toggle(subtask.taskId, subtask.id);
+    },
+  };
+  const TimerIcon = running ? Pause : Play;
+
+  if (onMobileDelete) {
+    return (
+      <div className="-ml-3 flex shrink-0 items-center">
+        <button
+          type="button"
+          {...timerProps}
+          className={cn(
+            "flex h-11 min-w-11 items-center justify-center gap-1 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground disabled:invisible",
+            running &&
+              "px-1 text-xs tabular-nums text-emerald-600 dark:text-emerald-400"
+          )}
+        >
+          <TimerIcon className="size-4" />
+          {running && formatClock(seconds)}
+        </button>
+        <MobileSubtaskOptions
+          subtask={subtask}
+          seconds={seconds}
+          onDelete={onMobileDelete}
+          onSave={(field, value) =>
+            save(
+              field === "Actual"
+                ? { actualMins: value }
+                : { estimatedMins: value }
+            )
+          }
+        />
+      </div>
+    );
+  }
 
   return (
-    <div className="ml-auto flex shrink-0 items-center gap-2 pl-3 max-sm:justify-start max-sm:pl-0 max-sm:pb-1">
+    <div className="ml-auto flex shrink-0 items-center gap-2 pl-3">
       {running ? (
         <span className="w-14 text-right text-sm tabular-nums text-emerald-500">
           {formatClock(seconds)}
@@ -94,20 +240,17 @@ export function SubtaskTiming({ subtask }: { subtask: Subtask }) {
       />
       <button
         type="button"
-        onClick={(e) => isSingleClick(e) && void toggle(subtask.taskId, subtask.id)}
-        // Done subtasks keep the column for alignment but can't be started.
-        disabled={subtask.completed && !running}
-        aria-label={running ? "Stop subtask timer" : "Start subtask timer"}
+        {...timerProps}
         className={cn(
           "flex h-7 w-[4.5rem] items-center justify-center gap-1.5 rounded-md border text-[11px] font-semibold uppercase tracking-wider transition-[opacity,colors]",
           running
             ? "border-emerald-500 text-emerald-500 hover:bg-emerald-500/10"
             : subtask.completed
               ? "invisible"
-              : "border-emerald-500 bg-emerald-500 text-white opacity-0 hover:bg-emerald-600 focus-visible:opacity-100 group-hover:opacity-100 max-sm:opacity-100 [@media(hover:none)]:opacity-100"
+              : "border-emerald-500 bg-emerald-500 text-white opacity-0 hover:bg-emerald-600 focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
         )}
       >
-        {running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+        <TimerIcon className="size-3.5" />
         {running ? "Stop" : "Start"}
       </button>
     </div>

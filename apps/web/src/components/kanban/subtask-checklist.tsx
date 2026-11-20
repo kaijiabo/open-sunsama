@@ -17,6 +17,7 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import type { Subtask } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   useSubtasks,
   useCreateSubtask,
@@ -54,6 +55,7 @@ export function SubtaskChecklist({
   const updateSubtask = useUpdateSubtask();
   const deleteSubtask = useDeleteSubtask();
   const reorderSubtasks = useReorderSubtasks();
+  const isMobile = useIsMobile();
 
   // Each add claims the next position up front: quick successive adds (or a
   // pasted list) fire parallel requests that can land out of order.
@@ -145,6 +147,7 @@ export function SubtaskChecklist({
                 <SortableSubtaskItem
                   key={subtask.id}
                   subtask={subtask}
+                  isMobile={isMobile}
                   onToggle={() => {
                     if (isPending(subtask)) return;
                     updateSubtask.mutate({

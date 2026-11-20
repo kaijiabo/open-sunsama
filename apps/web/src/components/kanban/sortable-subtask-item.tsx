@@ -5,7 +5,11 @@ import { X, GripVertical, Check } from "lucide-react";
 import type { Subtask } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { useHoveredTask } from "@/hooks/useKeyboardShortcuts";
-import { useSubtaskSize, useSubtaskStyles, subtaskCheckState } from "./subtask-size";
+import {
+  useSubtaskSize,
+  useSubtaskStyles,
+  subtaskCheckState,
+} from "./subtask-size";
 import { SubtaskTiming } from "./subtask-timing";
 
 // Re-export for convenience
@@ -13,6 +17,7 @@ export type { Subtask };
 
 interface SortableSubtaskItemProps {
   subtask: Subtask;
+  isMobile: boolean;
   onToggle: () => void;
   onDelete: () => void;
   onUpdate?: (title: string) => void;
@@ -24,6 +29,7 @@ interface SortableSubtaskItemProps {
  */
 export function SortableSubtaskItem({
   subtask,
+  isMobile,
   onToggle,
   onDelete,
   onUpdate,
@@ -31,8 +37,9 @@ export function SortableSubtaskItem({
   const { setHoveredSubtaskId } = useHoveredTask();
   const size = useSubtaskStyles();
   // The large rows (task modal, focus mode) carry times and a timer.
-  const showTiming =
-    useSubtaskSize() === "lg" && !subtask.id.startsWith("optimistic-");
+  const large = useSubtaskSize() === "lg";
+  const showTiming = large && !subtask.id.startsWith("optimistic-");
+  const compactTiming = showTiming && isMobile;
   const [isEditing, setIsEditing] = React.useState(false);
   const [editValue, setEditValue] = React.useState(subtask.title);
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -90,13 +97,17 @@ export function SortableSubtaskItem({
       className={cn(
         "group relative -mx-2 flex items-start rounded-md px-2 transition-colors",
         size.row,
-        showTiming && "max-sm:grid max-sm:grid-cols-[auto_minmax(0,1fr)_auto]",
         "hover:bg-muted/40",
         isEditing && "bg-muted/40",
         isDragging && "z-10 bg-muted/60 shadow-xs"
       )}
       onMouseEnter={() => setHoveredSubtaskId(subtask.id)}
       onMouseLeave={() => setHoveredSubtaskId(null)}
+      onKeyDown={(event) => {
+        if (event.key === " " && (event.target as HTMLElement).closest("button")) {
+          event.stopPropagation();
+        }
+      }}
     >
       {/* Drag handle sits in the left gutter so checkboxes line up with the
           add row. Hidden on touch, where there is no hover to reveal it. */}
@@ -124,6 +135,7 @@ export function SortableSubtaskItem({
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
           size.check,
+          size.checkTarget,
           subtaskCheckState(subtask.completed)
         )}
       >
@@ -146,10 +158,13 @@ export function SortableSubtaskItem({
           )}
         />
       ) : (
-        <span
+        <button
+          type="button"
+          disabled={!onUpdate}
           onClick={() => onUpdate && setIsEditing(true)}
           className={cn(
-            "min-w-0 flex-1 break-words transition-colors",
+            "min-w-0 flex-1 break-words rounded-sm text-left transition-colors",
+            large && "max-lg:min-h-11",
             size.text,
             onUpdate && "cursor-text",
             subtask.completed &&
@@ -157,23 +172,30 @@ export function SortableSubtaskItem({
           )}
         >
           {subtask.title}
-        </span>
+        </button>
       )}
 
-      {showTiming && <div className="max-sm:col-start-2 max-sm:col-span-2 max-sm:row-start-2"><SubtaskTiming subtask={subtask} /></div>}
+      {showTiming && (
+        <SubtaskTiming
+          subtask={subtask}
+          onMobileDelete={compactTiming ? onDelete : undefined}
+        />
+      )}
 
-      <button
-        type="button"
-        aria-label="Delete subtask"
-        onClick={onDelete}
-        className={cn(
-          "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
-          "opacity-0 transition-opacity hover:bg-muted hover:text-foreground",
-          "group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
-        )}
-      >
-        <X className="h-3.5 w-3.5" />
-      </button>
+      {!compactTiming && (
+        <button
+          type="button"
+          aria-label="Delete subtask"
+          onClick={onDelete}
+          className={cn(
+            "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
+            "opacity-0 transition-opacity hover:bg-muted hover:text-foreground",
+            "group-hover:opacity-100 focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
+          )}
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      )}
     </div>
   );
 }

@@ -24,6 +24,7 @@ import { CommandItem } from "./command-item";
 import { ResultItem } from "./result-item";
 import { CreateTaskItem } from "./create-task-item";
 import { useCommandContext } from "./use-command-context";
+import { timePattern } from "@/lib/time-format";
 
 interface CommandPaletteProps {
   open: boolean;
@@ -395,7 +396,7 @@ function formatTaskDate(scheduledDate: string | null | undefined) {
 function formatEventWhen(startTime: string, isAllDay: boolean) {
   const start = new Date(startTime);
   if (isAllDay) return format(start, "MMM d");
-  if (isSameDay(start, new Date())) return format(start, "h:mm a").toLowerCase();
+  if (isSameDay(start, new Date())) return format(start, timePattern()).toLowerCase();
   return format(start, "MMM d");
 }
 

@@ -21,6 +21,8 @@ import {
   RootErrorBoundary,
   applyPendingCacheReset,
 } from "@/components/app-error-screen";
+import { isDesktop } from "@/lib/desktop";
+import { setUses24HourClock } from "@/lib/time-format";
 import { routeTree } from "./routeTree.gen.tsx";
 
 import "./index.css";
@@ -197,8 +199,27 @@ const root: ReactDOM.Root =
   import.meta.hot?.data.root ?? ReactDOM.createRoot(rootElement);
 if (import.meta.hot) import.meta.hot.data.root = root;
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// WKWebView's Intl ignores macOS's "24-hour time" switch, so the desktop app
+// reads it from the OS before the first render.
+async function applyDesktopClockPreference(): Promise<void> {
+  if (!isDesktop()) return;
+  try {
+    const { invoke } = await import("@tauri-apps/api/core");
+    // Never hold the first render on the native call for long.
+    const uses24Hour = await Promise.race([
+      invoke<boolean | null>("uses_24_hour_clock"),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 500)),
+    ]);
+    if (typeof uses24Hour === "boolean") setUses24HourClock(uses24Hour);
+  } catch {
+    // Older desktop builds lack the command; keep the Intl detection.
+  }
+}
+
+void applyDesktopClockPreference().finally(() => {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});

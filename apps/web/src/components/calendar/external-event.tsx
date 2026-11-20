@@ -21,6 +21,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui";
 import type { LayoutResult } from "./event-layout";
+import { timePattern, timePatternNoPeriod } from "@/lib/time-format";
 
 const COLUMN_GAP_PCT = 1; // gap between side-by-side overlapping events
 
@@ -228,7 +229,7 @@ export function ExternalEvent({
             onTouchEnd={onTouchEnd}
             role="button"
             tabIndex={0}
-            aria-label={`Calendar event: ${event.title} from ${format(startTime, "h:mm a")} to ${format(endTime, "h:mm a")}`}
+            aria-label={`Calendar event: ${event.title} from ${format(startTime, timePattern())} to ${format(endTime, timePattern())}`}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.stopPropagation();
@@ -282,7 +283,7 @@ export function ExternalEvent({
               {/* Time range - muted text, hide if too compact */}
               {!isCompact && (
                 <p className="truncate text-xs text-foreground/70">
-                  {format(startTime, "h:mm")} - {format(endTime, "h:mm a")}
+                  {format(startTime, timePatternNoPeriod())} - {format(endTime, timePattern())}
                 </p>
               )}
 
@@ -299,10 +300,10 @@ export function ExternalEvent({
           <div className="space-y-1">
             <p className="font-medium">{event.title}</p>
             <p className="text-xs text-muted-foreground">
-              {format(startTime, "MMM d, h:mm a")} -{" "}
+              {format(startTime, `MMM d, ${timePattern()}`)} -{" "}
               {isSameDay(startTime, endTime)
-                ? format(endTime, "h:mm a")
-                : format(endTime, "MMM d, h:mm a")}
+                ? format(endTime, timePattern())
+                : format(endTime, `MMM d, ${timePattern()}`)}
             </p>
             {(continuesFromPriorDay || continuesToNextDay) && (
               <p className="text-xs text-muted-foreground/80 italic">

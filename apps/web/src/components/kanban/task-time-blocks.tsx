@@ -3,6 +3,7 @@ import { Clock } from "lucide-react";
 import type { TimeBlock } from "@open-sunsama/types";
 import { formatDuration } from "@/lib/utils";
 import { Label, Badge } from "@/components/ui";
+import { timePattern } from "@/lib/time-format";
 
 interface TimeBlockItemProps {
   timeBlock: TimeBlock;
@@ -22,7 +23,7 @@ export function TimeBlockItem({ timeBlock }: TimeBlockItemProps) {
           {format(startTime, "EEE, MMM d")}
         </p>
         <p className="text-xs text-muted-foreground">
-          {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
+          {format(startTime, timePattern())} - {format(endTime, timePattern())}
         </p>
       </div>
       <Badge variant="secondary">{formatDuration(durationMins)}</Badge>

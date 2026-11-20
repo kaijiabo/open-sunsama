@@ -7,6 +7,7 @@ import type {
   UpdateTaskInput,
 } from "@open-sunsama/types";
 import { cn, formatDuration } from "@/lib/utils";
+import { formatClockTime } from "@/lib/time-format";
 import { useHoveredTask, TIME_EDIT_KEYS } from "@/hooks/useKeyboardShortcuts";
 import {
   Popover,
@@ -89,20 +90,14 @@ export function TaskCardContent({
     setPriorityOpen(false);
   };
 
-  // Format scheduled time to "2:50 pm" format
+  // Format scheduled time as "2:50 pm" (or "14:50" on a 24-hour clock)
   const formattedTime = React.useMemo(() => {
     if (!scheduledTime) return null;
     const date =
       typeof scheduledTime === "string"
         ? new Date(scheduledTime)
         : scheduledTime;
-    return date
-      .toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      })
-      .toLowerCase();
+    return formatClockTime(date).toLowerCase();
   }, [scheduledTime]);
 
   const hasEstimateOnly =

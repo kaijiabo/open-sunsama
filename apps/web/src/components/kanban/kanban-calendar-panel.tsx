@@ -5,7 +5,6 @@ import { useDndMonitor, useDroppable, type DragMoveEvent } from "@dnd-kit/core";
 import {
   format,
   isSameDay,
-  setHours,
   addMinutes,
   differenceInMinutes,
   startOfDay,
@@ -59,6 +58,7 @@ import {
   calculateTimeFromY,
   snapToInterval,
 } from "@/hooks/useCalendarDnd";
+import { formatHourLabel, timePattern } from "@/lib/time-format";
 
 const DEFAULT_LAYOUT: LayoutResult = { lane: 0, columnCount: 1 };
 
@@ -583,7 +583,7 @@ export function KanbanCalendarPanel({
                 style={{ height: HOUR_HEIGHT }}
               >
                 <span className="absolute -top-2 right-1 text-[10px] text-muted-foreground/70">
-                  {format(setHours(date, hour), "ha").toLowerCase()}
+                  {formatHourLabel(hour)}
                 </span>
               </div>
             ))}
@@ -649,7 +649,7 @@ export function KanbanCalendarPanel({
                     if (!justEndedDrag) onViewTask?.(task.id);
                   }}
                   onMouseDown={(e) => startProjectedDrag(task, start, end, e)}
-                  title={`${task.title} · projected ${format(start, "h:mm a")}`}
+                  title={`${task.title} · projected ${format(start, timePattern())}`}
                   className="absolute left-1 right-2 z-10 overflow-hidden rounded border border-dotted border-primary/50 bg-primary/[0.04] px-1.5 text-left text-[11px] leading-4 text-primary transition-colors hover:bg-primary/[0.09]"
                   style={{
                     opacity: dragState?.blockId === `projected:${task.id}` ? 0.4 : 1,

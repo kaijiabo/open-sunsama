@@ -5,6 +5,7 @@ import type { Task, TimeBlock, CalendarEvent } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { formatDuration } from "@/lib/utils";
 import type { DragState, DropPreview } from "@/hooks/useCalendarDnd";
+import { timePattern, timePatternNoPeriod } from "@/lib/time-format";
 
 interface DragOverlayProps {
   dragState: DragState | null;
@@ -122,8 +123,8 @@ function TaskDragPreview({ task, dropPreview }: TaskDragPreviewProps) {
           <div className="flex items-center gap-2 text-xs text-primary">
             <Calendar className="h-3 w-3" />
             <span className="font-medium">
-              {format(dropPreview.startTime, "h:mm")} -{" "}
-              {format(dropPreview.endTime, "h:mm a")}
+              {format(dropPreview.startTime, timePatternNoPeriod())} -{" "}
+              {format(dropPreview.endTime, timePattern())}
             </span>
           </div>
         </div>
@@ -191,8 +192,8 @@ function BlockDragPreview({ block, dropPreview, dragType }: BlockDragPreviewProp
           >
             <Calendar className="h-3 w-3" />
             <span>
-              {format(dropPreview.startTime, "h:mm")} -{" "}
-              {format(dropPreview.endTime, "h:mm a")}
+              {format(dropPreview.startTime, timePatternNoPeriod())} -{" "}
+              {format(dropPreview.endTime, timePattern())}
             </span>
           </div>
         </div>
@@ -254,8 +255,8 @@ function EventDragPreview({
           >
             <Calendar className="h-3 w-3" />
             <span>
-              {format(dropPreview.startTime, "h:mm")} -{" "}
-              {format(dropPreview.endTime, "h:mm a")}
+              {format(dropPreview.startTime, timePatternNoPeriod())} -{" "}
+              {format(dropPreview.endTime, timePattern())}
             </span>
           </div>
         </div>

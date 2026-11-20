@@ -24,14 +24,18 @@ import {
   DialogTitle,
 } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { uses24HourClock } from "@/lib/time-format";
 
 /**
- * Convert 24h time (HH:MM) to 12h format for display
+ * Convert 24h time (HH:MM) to the user's clock style for display
  */
-export function formatTime12Hour(time24: string): string {
+export function formatTimeOfDay(time24: string): string {
   if (!time24) return "";
   const [hours, minutes] = time24.split(":").map(Number);
   if (hours === undefined || minutes === undefined) return "";
+  if (uses24HourClock()) {
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+  }
   const period = hours >= 12 ? "PM" : "AM";
   const hours12 = hours % 12 || 12;
   return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
@@ -84,17 +88,17 @@ interface TimeInputProps {
 function TimeInput({
   value,
   onChange,
-  placeholder = "e.g. 9am, 2:30pm",
+  placeholder = uses24HourClock() ? "e.g. 09:00, 14:30" : "e.g. 9am, 2:30pm",
 }: TimeInputProps) {
   const [inputValue, setInputValue] = React.useState(() =>
-    value ? formatTime12Hour(value) : ""
+    value ? formatTimeOfDay(value) : ""
   );
   const [isEditing, setIsEditing] = React.useState(false);
 
   // Update input when external value changes
   React.useEffect(() => {
     if (!isEditing) {
-      setInputValue(value ? formatTime12Hour(value) : "");
+      setInputValue(value ? formatTimeOfDay(value) : "");
     }
   }, [value, isEditing]);
 
@@ -107,10 +111,10 @@ function TimeInput({
     const parsed = parseTimeInput(inputValue);
     if (parsed) {
       onChange(parsed);
-      setInputValue(formatTime12Hour(parsed));
+      setInputValue(formatTimeOfDay(parsed));
     } else {
       // Reset to previous valid value
-      setInputValue(value ? formatTime12Hour(value) : "");
+      setInputValue(value ? formatTimeOfDay(value) : "");
     }
   };
 

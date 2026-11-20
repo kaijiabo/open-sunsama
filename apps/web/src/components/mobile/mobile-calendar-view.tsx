@@ -62,6 +62,7 @@ import {
 } from "@/components/calendar/event-layout";
 import { MobileMultiDayView } from "./mobile-multi-day-view";
 import { UnscheduledTasksDrawer } from "./mobile-unscheduled-drawer";
+import { formatHourLabel, timePattern } from "@/lib/time-format";
 
 const DEFAULT_LAYOUT: LayoutResult = { lane: 0, columnCount: 1 };
 // Imported from the central source so adding a new provider is a
@@ -534,7 +535,7 @@ export function MobileCalendarView({
                     style={{ height: HOUR_HEIGHT }}
                   >
                     <span className="absolute -top-2 right-2 text-[11px] text-muted-foreground font-medium tabular-nums">
-                      {format(setHours(selectedDate, hour), "ha").toLowerCase()}
+                      {formatHourLabel(hour)}
                     </span>
                   </div>
                 ))}
@@ -666,8 +667,8 @@ export function MobileCalendarView({
                         }}
                       >
                         <span className="text-[10px] font-semibold text-primary">
-                          {format(touchDrag.dragState.previewStart, "h:mm a")} –{" "}
-                          {format(touchDrag.dragState.previewEnd, "h:mm a")}
+                          {format(touchDrag.dragState.previewStart, timePattern())} –{" "}
+                          {format(touchDrag.dragState.previewEnd, timePattern())}
                         </span>
                       </div>
                     );

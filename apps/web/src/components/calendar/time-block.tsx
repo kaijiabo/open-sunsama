@@ -8,6 +8,7 @@ import {
 } from "@/hooks/useCalendarDnd";
 import { TimeBlockContextMenu } from "./time-block-context-menu";
 import type { LayoutResult } from "./event-layout";
+import { timePattern, timePatternNoPeriod } from "@/lib/time-format";
 
 const COLUMN_GAP_PCT = 1; // gap between side-by-side overlapping items
 
@@ -46,7 +47,7 @@ function hexToRgba(hex: string, alpha: number): string {
 
 /** Hover text for a block: its title, then when it runs. */
 export function blockTooltip(title: string, start: Date, end: Date): string {
-  return `${title}\n${format(start, "h:mm a")} – ${format(end, "h:mm a")}`;
+  return `${title}\n${format(start, timePattern())} – ${format(end, timePattern())}`;
 }
 
 /**
@@ -150,7 +151,7 @@ export function TimeBlock({
         onMouseDown={handleMouseDown}
         role="button"
         tabIndex={0}
-        aria-label={`Time block: ${block.title} from ${format(startTime, "h:mm a")} to ${format(endTime, "h:mm a")}`}
+        aria-label={`Time block: ${block.title} from ${format(startTime, timePattern())} to ${format(endTime, timePattern())}`}
         // Hover tooltip, so the time is readable on short blocks that hide it.
         title={blockTooltip(block.title, startTime, endTime)}
       >
@@ -184,7 +185,7 @@ export function TimeBlock({
           {/* Time range - muted text, hide if too compact */}
           {!isCompact && (
             <p className="truncate text-xs text-muted-foreground">
-              {format(startTime, "h:mm")} - {format(endTime, "h:mm a")}
+              {format(startTime, timePatternNoPeriod())} - {format(endTime, timePattern())}
             </p>
           )}
         </div>
@@ -249,7 +250,7 @@ export function TimeBlockPreview({
           {title}
         </p>
         <p className="shrink-0 truncate text-xs text-muted-foreground">
-          {format(startTime, "h:mm")} - {format(endTime, "h:mm a")}
+          {format(startTime, timePatternNoPeriod())} - {format(endTime, timePattern())}
         </p>
       </div>
     </div>

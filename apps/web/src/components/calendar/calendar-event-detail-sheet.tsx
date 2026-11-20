@@ -43,6 +43,7 @@ import {
 } from "@/hooks/useCalendars";
 import { toast } from "@/hooks/use-toast";
 import { HtmlContent } from "@/components/ui/html-content";
+import { timePattern } from "@/lib/time-format";
 
 interface CalendarEventDetailSheetProps {
   event: CalendarEvent | null;
@@ -110,9 +111,9 @@ function formatEventTime(event: CalendarEvent): string {
   }
 
   if (isSameDay(start, end)) {
-    return `${format(start, "EEEE, MMMM d, yyyy")} · ${format(start, "h:mm a")} – ${format(end, "h:mm a")}`;
+    return `${format(start, "EEEE, MMMM d, yyyy")} · ${format(start, timePattern())} – ${format(end, timePattern())}`;
   }
-  return `${format(start, "MMM d, h:mm a")} → ${format(end, "MMM d, h:mm a")}`;
+  return `${format(start, `MMM d, ${timePattern()}`)} → ${format(end, `MMM d, ${timePattern()}`)}`;
 }
 
 /**

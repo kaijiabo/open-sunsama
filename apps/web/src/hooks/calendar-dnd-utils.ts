@@ -7,6 +7,7 @@ import {
 } from "date-fns";
 import type { TimeBlock } from "@open-sunsama/types";
 import type { DropPreview } from "./calendar-dnd-types";
+import { timePattern } from "@/lib/time-format";
 
 /**
  * Constants for timeline calculations
@@ -220,5 +221,5 @@ export function calculateResizePreview(
  * Format time range for display
  */
 export function formatTimeRange(start: Date, end: Date): string {
-  return `${format(start, "h:mm a")} - ${format(end, "h:mm a")}`;
+  return `${format(start, timePattern())} - ${format(end, timePattern())}`;
 }

@@ -13,6 +13,7 @@ import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { isDeclined } from "@/lib/declined-event";
 import { calendarKeys } from "@/lib/query-keys";
+import { isDesktop } from "@/lib/desktop";
 import { trackGoal } from "@/lib/analytics";
 
 /**
@@ -635,9 +636,15 @@ export function useDeleteCalendarEvent() {
 
 /**
  * Initiate OAuth flow for a calendar provider
- * Calls the API with auth to get the OAuth URL, then redirects
+ * Calls the API with auth to get the OAuth URL, then redirects.
+ *
+ * In the desktop app the provider's sign-in page opens in the system browser:
+ * loading it inside the app's only window left no way back if the user
+ * stopped halfway (#205). The callback saves the account server-side, so the
+ * app just refetches calendars when its window regains focus.
  */
 export function useInitiateOAuth() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (provider: "google" | "outlook"): Promise<string> => {
       const client = getApiClient();
@@ -647,8 +654,22 @@ export function useInitiateOAuth() {
       }>(`calendar/oauth/${provider}/initiate`);
       return response.data.authUrl;
     },
-    onSuccess: (authUrl) => {
-      // Redirect to the OAuth provider
+    onSuccess: async (authUrl) => {
+      if (isDesktop()) {
+        const { invoke } = await import("@tauri-apps/api/core");
+        await invoke("plugin:shell|open", { path: authUrl });
+        toast({
+          title: "Finish connecting in your browser",
+          description: "Your calendars appear here once you approve access.",
+        });
+        const deadline = Date.now() + 15 * 60 * 1000;
+        const onFocus = () => {
+          void queryClient.invalidateQueries({ queryKey: calendarKeys.all });
+          if (Date.now() > deadline) window.removeEventListener("focus", onFocus);
+        };
+        window.addEventListener("focus", onFocus);
+        return;
+      }
       window.location.href = authUrl;
     },
     onError: (error) => {

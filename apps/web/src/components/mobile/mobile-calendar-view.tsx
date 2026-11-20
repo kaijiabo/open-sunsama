@@ -33,6 +33,7 @@ import {
 } from "@/hooks/useCalendars";
 import { useMobileTouchDrag } from "./use-mobile-touch-drag";
 import { isCalendarReadOnlyForUi } from "@/lib/calendar-providers";
+import { eventSurface } from "@/lib/event-response";
 import {
   HOUR_HEIGHT,
   TIMELINE_START_HOUR,
@@ -502,7 +503,7 @@ export function MobileCalendarView({
                     onClick={() => handleExternalEventClick(event)}
                     className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-xs hover:brightness-90 cursor-pointer"
                     style={{
-                      backgroundColor: hexToRgba(color, 0.15),
+                      ...eventSurface(event, color, hexToRgba(color, 0.15)),
                       borderLeft: `3px solid ${hexToRgba(color, 0.6)}`,
                     }}
                     title={event.title}

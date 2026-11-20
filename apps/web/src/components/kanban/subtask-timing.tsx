@@ -100,14 +100,14 @@ function MobileSubtaskOptions({
               ? `Planned time: ${formatDuration(subtask.estimatedMins)}`
               : undefined
           }
-          className="flex h-11 w-12 items-center justify-end gap-0.5 rounded-md pr-1 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex h-11 min-w-12 items-center justify-end gap-1 rounded-md pr-0.5 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
         >
           {subtask.estimatedMins ? (
-            <span className="text-xs tabular-nums">
+            <span className="text-[0.6875rem] tabular-nums">
               {formatDuration(subtask.estimatedMins)}
             </span>
           ) : null}
-          <Ellipsis className="size-3.5 shrink-0" />
+          <Ellipsis className="size-3 shrink-0" />
         </button>
       </PopoverTrigger>
       <PopoverContent
@@ -157,6 +157,7 @@ function MobileSubtaskOptions({
             <div className="my-1 border-t" />
             <button
               type="button"
+              aria-label={`Delete subtask: ${subtask.title}`}
               onClick={() => {
                 setOpen(false);
                 onDelete();
@@ -191,7 +192,7 @@ export function SubtaskTiming({
     estimatedMins?: number | null;
   }) => update.mutate({ taskId: subtask.taskId, subtaskId: subtask.id, data });
   const timerProps = {
-    "aria-label": running ? "Stop subtask timer" : "Start subtask timer",
+    "aria-label": `${running ? "Stop" : "Start"} subtask timer: ${subtask.title}`,
     disabled: subtask.completed && !running,
     onClick: (event: React.MouseEvent) => {
       if (isSingleClick(event)) void toggle(subtask.taskId, subtask.id);

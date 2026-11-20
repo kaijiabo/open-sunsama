@@ -101,7 +101,8 @@ export function SortableSubtaskItem({
       ref={setActivatorNodeRef}
       {...attributes}
       {...listeners}
-      aria-label="Reorder subtask"
+      aria-label={`Reorder subtask: ${subtask.title}`}
+      data-escape-local={isDragging || undefined}
       className={cn(
         "absolute -left-4 top-1.5 hidden h-5 w-4 items-center justify-center rounded sm:flex",
         "cursor-grab touch-none text-muted-foreground opacity-0 transition-opacity",
@@ -116,10 +117,8 @@ export function SortableSubtaskItem({
   );
 
   return (
-    <div
+    <li
       ref={setNodeRef}
-      role="group"
-      aria-label={subtask.title}
       style={style}
       data-subtask-id={subtask.id}
       className={cn(
@@ -137,7 +136,7 @@ export function SortableSubtaskItem({
         type="button"
         role="checkbox"
         aria-checked={subtask.completed}
-        aria-label={subtask.completed ? "Mark incomplete" : "Mark complete"}
+        aria-label={subtask.title}
         onClick={onToggle}
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
@@ -202,7 +201,7 @@ export function SortableSubtaskItem({
       {!compactTiming && (
         <button
           type="button"
-          aria-label="Delete subtask"
+          aria-label={`Delete subtask: ${subtask.title}`}
           onClick={onDelete}
           className={cn(
             "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
@@ -213,6 +212,6 @@ export function SortableSubtaskItem({
           <X className="h-3.5 w-3.5" />
         </button>
       )}
-    </div>
+    </li>
   );
 }

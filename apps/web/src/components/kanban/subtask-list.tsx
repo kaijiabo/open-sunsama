@@ -59,7 +59,7 @@ export function SubtaskList({
   return (
     <div className={className}>
       {subtasks.length > 0 && (
-        <div className="space-y-px">
+        <ul role="list" aria-label="Subtasks" className="space-y-px">
           {subtasks.map((subtask) => (
             <SubtaskItem
               key={subtask.id}
@@ -68,7 +68,7 @@ export function SubtaskList({
               onDelete={() => deleteSubtask(subtask.id)}
             />
           ))}
-        </div>
+        </ul>
       )}
       <SubtaskAddRow ref={addInputRef} onAdd={addSubtasks} />
     </div>
@@ -85,9 +85,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
   const size = useSubtaskStyles();
   const large = useSubtaskSize() === "lg";
   return (
-    <div
-      role="group"
-      aria-label={subtask.title}
+    <li
       className={cn(
         "group -mx-2 flex items-start rounded-md px-2 transition-colors hover:bg-muted/40",
         size.row
@@ -97,7 +95,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
         type="button"
         role="checkbox"
         aria-checked={subtask.completed}
-        aria-label={subtask.completed ? "Mark incomplete" : "Mark complete"}
+        aria-label={subtask.title}
         onClick={onToggle}
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full border-[1.5px] transition-all duration-150 active:scale-90",
@@ -122,7 +120,7 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
       </span>
       <button
         type="button"
-        aria-label="Delete subtask"
+        aria-label={`Delete subtask: ${subtask.title}`}
         onClick={onDelete}
         className={cn(
           "-my-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-muted-foreground/60",
@@ -134,6 +132,6 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
       >
         <X className="h-3.5 w-3.5" />
       </button>
-    </div>
+    </li>
   );
 }

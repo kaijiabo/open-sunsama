@@ -142,7 +142,7 @@ export function SubtaskChecklist({
             items={subtasks.map((s) => s.id)}
             strategy={verticalListSortingStrategy}
           >
-            <div className="space-y-px">
+            <ul role="list" aria-label="Subtasks" className="space-y-px">
               {subtasks.map((subtask) => (
                 <SortableSubtaskItem
                   key={subtask.id}
@@ -170,7 +170,7 @@ export function SubtaskChecklist({
                   }}
                 />
               ))}
-            </div>
+            </ul>
           </SortableContext>
         </DndContext>
       )}

@@ -205,7 +205,11 @@ async function applyDesktopClockPreference(): Promise<void> {
   if (!isDesktop()) return;
   try {
     const { invoke } = await import("@tauri-apps/api/core");
-    const uses24Hour = await invoke<boolean | null>("uses_24_hour_clock");
+    // Never hold the first render on the native call for long.
+    const uses24Hour = await Promise.race([
+      invoke<boolean | null>("uses_24_hour_clock"),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 500)),
+    ]);
     if (typeof uses24Hour === "boolean") setUses24HourClock(uses24Hour);
   } catch {
     // Older desktop builds lack the command; keep the Intl detection.

@@ -13,8 +13,9 @@ pub fn is_desktop() -> bool {
 /// The OS clock override, if the user set one: Some(true) for 24-hour,
 /// Some(false) for 12-hour, None to follow the locale. WKWebView's `Intl`
 /// ignores macOS's "24-hour time" switch, so the web app asks here first.
+/// Async so Tauri runs it off the main thread.
 #[tauri::command]
-pub fn uses_24_hour_clock() -> Option<bool> {
+pub async fn uses_24_hour_clock() -> Option<bool> {
     #[cfg(target_os = "macos")]
     {
         let read = |key: &str| {

@@ -20,7 +20,7 @@ export const SUBTASK_STYLES = {
   },
   lg: {
     row: "min-h-9 gap-3.5 py-1.5 max-lg:-mr-3 max-lg:min-h-11 max-lg:py-0 max-lg:pr-0",
-    check: "h-5 w-5",
+    check: "h-5 w-5 max-lg:aria-[checked=false]:border-muted-foreground/75 max-lg:aria-[checked=false]:[&>svg]:invisible",
     checkOffset: "mt-0.5 max-lg:mt-3",
     checkTarget: "relative focus-visible:ring-1 focus-visible:ring-ring max-lg:before:absolute max-lg:before:-inset-[13px]",
     checkIcon: "h-3 w-3",

@@ -147,13 +147,20 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   const input = row.getByRole("textbox", { name: "Edit subtask" });
   await input.fill("Review the ideas");
   await input.press("Enter");
-  await expect(row.getByRole("button", { name: "Review the ideas", exact: true })).toBeVisible();
+  const renamed = row.getByRole("button", { name: "Review the ideas", exact: true });
+  await expect(renamed).toBeFocused();
+  await renamed.press("Enter");
+  await input.fill("Unsaved change");
+  await input.press("Escape");
+  await expect(renamed).toBeFocused();
   await more.press("Space");
   const options = page.getByRole("dialog", { name: "Subtask options" });
   await options.getByRole("button", { name: /^Planned time/ }).click();
   await options.getByRole("button", { name: "15 min", exact: true }).click();
   await expect(options).toBeHidden();
   await expect(more).toHaveText("0:15");
+  await page.setViewportSize({ width: 320, height: 640 });
+  expect((await row.boundingBox())!.height).toBe(44);
   await more.click();
   await expect(options.getByRole("button", { name: /Planned time.*0:15/ })).toBeVisible();
   await page.keyboard.press("Escape");
@@ -161,8 +168,16 @@ test("keeps mobile subtasks in one row from creation through timing", async ({ p
   const started = page.waitForResponse((response) => response.url().endsWith("/timer/start"));
   await start.click();
   expect((await started).ok()).toBe(true);
+  const pause = row.getByRole("button", { name: "Stop subtask timer" });
+  await expect(pause).toBeVisible();
+  const titleBox = (await renamed.boundingBox())!;
+  const timerBox = (await pause.boundingBox())!;
+  const moreBox = (await more.boundingBox())!;
+  expect(titleBox.x + titleBox.width).toBeLessThanOrEqual(timerBox.x);
+  expect(timerBox.x + timerBox.width).toBeLessThanOrEqual(moreBox.x);
+  expect(moreBox.x + moreBox.width).toBeLessThanOrEqual(320);
   const stopped = page.waitForResponse((response) => response.url().endsWith("/timer/stop"));
-  await row.getByRole("button", { name: "Stop subtask timer" }).click();
+  await pause.click();
   expect((await stopped).ok()).toBe(true);
   await expect(start).toBeVisible();
   await more.click();
@@ -477,6 +492,16 @@ test("mobile subtask titles keep readable width alongside timer controls", async
   expect(title!.width).toBeGreaterThan(230);
   expect(title!.height).toBeLessThan(50);
   await expect(row.getByRole("button", { name: "Start subtask timer" })).toBeVisible();
+  await page.setViewportSize({ width: 768, height: 900 });
+  const handle = row.getByRole("button", { name: "Reorder subtask" });
+  await expect(handle).toBeVisible();
+  const handleBox = (await handle.boundingBox())!;
+  const titleBox = (await row.getByText("Check the launch checklist", { exact: true }).boundingBox())!;
+  const timerBox = (await row.getByRole("button", { name: "Start subtask timer" }).boundingBox())!;
+  expect(handleBox.width).toBe(44);
+  expect(handleBox.height).toBe(44);
+  expect(titleBox.x + titleBox.width).toBeLessThanOrEqual(handleBox.x);
+  expect(handleBox.x + handleBox.width).toBeLessThanOrEqual(timerBox.x);
 });
 
 test("completion cannot leave a task or subtask timer running after concurrent starts", async () => {

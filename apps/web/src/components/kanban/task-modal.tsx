@@ -965,6 +965,11 @@ export function TaskModal({
           <BottomSheetContent
             onDismiss={() => handleOpenChange(false)}
             aria-describedby={undefined}
+            onEscapeKeyDown={(event) => {
+              if (event.target instanceof HTMLElement && event.target.dataset.escapeLocal === "true") {
+                event.preventDefault();
+              }
+            }}
             onOpenAutoFocus={(e) => {
               e.preventDefault();
               if (isCompose) titleRef.current?.focus({ preventScroll: true });

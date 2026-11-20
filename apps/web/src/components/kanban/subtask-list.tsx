@@ -86,6 +86,8 @@ function SubtaskItem({ subtask, onToggle, onDelete }: SubtaskItemProps) {
   const large = useSubtaskSize() === "lg";
   return (
     <div
+      role="group"
+      aria-label={subtask.title}
       className={cn(
         "group -mx-2 flex items-start rounded-md px-2 transition-colors hover:bg-muted/40",
         size.row

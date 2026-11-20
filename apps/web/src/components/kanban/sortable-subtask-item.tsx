@@ -43,11 +43,13 @@ export function SortableSubtaskItem({
   const [isEditing, setIsEditing] = React.useState(false);
   const [editValue, setEditValue] = React.useState(subtask.title);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const returnFocus = React.useRef(false);
 
   const {
     attributes,
     listeners,
     setNodeRef,
+    setActivatorNodeRef,
     transform,
     transition,
     isDragging,
@@ -80,18 +82,44 @@ export function SortableSubtaskItem({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.nativeEvent.isComposing) return;
     if (e.key === "Enter") {
       e.preventDefault();
+      returnFocus.current = true;
       handleSave();
     } else if (e.key === "Escape") {
+      returnFocus.current = true;
       setEditValue(subtask.title);
       setIsEditing(false);
     }
   };
 
+  const inlineHandle = large && isMobile;
+  const handle = (
+    <button
+      type="button"
+      ref={setActivatorNodeRef}
+      {...attributes}
+      {...listeners}
+      aria-label="Reorder subtask"
+      className={cn(
+        "absolute -left-4 top-1.5 hidden h-5 w-4 items-center justify-center rounded sm:flex",
+        "cursor-grab touch-none text-muted-foreground opacity-0 transition-opacity",
+        "hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-1 focus-visible:ring-ring active:cursor-grabbing",
+        inlineHandle &&
+          "sm:max-lg:static sm:max-lg:size-11 sm:max-lg:shrink-0 sm:max-lg:[@media(hover:none)]:opacity-100",
+        isDragging && "opacity-100"
+      )}
+    >
+      <GripVertical className="h-3.5 w-3.5" />
+    </button>
+  );
+
   return (
     <div
       ref={setNodeRef}
+      role="group"
+      aria-label={subtask.title}
       style={style}
       data-subtask-id={subtask.id}
       className={cn(
@@ -104,6 +132,7 @@ export function SortableSubtaskItem({
       onMouseEnter={() => setHoveredSubtaskId(subtask.id)}
       onMouseLeave={() => setHoveredSubtaskId(null)}
     >
+      {!inlineHandle && handle}
       <button
         type="button"
         role="checkbox"
@@ -140,6 +169,12 @@ export function SortableSubtaskItem({
       ) : (
         <button
           type="button"
+          ref={(button) => {
+            if (button && returnFocus.current) {
+              returnFocus.current = false;
+              button.focus();
+            }
+          }}
           disabled={!onUpdate}
           onClick={() => onUpdate && setIsEditing(true)}
           className={cn(
@@ -155,22 +190,7 @@ export function SortableSubtaskItem({
         </button>
       )}
 
-      <button
-        type="button"
-        {...attributes}
-        {...listeners}
-        aria-label="Reorder subtask"
-        className={cn(
-          "absolute -left-4 top-1.5 hidden h-5 w-4 items-center justify-center rounded sm:flex",
-          "cursor-grab touch-none text-muted-foreground opacity-0 transition-opacity",
-          "hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-1 focus-visible:ring-ring active:cursor-grabbing",
-          large &&
-            "sm:max-lg:static sm:max-lg:size-11 sm:max-lg:shrink-0 sm:max-lg:[@media(hover:none)]:opacity-100",
-          isDragging && "opacity-100"
-        )}
-      >
-        <GripVertical className="h-3.5 w-3.5" />
-      </button>
+      {inlineHandle && handle}
 
       {showTiming && (
         <SubtaskTiming

@@ -100,7 +100,7 @@ function MobileSubtaskOptions({
               ? `Planned time: ${formatDuration(subtask.estimatedMins)}`
               : undefined
           }
-          className="flex h-11 w-14 items-center justify-end gap-1.5 rounded-md pr-1.5 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex h-11 w-12 items-center justify-end gap-0.5 rounded-md pr-1 text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring"
         >
           {subtask.estimatedMins ? (
             <span className="text-xs tabular-nums">

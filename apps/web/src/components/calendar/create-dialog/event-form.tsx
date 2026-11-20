@@ -21,6 +21,7 @@ import {
   SelectItem,
 } from "@/components/ui";
 import { isCalendarReadOnlyForUi } from "@/lib/calendar-providers";
+import { timePattern } from "@/lib/time-format";
 
 export function EventForm({
   date,
@@ -195,7 +196,7 @@ export function EventForm({
 
       <p className="text-xs text-muted-foreground">
         {Number.isFinite(+new Date(start)) && Number.isFinite(+new Date(end))
-          ? `${format(new Date(start), "EEE, MMM d · h:mm a")} – ${format(new Date(end), isSameDay(new Date(start), new Date(end)) ? "h:mm a" : "MMM d · h:mm a")}`
+          ? `${format(new Date(start), `EEE, MMM d · ${timePattern()}`)} – ${format(new Date(end), isSameDay(new Date(start), new Date(end)) ? timePattern() : `MMM d · ${timePattern()}`)}`
           : "Choose a start and end time"}
       </p>
       <div className="space-y-2">

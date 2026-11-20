@@ -16,6 +16,7 @@ import {
   Label,
 } from "@/components/ui";
 import { useAuth } from "@/hooks/useAuth";
+import { formatHourLabel } from "@/lib/time-format";
 import { toast } from "@/hooks/use-toast";
 import {
   useCalendarAccounts,
@@ -30,13 +31,6 @@ import { ICloudConnectDialog } from "./icloud-connect-dialog";
 import { GoogleIcon, OutlookIcon, ICloudIcon } from "./calendar-provider-icons";
 import { AccountCard } from "./calendar-account-card";
 import { RemoveAccountDialog } from "./remove-account-dialog";
-
-function formatHour(hour: number): string {
-  if (hour === 0) return "12:00 AM";
-  if (hour === 12) return "12:00 PM";
-  if (hour < 12) return `${hour}:00 AM`;
-  return `${hour - 12}:00 PM`;
-}
 
 function WorkingHoursCard() {
   const { user, updateUser } = useAuth();
@@ -103,7 +97,7 @@ function WorkingHoursCard() {
               <SelectContent>
                 {Array.from({ length: 24 }, (_, i) => (
                   <SelectItem key={i} value={String(i)}>
-                    {formatHour(i)}
+                    {formatHourLabel(i, "full")}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -119,7 +113,7 @@ function WorkingHoursCard() {
               <SelectContent>
                 {Array.from({ length: 24 }, (_, i) => (
                   <SelectItem key={i} value={String(i)}>
-                    {formatHour(i)}
+                    {formatHourLabel(i, "full")}
                   </SelectItem>
                 ))}
               </SelectContent>

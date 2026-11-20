@@ -23,7 +23,7 @@ import {
 } from "@/hooks/useTaskSeries";
 import {
   getScheduleDescription,
-  formatTime12Hour,
+  formatTimeOfDay,
 } from "@/components/kanban/repeat-config-popover";
 import type { TaskSeriesWithMeta } from "@open-sunsama/types";
 
@@ -172,7 +172,7 @@ function RoutineRow({ series, onStop, onDelete }: RoutineRowProps) {
 
   const startDate = new Date(series.startDate);
   const formattedTime = series.startTime
-    ? formatTime12Hour(series.startTime)
+    ? formatTimeOfDay(series.startTime)
     : null;
 
   return (

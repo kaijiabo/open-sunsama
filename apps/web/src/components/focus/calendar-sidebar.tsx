@@ -1,10 +1,11 @@
 import * as React from "react";
-import { format, setHours } from "date-fns";
+import { format } from "date-fns";
 import type { TimeBlock } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui";
 import { useTimeBlocksForDate } from "@/hooks/useTimeBlocks";
 import { TIMELINE_START_HOUR, TIMELINE_END_HOUR } from "@/hooks/useCalendarDnd";
+import { formatHourLabel } from "@/lib/time-format";
 
 interface CalendarSidebarProps {
   isOpen: boolean;
@@ -102,7 +103,7 @@ function MiniTimeline({ timeBlocks, currentTaskId }: MiniTimelineProps) {
           style={{ height: MINI_HOUR_HEIGHT }}
         >
           <span className="absolute -top-2 text-xs text-muted-foreground">
-            {format(setHours(new Date(), hour), "ha").toLowerCase()}
+            {formatHourLabel(hour)}
           </span>
         </div>
       ))}

@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { formatClockTime } from "./time-format";
 
 /**
  * Utility function to merge Tailwind CSS classes with clsx
@@ -22,15 +23,11 @@ export function formatDate(date: Date | string, options?: Intl.DateTimeFormatOpt
 }
 
 /**
- * Format time to a readable string (e.g., "2:30 PM")
+ * Format time to a readable string ("2:30 PM", or "14:30" on a 24-hour clock)
  */
 export function formatTime(date: Date | string): string {
   const d = typeof date === "string" ? new Date(date) : date;
-  return d.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
+  return formatClockTime(d);
 }
 
 /**

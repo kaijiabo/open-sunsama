@@ -3,7 +3,6 @@ import * as React from "react";
 import {
   format,
   isSameDay,
-  setHours,
   addMinutes,
   startOfDay,
   endOfDay,
@@ -24,6 +23,7 @@ import {
   sessionLayoutItem,
 } from "./work-session-block";
 import { layoutOverlappingItems, type LayoutResult } from "./event-layout";
+import { formatHourLabel } from "@/lib/time-format";
 
 const DEFAULT_LAYOUT: LayoutResult = { lane: 0, columnCount: 1 };
 import {
@@ -327,7 +327,7 @@ export function Timeline({
                 style={{ height: HOUR_HEIGHT }}
               >
                 <span className="absolute -top-2 right-1 sm:right-2 text-[10px] sm:text-xs text-muted-foreground font-medium">
-                  {format(setHours(date, hour), "ha").toLowerCase()}
+                  {formatHourLabel(hour)}
                 </span>
               </div>
             ))}

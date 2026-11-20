@@ -23,6 +23,7 @@ import {
   sessionsOnDay,
 } from "@/components/calendar/work-session-block";
 import type { LayoutResult } from "@/components/calendar/event-layout";
+import { formatHourLabel } from "@/lib/time-format";
 
 /**
  * Chips here aren't packed into lanes, so actual time always takes the right
@@ -149,7 +150,7 @@ export function MobileMultiDayView({
                 style={{ height: HOUR_HEIGHT }}
               >
                 <span className="absolute -top-1.5 right-1 text-[9px] font-medium tabular-nums text-muted-foreground">
-                  {format(new Date(2000, 0, 1, hour), "ha").toLowerCase()}
+                  {formatHourLabel(hour)}
                 </span>
               </div>
             ))}

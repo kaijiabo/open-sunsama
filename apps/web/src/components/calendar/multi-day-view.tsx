@@ -33,6 +33,7 @@ import type {
   EventDragMode,
   useMultiDayEventDrag,
 } from "./multi-day-event-drag";
+import { formatHourLabel, timePattern, timePatternNoPeriod } from "@/lib/time-format";
 
 /** Drag controller shared with the parent so tasks can be dragged in. */
 export type MultiDayDrag = ReturnType<typeof useMultiDayEventDrag>;
@@ -254,7 +255,7 @@ function MultiDayEvent({
           onClick?.();
         }
       }}
-      aria-label={`${event.title} at ${format(startTime, "h:mm a")}`}
+      aria-label={`${event.title} at ${format(startTime, timePattern())}`}
     >
       {showResizeHandles && (
         <div
@@ -281,7 +282,7 @@ function MultiDayEvent({
       </p>
       {height >= 28 && (
         <p className="truncate text-[9px] text-muted-foreground/70">
-          {format(startTime, "h:mm a")}
+          {format(startTime, timePattern())}
         </p>
       )}
     </div>
@@ -363,7 +364,7 @@ function MultiDayBlock({
       }}
       role="button"
       tabIndex={0}
-      aria-label={`${block.title} at ${format(startTime, "h:mm a")}`}
+      aria-label={`${block.title} at ${format(startTime, timePattern())}`}
     >
       {showResizeHandles && (
         <div
@@ -390,7 +391,7 @@ function MultiDayBlock({
       </p>
       {height >= 28 && (
         <p className="truncate text-[9px] text-white/80">
-          {format(startTime, "h:mm")}–{format(endTime, "h:mm a")}
+          {format(startTime, timePatternNoPeriod())}–{format(endTime, timePattern())}
         </p>
       )}
     </div>
@@ -704,7 +705,7 @@ export function MultiDayView({
                 >
                   {hour === 0
                     ? ""
-                    : format(new Date(2000, 0, 1, hour, 0), "h a")}
+                    : formatHourLabel(hour, "spaced")}
                 </div>
               ))}
             </div>
@@ -928,8 +929,8 @@ export function MultiDayView({
                         }}
                       >
                         <span className="text-[10px] font-semibold text-primary">
-                          {format(createDrag.range.start, "h:mm")} –{" "}
-                          {format(createDrag.range.end, "h:mm a")}
+                          {format(createDrag.range.start, timePatternNoPeriod())} –{" "}
+                          {format(createDrag.range.end, timePattern())}
                         </span>
                       </div>
                     )}
@@ -964,8 +965,8 @@ export function MultiDayView({
                           }}
                         >
                           <span className="text-[10px] font-semibold text-primary">
-                            {format(drag.dragState.previewStart, "h:mm a")} –{" "}
-                            {format(drag.dragState.previewEnd, "h:mm a")}
+                            {format(drag.dragState.previewStart, timePattern())} –{" "}
+                            {format(drag.dragState.previewEnd, timePattern())}
                           </span>
                         </div>
                       );

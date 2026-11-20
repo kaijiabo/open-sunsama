@@ -12,6 +12,7 @@ import type { TimeBlock, WorkSession } from "@open-sunsama/types";
 import { cn } from "@/lib/utils";
 import { calculateYFromTime, HOUR_HEIGHT } from "@/hooks/useCalendarDnd";
 import type { LayoutItem, LayoutResult } from "./event-layout";
+import { timePattern, timePatternNoPeriod } from "@/lib/time-format";
 
 const COLUMN_GAP_PCT = 1; // gap between side-by-side overlapping items
 const DEFAULT_COLOR = "#3B82F6"; // blue, the same default planned blocks use
@@ -90,8 +91,8 @@ export function WorkSessionBlock({
   const height =
     (differenceInMinutes(visible.end, visible.start) / 60) * HOUR_HEIGHT;
   const timeLabel = session.isRunning
-    ? `Working since ${format(startTime, "h:mm a")}`
-    : `Worked ${format(startTime, "h:mm")} – ${format(endTime, "h:mm a")}`;
+    ? `Working since ${format(startTime, timePattern())}`
+    : `Worked ${format(startTime, timePatternNoPeriod())} – ${format(endTime, timePattern())}`;
 
   return (
     <button

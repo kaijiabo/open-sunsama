@@ -4,6 +4,7 @@ import LandingPage from "../src/routes/landing";
 import SunsamaPage, { FAQS as sunsamaFaqs } from "../src/routes/alternative.sunsama";
 import DownloadPage from "../src/routes/download";
 import PrivacyPage from "../src/routes/privacy";
+import SecurityPage from "../src/routes/security";
 import TermsPage from "../src/routes/terms";
 import { SEO_CONFIGS } from "../src/hooks/useSEO";
 import { FAQS as homeFaqs } from "../src/components/landing/faq-section";
@@ -16,6 +17,7 @@ const pages = [
   { path: "/alternative/sunsama", component: SunsamaPage, seo: SEO_CONFIGS.alternative.sunsama },
   { path: "/download", component: DownloadPage, seo: SEO_CONFIGS.download },
   { path: "/privacy", component: PrivacyPage, seo: SEO_CONFIGS.privacy },
+  { path: "/security", component: SecurityPage, seo: SEO_CONFIGS.security },
   { path: "/terms", component: TermsPage, seo: SEO_CONFIGS.terms },
 ];
 

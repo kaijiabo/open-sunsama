@@ -131,6 +131,11 @@ export const SEO_CONFIGS = {
     description: "Open Sunsama privacy policy. Learn how we handle your data with transparency and respect for your privacy.",
     canonical: "/privacy",
   },
+  security: {
+    title: "Security and Data Protection",
+    description: "How Open Sunsama protects your data: bcrypt passwords, SHA-256 hashed API keys and OAuth tokens, AES-256-GCM encrypted calendar tokens, scoped AI agent access and self-hosting.",
+    canonical: "/security",
+  },
   terms: {
     title: "Terms of Service",
     description: "Open Sunsama terms of service. The terms and conditions for using our daily planner application.",

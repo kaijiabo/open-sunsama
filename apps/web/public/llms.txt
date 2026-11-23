@@ -7,6 +7,7 @@
 - [Home](https://opensunsama.com/): What Open Sunsama is and how daily planning works in it
 - [Download](https://opensunsama.com/download): Desktop apps for macOS, Windows and Linux
 - [Open-source task manager](https://opensunsama.com/open-source-task-manager): Why it is open source and how to self-host it
+- [Security](https://opensunsama.com/security): How passwords, API keys, OAuth tokens and calendar data are protected
 
 ## Features
 

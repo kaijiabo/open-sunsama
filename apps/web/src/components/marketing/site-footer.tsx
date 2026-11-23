@@ -41,6 +41,7 @@ const FOOTER_COLUMNS: Array<{ title: string; links: Array<[string, string]> }> =
       ["Connect your AI", "/docs/mcp/overview"],
       ["Self-hosting", "/docs/self-hosting/docker"],
       ["Blog", "/blog"],
+      ["Security", "/security"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
     ],

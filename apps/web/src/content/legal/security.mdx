@@ -1,0 +1,54 @@
+# Security and Data Protection
+
+**Last updated: November 23, 2026**
+
+Open Sunsama stores passwords as bcrypt hashes (cost 12), stores API keys and OAuth tokens only as SHA-256 hashes, and encrypts calendar and integration tokens with AES-256-GCM. All of the code that does this is public on [GitHub](https://github.com/kaijiabo/open-sunsama), so you can read exactly how your data is handled, or run your own copy on your own server.
+
+## How is my account protected?
+
+- **Passwords** are hashed with bcrypt at cost factor 12. We never store or log the plain password.
+- **Passkeys** (WebAuthn) are supported, so you can sign in without a password.
+- **Sessions** use signed JSON Web Tokens sent over HTTPS only.
+
+## How are AI agents and API clients kept in check?
+
+Every agent or script gets only the access you grant it, and you can revoke it at any time.
+
+| Access method | How it is stored | Lifetime | Limits |
+| --- | --- | --- | --- |
+| API key (`os_…`) | SHA-256 hash; shown to you once | Until you revoke it | Scopes you pick, such as `tasks:read` |
+| MCP OAuth access token | SHA-256 hash | 1 hour | Scopes you approve on the consent screen |
+| MCP OAuth refresh token | SHA-256 hash | 90 days | Revoked with the connection |
+
+- **OAuth 2.1 with PKCE (S256) is required** for every MCP client, such as Claude or ChatGPT. Requests without it are rejected.
+- **Keys are compared in constant time**, which blocks timing attacks.
+- **Scopes are separate for reading and writing**: `tasks:read`, `tasks:write`, `time-blocks:read`, `time-blocks:write`, `calendar:read`, `user:read` and `user:write`.
+
+## How is calendar data protected?
+
+- **Google, Outlook and iCloud tokens are encrypted at rest** with AES-256-GCM, with a random IV for every value.
+- **We request only the calendar permissions the app uses.** The [privacy policy](/privacy) lists each Google permission and what it is for.
+- **Disconnecting a calendar deletes its tokens, calendars and events** from our database right away.
+- **We do not use calendar data to train AI models**, and we do not sell it or use it for ads.
+
+## Where is my data stored?
+
+- **The hosted service at opensunsama.com** runs on Railway, with a managed PostgreSQL database. File attachments are stored in Amazon S3.
+- **All traffic uses HTTPS (TLS).**
+- **Self-hosting keeps all of it on your machine.** The [Docker guide](/docs/self-hosting/docker) runs the app, database and cache on your own server, and no data reaches us.
+
+## Can I delete or export my data?
+
+- **Export:** the REST API and MCP tools return all of your tasks, subtasks and time blocks. See the [API docs](/docs/api/tasks).
+- **Deletion:** email privacy@opensunsama.com to delete your account. Your tasks, time blocks and personal data are permanently deleted within 30 days.
+
+## How do I report a security problem?
+
+Please report vulnerabilities privately, as described in our [security policy on GitHub](https://github.com/kaijiabo/open-sunsama/blob/main/SECURITY.md). Don't open a public issue. We acknowledge reports within 48 hours, give an initial assessment within a week, and aim to fix them within 90 days, depending on severity. We credit reporters who want credit.
+
+## What has not been done yet?
+
+- **No SOC 2 report or third-party penetration test yet.** If your company requires one, self-hosting keeps the data inside your own security boundary.
+- **The code is open to review.** Anyone can audit the authentication, encryption and API code on GitHub.
+
+Questions? Email privacy@opensunsama.com.

@@ -96,6 +96,12 @@ const privacyRoute = createRoute({
   component: lazyRouteComponent(() => import("./routes/privacy")),
 });
 
+const securityRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/security",
+  component: lazyRouteComponent(() => import("./routes/security")),
+});
+
 const termsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/terms",
@@ -376,6 +382,7 @@ const routeTree = rootRoute.addChildren([
   forgotPasswordRoute,
   resetPasswordRoute,
   privacyRoute,
+  securityRoute,
   termsRoute,
   downloadRoute,
   blogRoute,

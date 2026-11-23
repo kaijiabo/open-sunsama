@@ -113,6 +113,7 @@ const STATIC_PAGES: SitemapEntry[] = [
 
   // Legal Pages (priority 0.3)
   { loc: "/privacy", lastmod: "", changefreq: "yearly", priority: 0.3 },
+  { loc: "/security", lastmod: "2026-11-23", changefreq: "monthly", priority: 0.5 },
   { loc: "/terms", lastmod: "", changefreq: "yearly", priority: 0.3 },
 ];
 

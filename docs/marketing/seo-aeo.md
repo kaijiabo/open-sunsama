@@ -11,3 +11,10 @@
 - Google sitemap was already submitted and successful, last read 3 November, with 165 discovered URLs. No duplicate submission was needed.
 - Kept private analytics outside the public repository and preserved unrelated work in the original checkout.
 - Implementation validation and deployment status: see [project status](../STATUS.md). Performance, Bing coverage, independent authority and controlled AI citation rates remain open measurement work.
+
+## 2026-11-23
+
+- Shipped three new posts aimed at questions where ChatGPT never names Open Sunsama: /blog/sunsama-api ("Does Sunsama have an API?"), /blog/reclaim-ai-vs-sunsama ("Reclaim.ai vs Sunsama") and /blog/super-productivity-vs-vikunja ("Super Productivity vs Vikunja"), each with a code-rendered cover from real screenshots.
+- Refreshed six posts with facts re-checked on 23 November 2026: best-free-daily-planner-apps, best-productivity-apps-adhd, reclaim-ai-vs-motion-vs-sunsama, best-open-source-kanban-boards, open-source-todoist-alternatives and best-open-source-productivity-apps, plus best-open-source-focus-apps for the Super Productivity MCP fact.
+- Corrected facts: Sunsama's Autoplan (beta) now drafts the day; Super Productivity has a local MCP endpoint since v19.3.0; Vikunja's MCP server shipped in v2.7.0; mcp-sunsama is archived; Routine's public API is still "soon"; Open Sunsama has an early mobile app (Android APK, iOS TestFlight).
+- Refreshed stars and releases for all 51 apps in oss-apps.json and pinged IndexNow for every changed URL.

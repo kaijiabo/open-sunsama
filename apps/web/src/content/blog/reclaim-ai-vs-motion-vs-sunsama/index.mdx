@@ -1,353 +1,212 @@
 export const frontmatter = {
   title: "Reclaim AI vs Motion vs Sunsama: AI Scheduling Tools Compared (2026)",
-  description: "Compare Reclaim AI, Motion, and Sunsama for AI-powered scheduling. Find the best calendar assistant for your workflow.",
+  description: "Reclaim AI vs Motion vs Sunsama in 2026: one guards your calendar, one plans your whole day, one guides you to plan it. Compare AI, MCP, apps and prices.",
   date: "2026-02-01",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
-  tags: ["comparison", "ai-scheduling", "productivity"],
-  readingTime: 13,
-  image: "/blog-reclaim-ai-vs-motion-vs-sunsama.webp"
+  tags: ["comparison", "ai-scheduling", "reclaim", "motion", "sunsama"],
+  readingTime: 10,
+  image: "/blog-reclaim-ai-vs-motion-vs-sunsama.webp",
+  faqs: [
+    {
+      question: "Is Reclaim AI better than Motion?",
+      answer: "For meetings and habits, yes. Reclaim guards focus time, breaks and habits on Google Calendar or Outlook, and has a free plan. Motion is better if you want AI to schedule all your tasks and projects, and if you want phone apps.",
+    },
+    {
+      question: "What is the best AI scheduling tool in 2026?",
+      answer: "Open Sunsama is our pick for most people: you plan a calm day on your calendar and any AI agent can help through its hosted MCP server. Pick Motion for full auto-scheduling, Reclaim for defending focus time, and Sunsama for a guided daily plan.",
+    },
+    {
+      question: "Can I use Reclaim AI for free?",
+      answer: "Yes. Reclaim's Lite plan is free for one person, with a one-week scheduling range. Starter costs $10 a seat a month billed yearly, or $12 monthly (November 2026).",
+    },
+    {
+      question: "Does Sunsama use AI?",
+      answer: "Yes. Sunsama has an AI assistant called Sunny and an official MCP server for Claude, ChatGPT and Cursor; both left beta in August 2026. Its Autoplan agent, in beta, drafts your day from a short prompt, but it does not re-plan on its own when meetings move.",
+    },
+    {
+      question: "What is the difference between Reclaim AI and Sunsama?",
+      answer: "Reclaim works on your calendar for you all day, placing focus time, habits and breaks. Sunsama has you plan each morning, by hand or from an AI draft you approve. See our Reclaim AI vs Sunsama comparison for the full breakdown.",
+    },
+    {
+      question: "Which of the three has phone apps?",
+      answer: "Motion and Sunsama have iOS and Android apps. Reclaim has no native phone app and suggests using its web app in your phone's browser.",
+    },
+    {
+      question: "Which one works best with Claude or ChatGPT?",
+      answer: "Reclaim and Sunsama both have official MCP servers, and Reclaim also has a ChatGPT app. Motion has a public REST API, and community-built MCP servers use it. Open Sunsama has a hosted MCP server with 24 tools and a public REST API.",
+    },
+  ],
 };
 
-The AI scheduling tools market has exploded. Between Reclaim AI, Motion, and Sunsama, professionals have more options than ever for managing their time. But each tool takes a fundamentally different approach: Reclaim protects your calendar from meeting overload, Motion automates your entire day, and Sunsama guides you through mindful daily planning.
+**Reclaim AI guards your calendar, Motion plans your whole day for you, and Sunsama guides you to plan it yourself.** Pick Reclaim for meeting-heavy weeks and Motion if you want AI to decide when you work. Pick Sunsama for a calm daily plan you sign off on.
 
-Choosing between these tools isn't about features—it's about philosophy. Do you want AI to defend your focus time? Schedule everything automatically? Or guide you through intentional decisions about your day?
+Entry plans cost $10 (Reclaim Starter), $17 (Sunsama Pro) and $19 (Motion Pro AI) a month.
 
-In this comprehensive Reclaim AI vs Motion comparison, we'll break down exactly how each tool works, what they cost, and who they're best for. We'll also introduce Open Sunsama, a [free Sunsama alternative](/alternative/sunsama) that combines the best ideas from all three without the subscription cost. If you're specifically comparing Motion and Sunsama, see our detailed [Motion vs Sunsama](/blog/motion-vs-sunsama) comparison.
+For most people, our pick is a fourth option: [Open Sunsama](/alternative/sunsama). You plan a realistic day yourself, any AI agent can help, and you own the planner. We build Open Sunsama, so we put it first — here is why, and where others fit better.
 
-## Quick Comparison: AI Scheduling Tools in 2026
+All prices and features below were checked on each vendor's site on 23 November 2026.
 
-Before diving into details, here's how these four tools compare at a glance:
+## Key takeaways
 
-| Feature | Reclaim AI | Motion | Sunsama | Open Sunsama |
-|---------|-----------|--------|---------|--------------|
-| **Monthly Price** | Free–$18/mo | $34/month | $25/month | Free |
-| **Annual Price** | Free–$15/mo | $19/month | $20/month | Free |
-| **Core Approach** | Calendar defense | Full automation | Guided planning | Manual control |
-| **AI Scheduling** | ✅ Focus time & habits | ✅ Full day | ❌ Manual only | ⚠️ Optional assist |
-| **Time Blocking** | ✅ AI-generated | ✅ AI-generated | ✅ Manual drag-drop | ✅ Manual drag-drop |
-| **Focus Mode** | ⚠️ Blocks only | ❌ No | ✅ Built-in timer | ✅ Built-in timer |
-| **Habit Scheduling** | ✅ Core feature | ⚠️ Basic | ❌ No | ❌ No |
-| **Meeting Scheduler** | ✅ Scheduling links | ✅ Built-in | ❌ No | ❌ No |
-| **Team Features** | ✅ Strong | ✅ Projects | ❌ Individual only | ❌ Individual only |
-| **Integrations** | Good (Slack, tasks) | Limited | Excellent (15+) | Growing |
-| **Free Tier** | ✅ Lite plan | ❌ None | ❌ None | ✅ Everything free |
-| **Open Source** | ❌ No | ❌ No | ❌ No | ✅ Yes |
+- **Best overall: Open Sunsama.** Hands-on daily planning, help from any AI agent over MCP, a public REST API and self-hosting.
+- **Best for defending focus time: Reclaim AI.** Habits, breaks and focus blocks rebook themselves around meetings. Free Lite plan.
+- **Best for full auto-scheduling: Motion.** It places every task and project on your calendar and moves them when plans change.
+- **Best guided daily plan: Sunsama.** A morning plan, an evening shutdown, and tasks pulled from Asana, Jira, Notion and more.
+- **All three have AI now.** Reclaim and Sunsama have official MCP servers, and Sunsama's Autoplan drafts your day. Motion has a public API.
 
-Now let's examine each tool in detail.
+## How do Reclaim AI, Motion and Sunsama compare at a glance?
 
-## What is Reclaim AI?
+| | Open Sunsama | Reclaim AI | Motion | Sunsama |
+|---|---|---|---|---|
+| **Best for** | Best overall | Defending focus time | Full auto-scheduling | Guided daily planning |
+| **Who places your work** | You, or your agent when asked | Reclaim's agents | Motion's AI | You, or Autoplan with your sign-off |
+| **Daily planning** | Kanban board of days | No | No ritual; AI builds the day | Morning plan (Autoplan or by hand) and shutdown |
+| **Calendars** | Google, Outlook, iCloud | Google, Outlook | Google, Outlook, iCloud | Google, Outlook, iCloud |
+| **Built-in AI** | None; bring any agent | Reclaim Chat | AI calendar, chat, notes; uses credits | Sunny assistant and Autoplan |
+| **AI agents (MCP)** | Hosted MCP server, 24 tools | Official MCP server; ChatGPT app | Community-built only | Official MCP server |
+| **Public API** | Yes, REST with API keys | No public docs found | Yes, REST with API key | No |
+| **Phone** | Early Android APK and iOS TestFlight | Web app only | iOS, Android | iOS, Android |
+| **Teams** | No | Yes | Yes, projects | No |
+| **Self-host** | Yes, Docker | No | No | No |
+| **Price (Nov 2026)** | Hosted app, or self-host for personal use | Free Lite; Starter $10/seat/mo yearly | Pro AI from $19/seat/mo | $17/mo yearly or $22 monthly |
 
-Reclaim AI is a calendar assistant that automatically protects time for focused work, habits, and breaks. Founded in 2019, Reclaim positions itself as the AI layer on top of your existing calendar—it doesn't replace Google Calendar or Outlook, it makes them smarter.
+Sources: [Reclaim pricing](https://reclaim.ai/pricing), [Motion pricing](https://www.usemotion.com/pricing), [Motion API docs](https://docs.usemotion.com/), [Sunsama pricing](https://www.sunsama.com/pricing) and [Sunsama MCP docs](https://help.sunsama.com/docs/integrations/mcp).
 
-### How Reclaim AI Works
+## How did we compare them?
 
-Unlike Motion, which schedules your entire day, Reclaim focuses on *defending* your calendar. You tell it what matters—exercise at 7am, focused coding time in the morning, lunch at noon—and Reclaim automatically blocks those times. When meetings try to intrude, Reclaim's "smart events" can flex or hold firm based on priority.
+In November 2026 we went through each app's website, pricing page, help docs, changelog, and API or MCP docs. We looked at how each one plans a day, handles a meeting that moves, syncs calendars, and works with AI agents.
 
-The key concept is "time defense." Reclaim events start as flexible (showing as free), but as your calendar fills up and the deadline approaches, they automatically harden to busy. This way, colleagues can book over low-priority blocks early in the week, but your critical habits become protected as time runs out.
+We also read user reviews and threads on Reddit, Hacker News and Product Hunt. We did not run long trials of the other three apps. We build and use Open Sunsama every day.
 
-### Reclaim AI Key Features
+## How much do you hand over to each app?
 
-**Focus Time Protection**: Set a weekly goal for deep work hours (say, 20 hours), and Reclaim automatically finds and defends time blocks across your week. As meetings fill your calendar, it fights to maintain your minimum.
+These three tools sit on a line from "AI decides" to "you decide".
 
-**Smart Habits**: Schedule recurring routines—morning exercise, lunch, email processing, 1:1 prep—and Reclaim finds optimal times that work around your meetings. Habits auto-reschedule when conflicts arise.
+- **Motion hands over the most.** You add tasks with deadlines and lengths. Motion builds your day and rebuilds it when a meeting lands.
+- **Reclaim hands over your calendar rules.** You set focus hours, habits and breaks once. Reclaim's agents keep them on the calendar as meetings come and go.
+- **Sunsama hands over the first draft, if you want.** Its Autoplan agent drafts the day from a short prompt, or you pick and drag tasks yourself. Either way you approve the plan, and Sunsama warns you when the day is too full.
 
-**Buffer Time**: Automatically add breaks between meetings and travel time before in-person events. No more back-to-back Zoom fatigue.
+Open Sunsama sits with Sunsama on that line, with one twist. You can ask an AI agent to do the planning, and you see every block it adds.
 
-**Scheduling Links**: Share availability for meetings with intelligent priority settings. Like Calendly, but aware of your defended time.
+## 1. Open Sunsama: best overall
 
-**Smart Meetings**: For recurring 1:1s and team meetings, Reclaim finds times that work for everyone and auto-reschedules when conflicts arise.
+**Verdict:** the best pick for most people. You get a calm, hands-on plan, AI help you can see, and a planner you own.
 
-**Calendar Sync**: Keep multiple calendars in sync—personal and work—so events on one block time on the other.
+**Best for:** people who want to plan their own day, with Claude or ChatGPT helping when they ask.
 
-### Reclaim AI Pricing in 2026
+<DemoVideo id="ai" />
 
-Reclaim offers a genuine free tier, making it the most accessible of the AI scheduling tools:
+**What it does well:**
 
-| Plan | Price (Annual) | Price (Monthly) | Best For |
-|------|---------------|----------------|----------|
-| **Lite** | Free | Free | Solo users, basic habits |
-| **Starter** | $10/seat/month | $12/seat/month | Small teams (up to 10) |
-| **Business** | $15/seat/month | $18/seat/month | Large teams (up to 100) |
-| **Enterprise** | $22/seat/month | Contact sales | 100+ seats, SSO |
+- A kanban board of days with Today, Tomorrow and a backlog. Unfinished tasks roll over.
+- Time blocking: drag a task onto the calendar and resize it. Blocks sync with Google, Outlook and iCloud.
+- A focus timer that tracks planned vs actual time.
+- A hosted [MCP server](/docs/mcp/overview) with 24 tools. Claude, ChatGPT or Cursor can read your meetings and plan around them.
+- A public [REST API](/docs/api/authentication) with API keys, public code, and [self-hosting with Docker](/docs/self-hosting/docker).
 
-The free Lite plan includes unlimited tasks, one habit, one scheduling link, and basic calendar features. Paid plans unlock unlimited habits, more scheduling links, team analytics, and integrations with Slack, Asana, Todoist, and more.
+<Clip id="ai-plan" caption="Claude plans the afternoon over MCP, and each time block appears live." />
 
-### Reclaim AI Limitations
+**Where it falls short:** there is no auto-scheduler. The phone app is early: an Android APK and an iOS TestFlight build, not in the app stores. It has no built-in Asana or Jira sync and no team features.
 
-**Not a Full Planner**: Reclaim defends time but doesn't help you decide *what* to work on. It's a calendar layer, not a productivity system.
+**Pick it if** you want Sunsama-style planning, help from any agent, and your data on your terms.
 
-**No Focus Mode**: While Reclaim blocks focus time, it doesn't help you actually focus during that time. No timer, no task expansion, no distraction hiding.
+<Clip id="time-block" caption="Drag a task onto the calendar and resize it to block time." />
 
-**Habit-Centric**: The tool works best for people with regular routines. If your schedule is chaotic and unpredictable, the habit model may feel constraining.
+## 2. Reclaim AI: best for defending focus time
 
-**Google/Outlook Only**: No support for iCloud Calendar or other providers.
+**Verdict:** the best pick when meetings eat your week. Reclaim keeps time for focus, habits and breaks without daily effort.
 
-## What is Motion?
+**Best for:** managers, engineers and teams on Google Calendar or Outlook.
 
-Motion is an AI scheduling app that automatically plans your entire day. When you add tasks with deadlines and durations, Motion's algorithm slots them into your calendar, considering meetings, priorities, and working hours. It's the most automated option in this comparison.
+**What it does well:**
 
-### How Motion Works
+- Agents for focus time, habits, buffer breaks and smart meetings. They rebook themselves when the calendar changes.
+- Task sync from Todoist, Asana, Linear, Jira, ClickUp and Google Tasks.
+- Scheduling links and no-meeting days.
+- Reclaim Chat, which stages changes in Preview Mode until you approve them, plus an [official MCP server](https://reclaim.ai/integrations/claude) and a ChatGPT app.
+- A free Lite plan for one person.
 
-Motion takes full control. You input tasks, set deadlines, and estimate durations. Motion then creates your optimal schedule—deciding not just *when* to work, but *what* to work on at any given moment. If a meeting runs long or priorities shift, Motion automatically reschedules everything.
+**Where it falls short:** no native phone app and no iCloud calendar. Reclaim 2.0, the default since May 2026, suggests tasks for your focus time rather than placing every task. Dropbox has owned Reclaim since August 2024.
 
-This appeals to people who hate planning. Rather than spending 15 minutes each morning deciding what to work on, Motion decides for you. Your job is just to follow the schedule and mark tasks complete.
+**Pick it if** you want your calendar to defend itself and you rarely plan on your phone.
 
-### Motion Key Features
+## 3. Motion: best for full auto-scheduling
 
-**AI Auto-Scheduling**: The flagship feature. Add a task, and Motion finds the best time slot based on deadlines, priorities, and your calendar. Truly hands-off scheduling.
+**Verdict:** the most hands-off option. Motion decides when you do each task and fixes the day when plans change.
 
-**Project Management**: Unlike Reclaim and Sunsama, Motion includes project management features—task lists, Gantt charts (Business tier), and team workspaces.
+**Best for:** founders and managers whose days break by 10am, and teams that want projects and schedules in one app.
 
-**Dynamic Rescheduling**: When something changes—a meeting runs over, a new urgent task appears—Motion automatically adjusts your entire day.
+**What it does well:**
 
-**Meeting Scheduler**: Built-in scheduling links for booking meetings, similar to Calendly.
+- An AI calendar that places every task by deadline and priority.
+- Projects, docs and dashboards, with Gantt charts on Business AI.
+- A public [REST API](https://docs.usemotion.com/) with an API key.
+- iOS, Android and desktop apps.
 
-**Productivity Analytics**: Business tier includes dashboards showing time allocation, task completion, and productivity trends.
+**Where it falls short:** AI features use monthly credits: 7,500 a seat on Pro AI and 15,000 on Business AI. There is no free plan, and its MCP options are community-built.
 
-**Team Features**: Shared projects, workload balancing, and team capacity planning.
+Critics also say you can end up having to [reverse engineer](https://iphonecleaner.net/t/can-anyone-share-an-honest-motion-app-review-or-experience/2002) how your own week was built.
 
-### Motion Pricing in 2026
+**Pick it if** you would rather follow a plan than make one.
 
-Motion is the most expensive option with no free tier:
+## 4. Sunsama: best guided daily plan
 
-| Plan | Price (Annual) | Price (Monthly) |
-|------|---------------|----------------|
-| **Pro AI** | $19/month | $34/month |
-| **Business AI** | $29/month | Contact sales |
+**Verdict:** the calmest of the three. Sunsama helps you commit to a day that fits, then end it on time.
 
-Both tiers include a 7-day free trial. Motion's pricing reflects its all-in-one ambition—it's trying to replace both your calendar app and task manager.
+**Best for:** people who overplan, and people whose tasks live in other tools.
 
-### Motion Limitations
+**What it does well:**
 
-**Loss of Control**: Some people find AI-scheduled days disorienting. When the algorithm reschedules your afternoon without asking, it can feel like you've lost agency over your own time.
+- A guided morning plan, workload totals, and an evening shutdown.
+- Imports from Asana, ClickUp, GitHub, Gmail, Jira, Linear, Notion, Slack, Todoist, Trello and more.
+- Sunny, an AI assistant that can create and move tasks and clean up your backlog. Since October 2026 it can also search connected accounts for tasks.
+- [Autoplan](https://help.sunsama.com/docs/usage-guides/daily-planning/), in beta, drafts your day from a short prompt in about 2–4 minutes, and you review it.
+- An official MCP server and apps for every platform, including Linux, iOS and Android.
 
-**Overkill for Some**: If you have a simple schedule and don't need project management, Motion's complexity may be more than you need.
+**Where it falls short:** no public REST API; the [request](https://roadmap.sunsama.com/improvements/p/sunsama-api) has been open since 2019. Autoplan runs only when you start it, and it does not re-plan on its own when a meeting moves. There is no free plan, only a 14-day trial.
 
-**Limited Integrations**: Motion has fewer integrations than Sunsama. No native Notion, Trello, or GitHub connections—you need Zapier workarounds.
+**Pick it if** you want a short daily ritual that keeps you honest.
 
-**No Focus Mode**: Despite optimizing your schedule, Motion doesn't help with the actual work. No deep work timer or distraction-hiding features.
+<Shot id="calendar-day" alt="Open Sunsama day view with tasks blocked on the calendar next to meetings" caption="In Open Sunsama, your time blocks sit next to your meetings for the day." />
 
-**Expensive**: At $19-34/month, Motion costs more than alternatives. That's $228-408/year for an individual.
+## Reclaim AI vs Motion: which AI scheduler wins?
 
-## What is Sunsama?
+**Reclaim wins for focus time and habits. Motion wins for scheduling tasks and projects.**
 
-Sunsama is a daily planner built around mindful, intentional planning. Rather than automating your day, Sunsama guides you through conscious decisions about what deserves your time. The app emphasizes sustainable productivity over relentless optimization.
+- **Pick Reclaim** if meetings are the problem. It protects time around them and has a free plan.
+- **Pick Motion** if tasks are the problem. It decides what to work on and when, and it has phone apps.
 
-### How Sunsama Works
+Both move things for you. If that makes you uneasy, Sunsama or Open Sunsama will feel better.
 
-Each morning, Sunsama walks you through a planning ritual. You review your calendar, pull in tasks from connected tools (Todoist, Trello, Asana, Notion, Gmail, etc.), and deliberately choose what to accomplish today. The app warns if you're overplanning—acknowledging that humans have limits.
+## What do Reclaim AI, Motion and Sunsama cost in November 2026?
 
-During the day, you manually drag tasks onto your calendar as time blocks. An optional shutdown ritual at day's end helps you reflect and roll incomplete tasks forward.
+| Plan | Reclaim AI | Motion | Sunsama |
+|---|---|---|---|
+| Free plan | Lite, one person | None | None |
+| Entry plan | Starter: $10/seat/mo yearly, $12 monthly | Pro AI: $19/seat/mo | Pro: $17/mo yearly, $22 monthly |
+| Team plan | Business: $15/seat/mo yearly, $18 monthly | Business AI: $29/seat/mo | Same Pro price; Enterprise is custom |
+| Trial | Start on the Lite plan | Free trial | 14 days, no card |
 
-### Sunsama Key Features
+Prices from [Reclaim](https://reclaim.ai/pricing), [Motion](https://www.usemotion.com/pricing) and [Sunsama](https://www.sunsama.com/pricing). Motion lists a discount for paying yearly.
 
-**Daily Planning Ritual**: Guided morning sessions help set realistic goals. This isn't overhead—it's the core practice.
+Open Sunsama runs as a hosted app at opensunsama.com, or you can self-host it for personal use.
 
-**[Focus Mode](/features/focus-mode)**: Expand a task to fill your screen, start a timer, and minimize distractions. Includes Pomodoro support.
+## Which one should you pick?
 
-**Extensive Integrations**: Two-way sync with Todoist, Trello, Asana, Notion, ClickUp, Jira, Linear, GitHub, Gmail, Slack, and more. Best-in-class for pulling tasks from multiple sources.
+**For most people: Open Sunsama.** You get a calm day you plan yourself, any AI agent to help, and a planner you own.
 
-**Overplanning Warnings**: The app tracks estimated time and alerts when you've scheduled more than realistic.
+- **If meetings keep eating your focus time,** pick Reclaim AI.
+- **If you want AI to decide when you do everything,** pick Motion.
+- **If you want a guided daily plan with lots of integrations,** pick Sunsama.
+- **If you need a public API or self-hosting,** pick Open Sunsama.
 
-**Calm Interface**: Deliberately minimal design. Sparse, focused, and surprisingly soothing.
+<Clip id="plan-day" caption="Drag tasks from the backlog into Today to plan the day." />
 
-**Shutdown Ritual**: Evening reflection on what you accomplished and what rolls to tomorrow.
+## Which comparisons should you read next?
 
-### Sunsama Pricing in 2026
-
-Sunsama recently raised prices after years of holding steady:
-
-| Plan | Price |
-|------|-------|
-| **Monthly** | $25/month |
-| **Annual** | $20/month ($240/year) |
-
-A 14-day free trial is available, no credit card required. Like Motion, there's no free tier.
-
-### Sunsama Limitations
-
-**No AI Automation**: Everything is manual. If you want software to schedule your day, look elsewhere.
-
-**Individual Focus Only**: No team features, shared projects, or collaboration tools.
-
-**No Meeting Scheduler**: You'll need separate tools like Calendly.
-
-**Premium Price**: At $240/year, Sunsama costs more than some competitors with less automation.
-
-## Reclaim AI vs Motion: Feature Comparison
-
-Let's directly compare the two most AI-automated options.
-
-### AI Philosophy
-
-**Reclaim AI**: Defensive AI. Protects time for what matters while working around your existing commitments. You still decide what to work on—Reclaim just ensures you have time for it.
-
-**Motion**: Offensive AI. Takes full control, deciding both when and what you work on. Maximum automation, minimum decision-making.
-
-**Verdict**: Reclaim for those who want AI assistance with human control. Motion for those who want AI to decide everything.
-
-### Focus Time
-
-**Reclaim AI**: Strong focus time features. Set a weekly goal (e.g., 20 hours), and Reclaim automatically defends blocks across your week. Priority settings control how hard it fights for this time.
-
-**Motion**: No dedicated focus time feature. Your tasks are your focus time—Motion schedules work periods, but doesn't specifically protect uninterrupted blocks.
-
-**Verdict**: Reclaim wins for focus time protection.
-
-### Task Scheduling
-
-**Reclaim AI**: Tasks sync from integrations (Todoist, Asana, ClickUp, Jira, Linear) and get auto-scheduled like habits. Less sophisticated than Motion's full scheduling.
-
-**Motion**: Core strength. Every task gets optimal scheduling based on deadlines, durations, and priorities. The most automated approach.
-
-**Verdict**: Motion wins for comprehensive task scheduling.
-
-### Team Features
-
-**Reclaim AI**: Strong team features including Smart Meetings (auto-schedule recurring team meetings), scheduling links, shared no-meeting days, and people analytics.
-
-**Motion**: Project management focus with shared workspaces, Gantt charts, and team workload views. More comprehensive for project tracking.
-
-**Verdict**: Reclaim for calendar coordination, Motion for project management.
-
-### Pricing
-
-**Reclaim AI**: Free tier available. Paid plans from $10-22/seat/month (annual).
-
-**Motion**: No free tier. $19-29/month (annual).
-
-**Verdict**: Reclaim wins on value with its free tier and lower paid pricing.
-
-## When AI Scheduling Works Best
-
-AI scheduling tools like Reclaim and Motion excel in specific situations:
-
-**Predictable Routines**: If you have regular habits—morning exercise, daily standup, weekly 1:1s—AI scheduling maintains consistency.
-
-**Meeting-Heavy Calendars**: When your calendar is constantly under assault from meeting requests, AI defense (Reclaim) or automatic rescheduling (Motion) reduces coordination overhead.
-
-**Deadline-Driven Work**: Motion shines when you have multiple tasks with hard deadlines. It ensures everything gets done by optimizing the schedule.
-
-**Team Coordination**: Reclaim's smart meetings and scheduling links reduce the back-and-forth of finding times that work for everyone.
-
-**Decision Fatigue**: If choosing what to work on exhausts you, Motion's full automation eliminates that burden entirely.
-
-## When Manual Planning is Better
-
-AI scheduling isn't always the answer. Manual tools like Sunsama (or Open Sunsama) work better for:
-
-**Creative Work**: Creative projects don't fit neat time boxes. Sometimes you need to follow inspiration, not a schedule. AI scheduling interrupts flow.
-
-**Autonomy Matters**: Some people need to feel in control of their day. When algorithms reschedule without asking, it feels disempowering.
-
-**Variable Energy**: Human energy fluctuates. Some mornings you're sharp; some afternoons you're drained. Manual planning lets you match tasks to energy.
-
-**Meaningful Work**: Sunsama's planning ritual forces you to ask: "Does this deserve my time today?" That reflection is lost when AI decides everything.
-
-**Simple Schedules**: If you only have a few things to do, AI scheduling is overkill. Manual planning takes 5 minutes and gives you full control.
-
-**Budget Constraints**: Sunsama costs $240/year; Motion costs $228-348/year; Reclaim's useful features require at least $120/year. Manual planning is free.
-
-## Open Sunsama: The Free Alternative
-
-What if you want Sunsama's intentional planning philosophy without the $240/year price tag? Or Reclaim's focus protection without the monthly subscription?
-
-Open Sunsama is a free, open-source daily planner that combines the best ideas from all three tools:
-
-### Completely Free, Forever
-
-No pricing tiers, no paywalls, no premium features locked away. Everything is free for everyone.
-
-### Intentional Planning, Your Way
-
-Like Sunsama, Open Sunsama emphasizes manual, intentional planning. You decide what to work on and when. The kanban workflow helps you visualize and prioritize your day.
-
-### Built-In Focus Mode
-
-Like Sunsama, Open Sunsama includes a dedicated focus mode. Expand a task to fill your screen, start a timer, and minimize distractions. Includes progress tracking.
-
-### Time Blocking Without AI Lock-In
-
-Drag tasks onto your calendar like Sunsama and Reclaim. But the blocks are yours to control—no algorithm will reschedule them without asking. Learn more about [time blocking](/features/time-blocking) and [what time blocking is](/blog/what-is-time-blocking).
-
-### Calendar Sync
-
-Full synchronization with Google Calendar, Outlook, and iCloud. Your time blocks appear on your calendar; external events inform your planning.
-
-### Open Source Transparency
-
-The entire codebase is publicly available. You can verify how your data is handled, contribute improvements, or fork it for specific needs.
-
-### Self-Hosting Option
-
-For maximum privacy, run Open Sunsama on your own servers. Your productivity data never leaves your infrastructure—something neither Reclaim, Motion, nor Sunsama can offer.
-
-### Desktop App
-
-Native application for Windows, macOS, and Linux. System tray icon, global hotkeys (Cmd+Shift+T to create tasks), and native notifications.
-
-## Frequently Asked Questions
-
-### Is Reclaim AI better than Motion for scheduling?
-
-It depends on your needs. **Reclaim AI** is better if you want to protect focus time and habits while keeping control of what you work on—it defends your calendar without taking over. **Motion** is better if you want complete automation where AI decides your entire schedule. Reclaim is also more affordable with a free tier, while Motion requires a paid subscription from day one.
-
-### What is the best AI calendar app in 2026?
-
-The best AI calendar app depends on your workflow. **Reclaim AI** is best for protecting focus time and scheduling habits around meetings. **Motion** is best for full automation where AI plans your entire day. **Sunsama** is best for guided manual planning with excellent integrations. **Open Sunsama** is best if you want free, open-source planning without AI lock-in.
-
-### Can I use Reclaim AI for free?
-
-Yes. Reclaim AI offers a free Lite plan that includes unlimited tasks, one habit, one scheduling link, and basic calendar features. The free tier is limited to one user and a one-week scheduling range. For unlimited habits, more scheduling links, and team features, you'll need a paid plan starting at $10/seat/month.
-
-### Is Sunsama worth $20 per month?
-
-Sunsama is worth the price if you value intentional planning rituals, excellent integrations with tools like Todoist and Notion, and a calm interface designed for focus. It's less worthwhile if you want AI automation (Sunsama is fully manual) or team features (it's individual-focused). If budget is a concern, Open Sunsama offers similar intentional planning features for free.
-
-### What's the difference between Reclaim AI and Sunsama?
-
-**Reclaim AI** uses AI to automatically protect focus time and schedule habits around your meetings—it's a calendar defense tool. **Sunsama** is a manual daily planner that guides you through intentional planning rituals—it's about mindful decision-making, not automation. Reclaim optimizes your schedule; Sunsama helps you think about what deserves your time.
-
-### Does Motion or Reclaim have better integrations?
-
-**Reclaim AI** has better integrations overall, especially with task management tools like Todoist, Asana, ClickUp, Jira, and Linear. Reclaim also integrates with Slack for status sync. **Motion** has more limited integrations—primarily calendar sync with Google and Outlook, plus Zoom. For deep integrations with multiple tools, Reclaim or Sunsama are stronger choices.
-
-### Is there a free alternative to Motion and Reclaim?
-
-Yes. **Open Sunsama** is a free, open-source daily planner with [time blocking](/features/time-blocking), [focus mode](/features/focus-mode), and [calendar sync](/features/calendar-sync). While it doesn't have Motion's full AI automation or Reclaim's smart habits, it provides the core daily planning features most people need without any subscription cost. You can even self-host it for complete privacy. See our complete [best free Sunsama alternatives](/blog/best-free-sunsama-alternatives) guide.
-
-### Which AI scheduling tool is best for developers?
-
-For developers, consider **Reclaim AI** with its Linear and Jira integrations for auto-scheduling development tasks, plus strong focus time protection. **Open Sunsama** is another good choice—it's free, open-source (you can contribute!), and has keyboard shortcuts and a command palette for fast operation. Motion works but lacks the developer-specific integrations.
-
-## Conclusion: Choosing the Right AI Scheduling Tool
-
-The Reclaim AI vs Motion vs Sunsama decision comes down to three questions:
-
-**How much automation do you want?**
-- Full automation: Motion
-- Defensive AI: Reclaim
-- Guided manual planning: Sunsama
-- Manual control: Open Sunsama
-
-**What's your budget?**
-- Free: Reclaim (Lite) or Open Sunsama
-- $10-15/month: Reclaim (Starter/Business)
-- $19-20/month: Motion or Sunsama
-- $0 forever: Open Sunsama
-
-**What matters most?**
-- Focus time protection: Reclaim
-- Task deadline management: Motion
-- Intentional planning rituals: Sunsama
-- Open source, self-hostable: Open Sunsama
-
-There's no universally "best" AI calendar app. Reclaim excels at defending your time. Motion excels at automated scheduling. Sunsama excels at mindful planning. And Open Sunsama proves you don't need to pay premium prices for solid daily planning tools.
-
-The right choice is the one that matches how you want to work. Use the free trials—Reclaim offers a free tier, Motion has 7 days, Sunsama has 14 days—to discover which philosophy fits your brain.
-
-And if none of them feel quite right, or if the price gives you pause, Open Sunsama is always here—free, open-source, and ready to help you plan your days with intention. For those seeking a [Motion alternative](/alternative/motion) or [Reclaim alternative](/alternative/reclaim), Open Sunsama delivers the essential features without the subscription.
-
----
-
-Ready to try intentional daily planning without the premium price tag? [Get started with Open Sunsama for free](/register) and discover a calmer, more focused way to work.
+- [Reclaim AI vs Sunsama](/blog/reclaim-ai-vs-sunsama), head to head.
+- [Motion vs Sunsama](/blog/motion-vs-sunsama) if Reclaim is off your list.
+- [Reclaim.ai alternatives](/blog/reclaim-ai-alternatives) and [Motion alternatives](/blog/motion-alternatives).
+- [Akiflow vs Sunsama vs Motion](/blog/akiflow-vs-sunsama-vs-motion) if Akiflow is on your list.
+- [Time blocking with AI](/blog/time-blocking-with-ai), with you still in control.

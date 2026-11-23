@@ -1,0 +1,164 @@
+export const frontmatter = {
+  title: "Sunsama API (2026): What Exists and What to Use Instead",
+  description: "Does Sunsama have an API? Not a public REST API. Here is what works in 2026 (MCP, Zapier, unofficial wrappers), the risks, and planners with a real API.",
+  date: "2026-10-11",
+  updated: "2026-11-23",
+  author: "Open Sunsama Team",
+  tags: ["api", "sunsama", "mcp", "developers"],
+  readingTime: 8,
+  image: "/blog-sunsama-api.webp",
+  faqs: [
+    {
+      question: "Does Sunsama have a public API?",
+      answer: "No. Sunsama has no public REST API. The request has been open on its roadmap since 16 December 2019 and still had 888 votes on 23 November 2026.",
+    },
+    {
+      question: "How can I connect to Sunsama without an API?",
+      answer: "Use Sunsama's official MCP server with an AI app like Claude or ChatGPT, or use Zapier. Both are part of the Pro plan.",
+    },
+    {
+      question: "Is the unofficial Sunsama API safe to use?",
+      answer: "Use it with care. The community sunsama-api library calls Sunsama's internal GraphQL API and signs in with your email and password or a session token. Sunsama does not support it, so it can break without warning.",
+    },
+    {
+      question: "Is Sunsama's MCP server an API?",
+      answer: "It is a way for AI apps to read and change your Sunsama data, with OAuth sign-in. It is built for AI clients like Claude, ChatGPT and Cursor, not for plain scripts or cron jobs.",
+    },
+    {
+      question: "Which daily planner has a public API?",
+      answer: "Open Sunsama has a public REST API with API keys, plus a hosted MCP server. Todoist, TickTick, Motion and Amazing Marvin also publish APIs.",
+    },
+    {
+      question: "What is the best Sunsama alternative with an API?",
+      answer: "Open Sunsama. It plans your day like Sunsama, has a documented REST API and a hosted MCP server, and its code is public so you can self-host it.",
+    },
+  ],
+};
+
+**Sunsama has no public REST API.** The [request on Sunsama's roadmap](https://roadmap.sunsama.com/improvements/p/sunsama-api) has been open since December 2019 and still had 888 votes on 23 November 2026. Today your options are Sunsama's official MCP server, Zapier, or an unofficial wrapper.
+
+If you need a real Sunsama API, our pick is [Open Sunsama](/alternative/sunsama). It is a daily planner like Sunsama with a documented REST API, API keys and a hosted MCP server. We build Open Sunsama, so we recommend it at the end — here is what each path can and can't do.
+
+## Key takeaways
+
+- **No public API:** Sunsama does not publish a REST API or API keys for its planner.
+- **Official MCP server:** `https://api.sunsama.com/mcp` lets Claude, ChatGPT and Cursor work with your Sunsama data. It left beta in August 2026.
+- **Zapier:** Sunsama lists Zapier as part of its Pro plan.
+- **Unofficial wrapper:** a community library calls Sunsama's internal GraphQL API with your password. It works, but nobody guarantees it.
+- **Best planner with a real API:** Open Sunsama, with REST, API keys, MCP and self-hosting.
+
+## What are your Sunsama API options in 2026?
+
+| Option | Official? | Sign-in | Good for | Limits |
+|---|---|---|---|---|
+| **Open Sunsama REST API** | Yes (a different planner) | API key | Scripts, cron jobs, n8n, your own tools | You move your planning to Open Sunsama |
+| **Sunsama MCP server** | Yes | OAuth | Asking Claude or ChatGPT to plan your day | Needs an AI app in the loop |
+| **Zapier** | Yes | Zapier account | Simple "when X, do Y" automations | Only the triggers and actions Zapier offers |
+| **sunsama-api (community)** | No | Email and password, or session token | Hobby scripts | Internal API; can break any day |
+| **mcp-sunsama (community)** | No | Email and password | Nothing new: archived in March 2026 | Uses the same internal API |
+
+Sources: [Sunsama MCP docs](https://help.sunsama.com/docs/integrations/mcp), [Sunsama pricing](https://www.sunsama.com/pricing), [sunsama-api](https://github.com/robertn702/sunsama-api) and [mcp-sunsama](https://github.com/robertn702/mcp-sunsama), checked November 2026.
+
+## Why doesn't Sunsama have a public API?
+
+We can't speak for Sunsama's plans. What we can see is the roadmap. The API request was created on 16 December 2019, has 888 votes and carries no status label in November 2026.
+
+When Sunsama launched its MCP server in April 2026, it posted the news in that same API thread. So for now, MCP is Sunsama's answer to "how do I connect my own tools?"
+
+That works if you want an AI to help. It doesn't work if you want a cron job that exports last week's time, or a Home Assistant button that adds a task.
+
+## Option 1: Sunsama's official MCP server is the safest way in
+
+Sunsama hosts the MCP server, and it left beta in August 2026. It uses OAuth 2.1, so you never share your password.
+
+You add `https://api.sunsama.com/mcp` as a custom connector in Claude, or find Sunsama in ChatGPT's plugin directory. Then you can ask things like "move my writing task to tomorrow morning."
+
+Our [Sunsama MCP guide](/blog/sunsama-mcp) has setup steps for Claude, ChatGPT, Cursor and Claude Code. The catch: an MCP server talks to AI clients. You can't easily call it from a plain script.
+
+For older clients without OAuth, Sunsama also offers a long-lived token under Settings → Integrations → MCP. Its docs say this token "may be removed", so don't build on it.
+
+## Option 2: Zapier covers simple automations
+
+Sunsama's Pro plan includes "AI + MCP + Zapier". Zapier connects Sunsama to thousands of other apps with no code.
+
+Zapier is fine for simple flows. You are limited to the triggers and actions Zapier exposes, and every run goes through a third party.
+
+## Option 3: the unofficial sunsama-api wrapper works, with risks
+
+[sunsama-api](https://github.com/robertn702/sunsama-api) is a TypeScript library by a community developer. Its README says it is not affiliated with or endorsed by Sunsama.
+
+It calls Sunsama's internal GraphQL API, the one Sunsama's own apps use. To sign in, you give it your Sunsama email and password, or a session token.
+
+That brings two risks:
+
+- **Your password sits in a script.** Anyone who reads the script or its config can sign in as you.
+- **It can break any day.** Sunsama never promised this API to anyone. A change on their side can stop your script without warning.
+
+The same author built [mcp-sunsama](https://github.com/robertn702/mcp-sunsama), an MCP server on top of the library. It needed your email and password too, and its author archived it in March 2026. Use Sunsama's own OAuth server instead.
+
+## Which daily planner like Sunsama has a real API?
+
+If an API is a must, pick a planner that publishes one. Open Sunsama is built for this.
+
+<DemoVideo id="ai" />
+
+Open Sunsama plans your day like Sunsama does. You get a kanban board of days, time blocking on Google, Outlook or iCloud calendars, a focus timer and rollover. Then it opens every part of that to your own code.
+
+- **A public REST API.** Tasks, subtasks and time blocks, documented at [/docs/api/authentication](/docs/api/authentication).
+- **API keys with scopes.** Create a key in Settings, then pick read or write access for tasks, time blocks, calendar events and your profile.
+- **A hosted MCP server.** OAuth sign-in for Claude, ChatGPT, Cursor and any MCP client, with 24 tools.
+- **Public code.** Read it on [GitHub](https://github.com/kaijiabo/open-sunsama), or [self-host it with Docker](/docs/self-hosting/docker).
+
+Here is all it takes to list tomorrow's tasks:
+
+```bash
+curl "https://api.opensunsama.com/tasks?date=2026-11-24" \
+  -H "X-API-Key: $OPENSUNSAMA_API_KEY"
+```
+
+<Shot id="mcp-settings" alt="Open Sunsama MCP settings with the connector URL, setup steps and an API key option" caption="Settings → MCP holds the connector URL and setup steps; API keys live one row up." />
+
+And when you would rather ask than script, your agent uses the same data through MCP.
+
+<Clip id="ai-plan" caption="Claude plans the afternoon over MCP, and each time block appears live." />
+
+<Clip id="time-block" caption="Time blocks you or your scripts create show up on the calendar." />
+
+Be clear on the gaps. Open Sunsama has no Sunsama importer and no built-in Asana or Jira sync.
+
+Its mobile app is early: an Android APK and an iOS TestFlight build, not in the app stores yet. Its license is non-commercial: personal use and self-hosting are fine, and companies need a commercial license.
+
+## Which other planners have a public API?
+
+These apps publish an API too. We checked each vendor's docs in November 2026.
+
+| App | Public API | Official MCP server |
+|---|---|---|
+| **Open Sunsama** | [REST API](/docs/api/authentication) with scoped API keys | Yes, hosted, OAuth |
+| **Todoist** | [Yes](https://developer.todoist.com/) | Yes, at ai.todoist.net/mcp |
+| **TickTick** | [Yes](https://developer.ticktick.com) | Yes, at mcp.ticktick.com |
+| **Motion** | [Yes](https://docs.usemotion.com/), API key; 12 requests a minute for individuals | Community-built only |
+| **Amazing Marvin** | [Yes](https://github.com/amazingmarvin/MarvinAPI/wiki) | None found |
+| **Morgen** | [Yes](https://docs.morgen.so/), in early access | Community-built only |
+| **Akiflow** | No; an [open feature request](https://product.akiflow.com/p/akiflow-api) | Yes, hosted |
+| **Sunsama** | No | Yes, hosted, OAuth |
+
+Todoist and TickTick are to-do lists first. Motion schedules your day for you. Open Sunsama is the closest to Sunsama's hands-on daily planning, with the most open access.
+
+<Shot id="board" alt="Open Sunsama kanban board with columns for each day and a backlog" caption="The board of days: the same daily planning as Sunsama, with an API behind it." />
+
+## Which path should you pick?
+
+**For most people who need an API: Open Sunsama.** You keep a calm daily plan, and your scripts and agents can reach every task and time block.
+
+- **If you love Sunsama and just want AI help,** use Sunsama's official MCP server.
+- **If you need one simple automation,** try Sunsama's Zapier integration.
+- **If you are tinkering for fun,** the community wrapper works, but keep your password out of shared code.
+- **If your tasks live in Todoist or TickTick,** use their APIs and add a planner on top.
+
+## Related guides
+
+- [Sunsama MCP setup](/blog/sunsama-mcp) for Claude, ChatGPT and Cursor.
+- [Best task managers with MCP](/blog/best-task-managers-with-mcp), compared.
+- [Plan your day with Claude](/blog/plan-your-day-with-claude) using Open Sunsama.
+- [Best Sunsama alternatives](/blog/best-free-sunsama-alternatives) if you are ready to switch.

@@ -2,7 +2,7 @@ export const frontmatter = {
   title: "Best Open Source Productivity Apps in 2026 (Self-Hostable)",
   description: "The best open source productivity apps for 2026: planners, tasks, notes, time tracking and calendars, with license, releases and source code for each.",
   date: "2026-02-01",
-  updated: "2026-09-24",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["open-source", "productivity", "self-hosted", "time-blocking", "mcp"],
   readingTime: 15,
@@ -30,7 +30,7 @@ export const frontmatter = {
     },
     {
       question: "Which open source productivity apps work with AI agents like Claude or ChatGPT?",
-      answer: "Open Sunsama has a hosted MCP server with OAuth sign-in that works in Claude, ChatGPT and Cursor. tududi, Joplin, Trilium and AFFiNE also ship their own MCP servers. Others, like Kimai and Super Productivity, rely on community servers.",
+      answer: "Open Sunsama has a hosted MCP server with OAuth sign-in that works in Claude, ChatGPT and Cursor. tududi, Joplin, Trilium and AFFiNE also ship their own MCP servers. Super Productivity added a local MCP endpoint in October 2026. Others, like Kimai, rely on community servers.",
     },
     {
       question: "How hard is it to self-host productivity apps?",
@@ -45,7 +45,7 @@ export const frontmatter = {
 
 The best open source productivity app overall in 2026 is **Open Sunsama**, for daily planning and time blocking with any AI agent. For tasks, add **Vikunja** or **tududi**. For notes, pick **Joplin** or **Logseq**, then add **Kimai** for time tracking and **Nextcloud Calendar** for your calendar.
 
-Every app below has public source code, a clear license and a card with facts we checked on 24 September 2026. Each card links straight to the code, so you can check it yourself.
+Every app below has public source code, a clear license and a card with facts we checked on 24 September 2026. We refreshed stars, releases and MCP support on 23 November 2026. Each card links straight to the code, so you can check it yourself.
 
 We build Open Sunsama, so we put it first — here is why, and where others fit better.
 
@@ -83,7 +83,7 @@ It is the one app here that plans your day on a calendar next to your meetings. 
 
 We build Open Sunsama and use it to plan our own days. For every other app, we read the license file, the release notes, the docs for sync, API and MCP, and the open issues. We also read what users say on Reddit, Hacker News and GitHub.
 
-Stars, releases and last commits come from each project's GitHub, GitLab or Codeberg page on 24 September 2026. Screenshots come from each project's own images, or from demos and web apps we opened ourselves. The caption under each shot names its source.
+Stars, releases and last commits come from each project's GitHub, GitLab or Codeberg page on 23 November 2026. Screenshots come from each project's own images, or from demos and web apps we opened ourselves. The caption under each shot names its source.
 
 We did not run every app for weeks, so we don't claim to have tested them. An app made the list only if its code is open source and it still ships fixes.
 
@@ -164,7 +164,7 @@ What it does well:
 - Planned vs actual: the focus timer tracks the time you really spent.
 - Subtasks, notes, file attachments and priorities P0 to P3.
 - Keyboard first, with a command palette on Cmd+K.
-- Web, desktop for Mac, Windows and Linux, and a mobile web app for your phone.
+- Web, desktop for Mac, Windows and Linux, and a mobile web app for your phone. The mobile app is early: an Android APK and an iOS TestFlight build, not in the app stores yet.
 - A public REST API with API keys, plus a hosted MCP server.
 
 Where it falls short:
@@ -394,8 +394,9 @@ MCP is the plug that lets an AI agent read and change your tasks. In 2026 it mat
 - **tududi:** an MCP server built into the app.
 - **Joplin, Trilium and Logseq 2.0:** MCP servers built into the apps, off by default.
 - **AFFiNE:** MCP on its cloud and self-hosted servers when AI is on.
-- **Vikunja:** a built-in MCP server is on the main branch, not yet in a stable release.
-- **Super Productivity, Kimai, solidtime and WeKan:** community MCP servers built by other people.
+- **Vikunja:** a built-in MCP server, shipped in v2.7.0 (October 2026).
+- **Super Productivity:** an opt-in local MCP endpoint since v19.3.0 (October 2026).
+- **Kimai, solidtime and WeKan:** community MCP servers built by other people.
 
 Here is what that looks like in Open Sunsama. You ask your agent to plan the afternoon. The tasks and time blocks appear on your calendar as it works.
 

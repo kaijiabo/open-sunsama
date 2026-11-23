@@ -260,7 +260,7 @@ export default defineMarketingPage({
           feature: "How your day gets planned",
           cells: [
             { text: "You drag tasks, or your agent does" },
-            { text: "You drag tasks, in a guided ritual" },
+            { text: "You drag tasks, or Autoplan drafts the day for you to review (beta)" },
             { text: "AI schedules tasks for you" },
             { text: "AI schedules by priority" },
           ],
@@ -300,7 +300,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "no", text: "Web app only" },
@@ -348,7 +348,7 @@ export default defineMarketingPage({
       {
         question: "Does Open Sunsama have a phone app?",
         answer:
-          "It works in your phone's browser as a mobile web app and syncs in real time. There is no native phone app yet. Desktop apps are ready for Mac, Windows and Linux.",
+          "It works in your phone's browser as a mobile web app and syncs in real time. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. Desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
       {

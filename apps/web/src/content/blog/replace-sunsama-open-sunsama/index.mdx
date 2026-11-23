@@ -1,7 +1,8 @@
 export const frontmatter = {
-  title: "How to Replace Sunsama with Open Sunsama (Save $240/Year)",
-  description: "Complete guide to switching from Sunsama to Open Sunsama. Get the same features for free with this open-source alternative.",
+  title: "How to Replace Sunsama with Open Sunsama: A Step-by-Step Switch",
+  description: "Complete guide to switching from Sunsama to Open Sunsama, the open-source daily planner any AI agent can run. Move tasks, calendars and habits step by step.",
   date: "2026-02-01",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["migration", "sunsama", "open-source"],
   readingTime: 11,
@@ -10,21 +11,17 @@ export const frontmatter = {
 
 You've been using Sunsama, and you love it. The calm interface, the daily planning ritual, the satisfying way tasks slide onto your calendar as time blocks. Sunsama transformed how you approach your workday, bringing intentionality to what used to be chaos.
 
-But there's one thing you don't love: **the $240 per year price tag**.
+But you want to own your planner: read its code, self-host it, script it through an API, and let any AI agent run it.
 
-That's $20 every month for a task manager. Over five years, you'll spend $1,200. And while Sunsama delivers value, you can't help wondering: is there a **Sunsama free alternative** that offers the same experience without the recurring cost?
-
-The answer is yes. Open Sunsama is a free, open-source daily planner built on the same philosophy as Sunsama—intentional daily planning, time blocking, and calm productivity—without the premium subscription. In this guide, we'll walk you through exactly how to replace Sunsama with Open Sunsama, what you'll gain, what's different, and how to make the transition seamless.
+Open Sunsama is an open-source daily planner built on the same philosophy as Sunsama—intentional daily planning, time blocking, and calm productivity. In this guide, we'll walk you through exactly how to replace Sunsama with Open Sunsama, what you'll gain, what's different, and how to make the transition seamless.
 
 ## Why Users Cancel Sunsama
 
 Before diving into the replacement process, let's acknowledge why you might be looking for an alternative. Sunsama is genuinely excellent software, but several factors drive users to seek alternatives:
 
-### The Cost Adds Up
+### No Public API
 
-At $20/month or $240/year, Sunsama is one of the most expensive personal productivity tools on the market. For comparison, Todoist Premium costs $48/year, and TickTick Premium is $36/year. When you're paying Sunsama's price for a single-user tool, you start questioning the value proposition.
-
-For freelancers, students, and anyone budget-conscious, **Sunsama is too expensive** to justify indefinitely—even if the product is wonderful. The daily planning methodology works, but the methodology doesn't require paying $240/year.
+Sunsama has an official MCP server for AI apps, but no public REST API. If you want to script your planner, connect it to n8n or your own tools, or keep a copy of your data on your terms, that gap matters.
 
 ### Vendor Lock-In Concerns
 
@@ -54,13 +51,13 @@ The biggest concern when switching from Sunsama to any alternative is feature pa
 | **Subtasks** | ✅ Unlimited | ✅ Unlimited |
 | **Rich Text Notes** | ✅ Markdown support | ✅ Tiptap editor |
 | **Desktop App** | ✅ Electron | ✅ Tauri (lighter) |
-| **Mobile Apps** | ✅ iOS + Android | ✅ iOS + Android |
+| **Mobile Apps** | ✅ iOS + Android | ⚠️ Early Android APK and iOS TestFlight |
 | **Command Palette** | ✅ Quick actions | ✅ Cmd/Ctrl + K |
 | **Dark Mode** | ✅ Yes | ✅ Yes |
 | **Recurring Tasks** | ✅ Yes | ✅ Yes |
 | **Time Estimates** | ✅ Task duration | ✅ Task duration |
 | **Task Rollover** | ✅ Automatic | ✅ Automatic |
-| **Price** | $240/year | **Free** |
+| **Price** | $240/year | Hosted app, or self-host for personal use |
 
 The core workflow—planning your day, time blocking tasks, focusing on one thing at a time, reviewing your progress—works identically in both tools. You're not losing the methodology that made Sunsama valuable.
 
@@ -108,7 +105,7 @@ Before leaving any service, it's wise to export your data. Sunsama allows data e
 
 This export serves as a backup and reference during your transition. Since both apps sync with your calendar, your time blocks will appear automatically once you connect your calendars to Open Sunsama.
 
-### Step 2: Create Your Free Open Sunsama Account
+### Step 2: Create Your Open Sunsama Account
 
 Setting up Open Sunsama takes less than a minute:
 
@@ -281,13 +278,13 @@ Self-hosting makes sense if:
 - You want to customize the application
 - You enjoy running your own infrastructure
 
-For most users, the hosted version at opensunsama.com is easier and still completely free.
+For most users, the hosted version at opensunsama.com is easier.
 
 ## Frequently Asked Questions
 
-### Is Open Sunsama really a good Sunsama free alternative?
+### Is Open Sunsama a good Sunsama alternative?
 
-Yes. Open Sunsama was built specifically for users who love Sunsama's approach but can't or won't pay $240/year. The core functionality—daily planning, time blocking, focus mode, calendar sync—works identically. You're trading some polish and third-party integrations for complete freedom and zero cost.
+Yes, for most people who love Sunsama's approach and want to own their planner. Daily planning, time blocking, focus mode and calendar sync work the same way. You trade Sunsama's guided ritual, Autoplan and built-in task integrations for open code, self-hosting, a public REST API and any AI agent.
 
 ### How long does it take to replace Sunsama with Open Sunsama?
 
@@ -301,9 +298,9 @@ Export your data before canceling your Sunsama subscription. Your time blocks th
 
 Check Sunsama's cancellation policy. Most subscription services allow cancellation but don't provide prorated refunds. You'll retain access until the end of your billing period. Use that time to run both tools in parallel and ensure Open Sunsama meets your needs before fully committing.
 
-### Is Open Sunsama too expensive? Wait, it's free?
+### Can I see Open Sunsama's code?
 
-Correct—Open Sunsama is completely free. There's no premium tier, no artificial limitations, no trial period. The project is maintained by the community with optional sponsorships from users who want to support development.
+Open Sunsama is open source: the code is public on GitHub, and you can self-host it for personal use under its non-commercial license. Companies need a commercial license.
 
 ### Can I use Open Sunsama with my existing Google Calendar?
 
@@ -311,15 +308,15 @@ Absolutely. Open Sunsama offers full two-way sync with Google Calendar. Events y
 
 ### Does Open Sunsama have a mobile app?
 
-Yes. Open Sunsama has mobile apps for iOS and Android built with Expo React Native. You can view your schedule, add tasks, and check off completed items. Time blocking is optimized for desktop use, but mobile works for quick updates on the go.
+Partly. Open Sunsama's mobile app is an early Android APK and an iOS TestFlight build, not in the app stores yet. You can view your schedule, add tasks, and check off completed items. Time blocking is optimized for desktop use, but mobile works for quick updates on the go.
 
-### How does Open Sunsama make money if it's free?
+### How is Open Sunsama licensed?
 
 Open Sunsama is a community-driven open-source project. Operating costs are minimal due to efficient architecture. The project accepts sponsorships from users and organizations who benefit from the software and want to ensure its continued development.
 
 ### Is it hard to self-host Open Sunsama?
 
-Self-hosting requires basic familiarity with Docker, environment variables, and server administration. If you've ever deployed a web application, you can self-host Open Sunsama. If "Docker" sounds intimidating, just use the hosted version—it's equally free.
+Self-hosting requires basic familiarity with Docker, environment variables, and server administration. If you've ever deployed a web application, you can self-host Open Sunsama. If "Docker" sounds intimidating, just use the hosted version at opensunsama.com.
 
 ### What happens if Open Sunsama shuts down?
 
@@ -334,14 +331,14 @@ Open Sunsama captures everything valuable about Sunsama's approach while adding 
 Making the switch is straightforward:
 
 1. Export your Sunsama data as a backup
-2. Create a free Open Sunsama account
+2. Create an Open Sunsama account
 3. Connect your calendars
 4. Continue your daily planning practice
 
 The methodology that made Sunsama valuable doesn't live in Sunsama's servers—it lives in your habits. Those habits transfer to Open Sunsama effortlessly.
 
-Whether you're looking for a **Sunsama free alternative** because of cost, privacy concerns, or simply the principle of owning your productivity system, Open Sunsama delivers. Same philosophy. Same workflow. Zero subscription.
+Whether you're looking for a **Sunsama alternative** for privacy, for open code, or simply the principle of owning your productivity system, Open Sunsama delivers. Same philosophy. Same workflow. Your planner, your data.
 
 ---
 
-Ready to replace Sunsama and save $240/year? [Create your free Open Sunsama account](/register) and experience open-source daily planning today. Your productivity shouldn't come with a monthly bill.
+Ready to replace Sunsama? [Create your Open Sunsama account](/register) and experience open-source daily planning today.

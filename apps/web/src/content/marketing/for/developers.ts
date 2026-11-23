@@ -182,7 +182,7 @@ export default defineMarketingPage({
       points: [
         "Cmd+K finds any task or day. Single keys add, defer and complete.",
         "A REST API with API keys scoped to what each script needs.",
-        "A hosted MCP server with 24 tools for Claude Code, Cursor and ChatGPT.",
+        "A hosted MCP server with 47 tools for Claude Code, Cursor and ChatGPT.",
         "Self-host with one docker compose command.",
         "Desktop apps for Mac, Windows and Linux.",
       ],
@@ -214,7 +214,7 @@ export default defineMarketingPage({
             "Tasks, subtasks and time blocks live in one place. Your agent needs one connector, not a task app plus a calendar app.",
           ],
           bullets: [
-            "24 tools, each marked read-only or destructive",
+            "47 tools, each marked read-only or destructive",
             "Meetings are read-only: your agent can't move them",
             "Estimates and actual minutes are in the data",
           ],
@@ -223,7 +223,7 @@ export default defineMarketingPage({
             alt: "Claude plans an afternoon in Open Sunsama over MCP while tasks and time blocks appear live",
             caption: "Claude plans the afternoon over MCP. Blocks appear live.",
           },
-          link: { label: "See all 24 MCP tools", href: "/docs/mcp/overview" },
+          link: { label: "See all 47 MCP tools", href: "/docs/mcp/overview" },
         },
         {
           title: "Deep work gets a real slot on the calendar",
@@ -348,7 +348,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
@@ -362,7 +362,7 @@ export default defineMarketingPage({
       kind: "stats",
       id: "numbers",
       items: [
-        { value: "24", label: "MCP tools" },
+        { value: "47", label: "MCP tools" },
         { value: "3", label: "Desktop apps" },
         { value: "1", label: "URL for any agent" },
         { live: "github-stars", label: "GitHub stars" },
@@ -395,7 +395,7 @@ export default defineMarketingPage({
       {
         question: "Is there an MCP task manager that also does time blocking?",
         answer:
-          "Yes. Open Sunsama's MCP server has 24 tools for tasks, subtasks, time blocks and your synced meetings. Your agent can see the whole day and block time around your meetings.",
+          "Yes. Open Sunsama's MCP server has 47 tools for tasks, subtasks, time blocks, Ideas boards and your synced meetings. Your agent can see the whole day and block time around your meetings.",
         link: { label: "Task managers with MCP", href: "/blog/best-task-managers-with-mcp" },
       },
       {
@@ -490,7 +490,7 @@ export default defineMarketingPage({
     featureList: [
       "Command palette (Cmd+K) and single-key shortcuts",
       "Public REST API with scoped API keys",
-      "Hosted MCP server with 24 tools and OAuth sign-in",
+      "Hosted MCP server with 47 tools and OAuth sign-in",
       "Self-hosting with Docker Compose",
       "Drag-and-drop time blocking next to Google, Outlook and iCloud events",
       "Focus mode with planned vs actual time",

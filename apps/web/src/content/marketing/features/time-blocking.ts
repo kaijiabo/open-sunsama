@@ -132,7 +132,7 @@ export default defineMarketingPage({
         {
           title: "Take today's plan with you",
           body: [
-            "On your phone, open Open Sunsama in the browser. It works as a mobile web app and syncs in real time.",
+            "On your phone, open Open Sunsama in the browser, or try the early Android APK or iOS TestFlight build. It syncs in real time.",
             "At your desk, use the web app or the [desktop app](/download) for Mac, Windows and Linux.",
           ],
           media: {
@@ -150,7 +150,7 @@ export default defineMarketingPage({
       heading: "Claude, ChatGPT or any AI agent can time-block your day",
       lead: "Paste one URL into your AI app and sign in. Your agent sees your meetings and tasks together, then creates time blocks around them.",
       body: [
-        "Open Sunsama has a hosted MCP server with 24 tools. Your agent can read your calendar events, but it can't change them. It only adds and moves your tasks and time blocks.",
+        "Open Sunsama has a hosted MCP server with 47 tools. Your agent can read your calendar events, but it can't change them. It only adds and moves your tasks and time blocks.",
         "You stay in charge. Every block the agent makes shows up live on your calendar, and you can drag it anywhere.",
       ],
       prompts: [
@@ -232,7 +232,7 @@ export default defineMarketingPage({
           feature: "Auto-scheduling",
           cells: [
             { mark: "no", text: "Ask your agent" },
-            { mark: "partial", text: "Optional, per task" },
+            { mark: "partial", text: "Per task; Autoplan drafts the day (beta)" },
             { mark: "yes", text: "Full" },
             { mark: "partial", text: "Schedule Optimizer" },
           ],
@@ -269,7 +269,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
@@ -283,7 +283,7 @@ export default defineMarketingPage({
       kind: "stats",
       id: "numbers",
       items: [
-        { value: "24", label: "MCP tools" },
+        { value: "47", label: "MCP tools" },
         { value: "3", label: "Desktop apps" },
         { value: "1", label: "URL for any agent" },
         { live: "github-stars", label: "GitHub stars" },
@@ -348,7 +348,7 @@ export default defineMarketingPage({
       {
         question: "Can I time block on my phone?",
         answer:
-          "Yes, in your phone's browser. Open Sunsama works as a mobile web app and syncs in real time. There is no native phone app yet; desktop apps are ready for Mac, Windows and Linux.",
+          "Yes, in your phone's browser. Open Sunsama works as a mobile web app and syncs in real time. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet; desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
       {

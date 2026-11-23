@@ -31,7 +31,7 @@ const verdict: AlternativeExtras["verdict"] = {
 const giveUps: AlternativeExtras["giveUps"] = [
   {
     title: "Apps on every device",
-    body: "Todoist has apps for iOS, Android, Apple Watch and Wear OS. Open Sunsama runs in your phone's browser as a mobile web app, and has desktop apps for Mac, Windows and Linux.",
+    body: "Todoist has apps for iOS, Android, Apple Watch and Wear OS. Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser, and has desktop apps for Mac, Windows and Linux.",
   },
   {
     title: "Natural-language quick add",
@@ -312,7 +312,7 @@ export default defineMarketingPage({
       {
         question: "Does Open Sunsama have a phone app?",
         answer:
-          "It runs in your phone's browser as a mobile web app and syncs in real time. There is no native app for iOS or Android yet.",
+          "The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser as a mobile web app and syncs in real time.",
         link: { label: "Get the desktop app", href: "/download" },
       },
       LICENSE_FAQ,

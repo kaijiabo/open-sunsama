@@ -12,7 +12,7 @@ const BANNED: Array<[RegExp, string]> = [
   // "free slots" and "free time" are fine; "free app" or "for free" sells on price
   [/\bfree\b(?![ -](slots?|time|space|hours?|up)\b)/i, 'sells on price ("free")'],
   [/\b(revolutionary|game[- ]changer|seamless(ly)?|leverage|robust|unlock|elevate|supercharge)\b/i, "hype word"],
-  [/\b(app store|play store|ios app|android app)\b/i, "claims a native phone app (there is none; phones use the mobile web app)"],
+  [/\b(app store|play store|ios app|android app)\b/i, "claims a store phone app (ours is an early Android APK and iOS TestFlight build, not in the app stores)"],
   [/\b(we tested|in our testing|hands-on test)/i, "claims hands-on testing of other apps"],
 ];
 

@@ -37,7 +37,7 @@ const giveUps: AlternativeExtras["giveUps"] = [
   },
   {
     title: "Native phone apps",
-    body: "Motion has apps for iOS and Android. Open Sunsama runs in your phone's browser as a mobile web app, and has desktop apps for Mac, Windows and Linux.",
+    body: "Motion has apps for iOS and Android. Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser, and has desktop apps for Mac, Windows and Linux.",
   },
   {
     title: "Built-in task integrations",
@@ -153,7 +153,7 @@ export default defineMarketingPage({
       lead: "Paste one URL into Claude, ChatGPT, Cursor or any MCP client, then sign in. Ask it to plan, and it creates tasks and time blocks around your meetings.",
       body: [
         "That is the middle path many Motion users ask for. The AI does the planning, and nothing moves until you ask. Set rules in plain words, like \"no deep work after 4pm\".",
-        "Motion has a public REST API, but we found only community-built MCP servers for it. Open Sunsama runs a hosted MCP server with 24 tools. Your agent can read your calendar events but can't change them.",
+        "Motion has a public REST API, but we found only community-built MCP servers for it. Open Sunsama runs a hosted MCP server with 47 tools. Your agent can read your calendar events but can't change them.",
       ],
       prompts: [
         "Plan my afternoon around my meetings. No deep work after 4pm.",

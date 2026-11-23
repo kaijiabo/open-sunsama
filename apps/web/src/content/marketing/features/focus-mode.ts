@@ -180,7 +180,7 @@ export default defineMarketingPage({
       heading: "Your AI agent can read planned vs actual and plan tomorrow",
       lead: "Connect Claude, ChatGPT, Cursor or any MCP client with one URL. Your agent sees each task's estimate and real time.",
       body: [
-        "Open Sunsama has a hosted MCP server with 24 tools. Tasks come back with their estimate and actual minutes, so your agent can spot the tasks you always underestimate.",
+        "Open Sunsama has a hosted MCP server with 47 tools. Tasks come back with their estimate and actual minutes, so your agent can spot the tasks you always underestimate.",
         "Ask it to plan tomorrow with that in mind. It creates focus blocks around your meetings, and you can drag any of them.",
       ],
       prompts: [
@@ -245,7 +245,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
@@ -312,7 +312,7 @@ export default defineMarketingPage({
       {
         question: "Can I use focus mode on my phone?",
         answer:
-          "Yes, in your phone's browser. Open Sunsama works as a mobile web app. There is no native phone app yet; desktop apps are ready for Mac, Windows and Linux.",
+          "Yes, in your phone's browser. Open Sunsama works as a mobile web app. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet; desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
     ],

@@ -2,6 +2,7 @@ export const frontmatter = {
   title: "Linear vs Sunsama: Which Should Engineers Use in 2026?",
   description: "Compare Linear and Sunsama for engineering workflows. Issue tracking vs daily planning, and how Open Sunsama bridges both.",
   date: "2026-02-01",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["comparison", "linear", "developers"],
   readingTime: 12,
@@ -12,7 +13,7 @@ Linear and Sunsama solve fundamentally different problems for engineering teams�
 
 The confusion arises because both are popular among developers, both have beautiful keyboard-first interfaces, and both promise to make you more productive. But comparing Linear vs Sunsama is like comparing GitHub and your calendar app—they serve different purposes in your workflow.
 
-In this comprehensive comparison, we'll break down exactly what each tool does, how they fit into engineering workflows, and why the smartest approach might be using Linear for team issues while adopting a free daily planner like Open Sunsama for personal productivity.
+In this comprehensive comparison, we'll break down exactly what each tool does, how they fit into engineering workflows, and why the smartest approach might be using Linear for team issues while adopting an open-source daily planner like Open Sunsama for personal productivity.
 
 ## Quick Comparison: Linear vs Sunsama vs Open Sunsama
 
@@ -21,8 +22,7 @@ Before diving deep, here's how these three tools compare across features that ma
 | Feature | Linear | Sunsama | Open Sunsama |
 |---------|--------|---------|--------------|
 | **Primary Purpose** | Issue tracking | Daily planning | Daily planning |
-| **Price (Free)** | ✅ Generous free tier | ❌ No free tier | ✅ Free forever |
-| **Price (Paid)** | $8/user/month | $20/month | Free |
+| **Price (Paid)** | $8/user/month | $20/month | Hosted app, or self-host for personal use |
 | **Team Collaboration** | ✅ Core feature | ❌ Individual only | ❌ Individual only |
 | **Issue Tracking** | ✅ Core feature | ❌ No | ❌ No |
 | **Time Blocking** | ❌ No | ✅ Core feature | ✅ Core feature |
@@ -30,10 +30,10 @@ Before diving deep, here's how these three tools compare across features that ma
 | **Keyboard Shortcuts** | ✅ Extensive | ✅ Extensive | ✅ Extensive |
 | **GitHub Integration** | ✅ Deep | ✅ One-way pull | 🔜 Coming soon |
 | **Linear Integration** | — | ✅ Native | 🔜 Coming soon |
-| **API Access** | ✅ GraphQL API | ✅ Limited | ✅ Full REST API |
+| **API Access** | ✅ GraphQL API | ❌ No public API | ✅ Full REST API |
 | **Open Source** | ❌ No | ❌ No | ✅ Yes |
 | **Self-Hostable** | ❌ No | ❌ No | ✅ Yes |
-| **MCP Tools** | ❌ No | ❌ No | ✅ 24 tools |
+| **MCP Server** | ✅ Official | ✅ Official, OAuth | ✅ Official, OAuth, 47 tools |
 
 Now let's examine what each tool actually does and when you should use them.
 
@@ -254,15 +254,15 @@ Issue trackers show what work exists. Daily planners answer a different question
 
 5. **Intentionality beats reactivity**: Without planning, you respond to whatever's loudest. With planning, you choose what's most important.
 
-### The Friction Point: Cost
+### The Friction Point: Planning Lives Outside Linear
 
-Here's the problem: If you're already paying for Linear (free or $8/user), adding Sunsama at $240/year is a significant additional expense. For a team of 10 engineers, that's $2,400/year just for daily planning—more than the Linear subscription itself.
+Linear tracks the team's issues, not your own day. Sunsama can pull Linear issues into a daily plan at $240 a year per person, but it has no public API, so you can't script the link yourself.
 
 This is where Open Sunsama enters the picture.
 
 ## Open Sunsama for Engineering Teams
 
-Open Sunsama is a free, open-source daily planner built specifically with developers in mind. It provides the daily planning capabilities that Linear lacks, without the $240/year price tag.
+Open Sunsama is an open-source daily planner built specifically with developers in mind. It provides the daily planning capabilities that Linear lacks, with a public REST API and an MCP server any AI agent can use.
 
 ### Built for Developers
 
@@ -272,7 +272,7 @@ Open Sunsama is a free, open-source daily planner built specifically with develo
 
 **Full REST API**: Build custom integrations, automate workflows, or connect Open Sunsama to your internal tools. Unlike Sunsama's limited API, Open Sunsama gives you complete programmatic control.
 
-**MCP Tools for AI Agents**: Open Sunsama includes 24 MCP (Model Context Protocol) tools that let AI assistants like Claude create tasks, manage time blocks, and interact with your planning workflow. Developers using AI coding assistants can integrate their planning directly into their development environment.
+**MCP Tools for AI Agents**: Linear and Sunsama both run official MCP servers now. Open Sunsama adds a public REST API and open code, and includes 47 MCP (Model Context Protocol) tools that let AI assistants like Claude create tasks, manage time blocks, and interact with your planning workflow. Developers using AI coding assistants can integrate their planning directly into their development environment.
 
 ### Key Features for Engineers
 
@@ -308,12 +308,14 @@ Build scripts that sync Linear issues to Open Sunsama tasks, create time blocks 
 
 ### MCP Tools for AI-Assisted Planning
 
-Open Sunsama includes 24 MCP tools that AI assistants can use:
+Open Sunsama includes 47 MCP tools that AI assistants can use:
 
 | Category | Tools |
 |----------|-------|
-| **Tasks** | `list_tasks`, `get_task`, `create_task`, `update_task`, `complete_task`, `delete_task`, `schedule_task`, `reorder_tasks` |
-| **Time Blocks** | `list_time_blocks`, `create_time_block`, `update_time_block`, `delete_time_block`, `link_task_to_time_block` |
+| **Tasks** | `list_tasks`, `get_task`, `create_task`, `update_task`, `complete_task`, `uncomplete_task`, `delete_task`, `schedule_task`, `reorder_tasks` |
+| **Time Blocks** | `list_time_blocks`, `get_time_block`, `create_time_block`, `update_time_block`, `delete_time_block`, `link_task_to_time_block`, `get_schedule_for_day` |
+| **Calendar events** (read-only) | `list_calendar_events` |
+| **Ideas boards** | 23 tools for boards, columns, cards and checklists, including `promote_idea` and `bulk_ideas` |
 | **Subtasks** | `list_subtasks`, `create_subtask`, `toggle_subtask`, `update_subtask`, `delete_subtask` |
 | **User** | `get_user_profile`, `update_user_profile` |
 
@@ -322,16 +324,6 @@ This enables workflows like:
 - "Create a time block for code review after my standup"
 - "What's on my calendar for today?"
 
-### Cost Comparison for Engineering Teams
-
-| Team Size | Linear (Standard) | Sunsama | Open Sunsama | Total with Sunsama | Total with Open Sunsama |
-|-----------|-------------------|---------|--------------|-------------------|------------------------|
-| 1 developer | Free | $240/year | Free | $240/year | $0/year |
-| 5 developers | $480/year | $1,200/year | Free | $1,680/year | $480/year |
-| 10 developers | $960/year | $2,400/year | Free | $3,360/year | $960/year |
-| 25 developers | $2,400/year | $6,000/year | Free | $8,400/year | $2,400/year |
-
-For a 10-person engineering team, switching from Sunsama to Open Sunsama saves $2,400/year while maintaining daily planning capabilities.
 
 ## Frequently Asked Questions
 
@@ -349,7 +341,7 @@ Yes, Sunsama has native Linear integration. You can pull your assigned Linear is
 
 ### Is Open Sunsama a replacement for Linear?
 
-No. Open Sunsama is a daily planner, not an issue tracker. It's meant to complement Linear, not replace it. Use Linear for team issue tracking and project management; use Open Sunsama for personal daily planning and time blocking. See our list of [free Sunsama alternatives](/blog/best-free-sunsama-alternatives) for more daily planning options.
+No. Open Sunsama is a daily planner, not an issue tracker. It's meant to complement Linear, not replace it. Use Linear for team issue tracking and project management; use Open Sunsama for personal daily planning and time blocking. See our list of [Sunsama alternatives](/blog/best-free-sunsama-alternatives) for more daily planning options.
 
 ### Can I self-host Open Sunsama?
 
@@ -369,11 +361,11 @@ Open Sunsama offers a full REST API with complete access to tasks, time blocks, 
 
 ### Can AI assistants use Open Sunsama?
 
-Yes. Open Sunsama includes 24 MCP (Model Context Protocol) tools that allow AI assistants like Claude to create tasks, schedule time blocks, and interact with your planning workflow. This enables AI-assisted daily planning directly from your development environment or AI chat interface.
+Yes. Open Sunsama includes 47 MCP (Model Context Protocol) tools that allow AI assistants like Claude to create tasks, schedule time blocks, and interact with your planning workflow. This enables AI-assisted daily planning directly from your development environment or AI chat interface.
 
 ### Which is better for engineering managers: Linear or Sunsama?
 
-Engineering managers typically need both. **Linear** for visibility into team progress, cycle planning, and cross-team coordination. A **daily planner** for managing your own time between meetings, 1:1s, planning sessions, and individual contributor work. Open Sunsama provides the daily planning layer at no cost.
+Engineering managers typically need both. **Linear** for visibility into team progress, cycle planning, and cross-team coordination. A **daily planner** for managing your own time between meetings, 1:1s, planning sessions, and individual contributor work. Open Sunsama provides the daily planning layer, with a public API you can connect to Linear.
 
 ## Conclusion: The Right Tool for Each Job
 
@@ -383,14 +375,14 @@ The Linear vs Sunsama comparison reveals a fundamental truth: **these tools aren
 
 **Use a daily planner** for deciding what YOU will accomplish today. Time blocking, focus mode, and intentional planning help you actually complete the work that Linear tracks.
 
-**Choose Open Sunsama** if you want powerful daily planning without the $240/year price tag. As the only [free Sunsama alternative](/alternative/sunsama) designed for developers, Open Sunsama offers:
+**Choose Open Sunsama** if you want daily planning you own. As an [open-source Sunsama alternative](/alternative/sunsama) designed for developers, Open Sunsama offers:
 - Full REST API for custom integrations
 - MCP tools for AI-assisted planning
 - Self-hosting for data sovereignty
 - Keyboard-first interface developers love
 
-The smartest engineering workflow combines Linear for team coordination with Open Sunsama for personal productivity—giving you the best of both worlds at a fraction of the cost.
+The smartest engineering workflow combines Linear for team coordination with Open Sunsama for personal productivity—giving you the best of both worlds.
 
 ---
 
-Ready to add intentional daily planning to your engineering workflow? [Get started with Open Sunsama for free](/register) and discover how time blocking transforms your productivity—without the premium price tag.
+Ready to add intentional daily planning to your engineering workflow? [Get started with Open Sunsama](/register) and discover how time blocking transforms your productivity.

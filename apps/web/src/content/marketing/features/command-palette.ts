@@ -215,7 +215,7 @@ export default defineMarketingPage({
       heading: "Or skip the keys and ask any AI agent",
       lead: "Connect Claude, ChatGPT, Cursor or any MCP client with one URL. Your agent can do what the palette does, in plain words.",
       body: [
-        "Open Sunsama has a hosted MCP server with 24 tools. Your agent can add, find, move and complete tasks, and block time on your calendar.",
+        "Open Sunsama has a hosted MCP server with 47 tools. Your agent can add, find, move and complete tasks, and block time on your calendar.",
         "Developers can stay in their editor. Ask Claude Code or Cursor to add a task without leaving the terminal.",
       ],
       prompts: [
@@ -229,7 +229,7 @@ export default defineMarketingPage({
       links: [
         { label: "Claude Code setup", href: "/docs/mcp/claude" },
         { label: "Cursor setup", href: "/docs/mcp/cursor" },
-        { label: "All 24 tools", href: "/features/ai-integration" },
+        { label: "All 47 tools", href: "/features/ai-integration" },
       ],
     },
     {
@@ -275,7 +275,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },

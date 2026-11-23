@@ -34,12 +34,12 @@ export const frontmatter = {
     },
     {
       question: "Which one works best with Claude or ChatGPT?",
-      answer: "Reclaim and Sunsama both have official MCP servers, and Reclaim also has a ChatGPT app. Motion has a public REST API, and community-built MCP servers use it. Open Sunsama has a hosted MCP server with 24 tools and a public REST API.",
+      answer: "Reclaim and Sunsama both have official MCP servers, and Reclaim also has a ChatGPT app. Motion has a public REST API, and community-built MCP servers use it. Open Sunsama has a hosted MCP server with 47 tools and a public REST API.",
     },
   ],
 };
 
-**Reclaim AI guards your calendar, Motion plans your whole day for you, and Sunsama guides you to plan it yourself.** Pick Reclaim for meeting-heavy weeks and Motion if you want AI to decide when you work. Pick Sunsama for a calm daily plan you sign off on.
+**Reclaim AI guards your calendar, Motion plans your whole day for you, and Sunsama guides you to plan it, or drafts it with its beta Autoplan agent for you to review.** Pick Reclaim for meeting-heavy weeks and Motion if you want AI to decide when you work. Pick Sunsama for a calm daily plan you sign off on.
 
 Entry plans cost $10 (Reclaim Starter), $17 (Sunsama Pro) and $19 (Motion Pro AI) a month.
 
@@ -64,7 +64,7 @@ All prices and features below were checked on each vendor's site on 23 November 
 | **Daily planning** | Kanban board of days | No | No ritual; AI builds the day | Morning plan (Autoplan or by hand) and shutdown |
 | **Calendars** | Google, Outlook, iCloud | Google, Outlook | Google, Outlook, iCloud | Google, Outlook, iCloud |
 | **Built-in AI** | None; bring any agent | Reclaim Chat | AI calendar, chat, notes; uses credits | Sunny assistant and Autoplan |
-| **AI agents (MCP)** | Hosted MCP server, 24 tools | Official MCP server; ChatGPT app | Community-built only | Official MCP server |
+| **AI agents (MCP)** | Hosted MCP server, 47 tools | Official MCP server; ChatGPT app | Community-built only | Official MCP server |
 | **Public API** | Yes, REST with API keys | No public docs found | Yes, REST with API key | No |
 | **Phone** | Early Android APK and iOS TestFlight | Web app only | iOS, Android | iOS, Android |
 | **Teams** | No | Yes | Yes, projects | No |
@@ -102,7 +102,7 @@ Open Sunsama sits with Sunsama on that line, with one twist. You can ask an AI a
 - A kanban board of days with Today, Tomorrow and a backlog. Unfinished tasks roll over.
 - Time blocking: drag a task onto the calendar and resize it. Blocks sync with Google, Outlook and iCloud.
 - A focus timer that tracks planned vs actual time.
-- A hosted [MCP server](/docs/mcp/overview) with 24 tools. Claude, ChatGPT or Cursor can read your meetings and plan around them.
+- A hosted [MCP server](/docs/mcp/overview) with 47 tools. Claude, ChatGPT or Cursor can read your meetings and plan around them.
 - A public [REST API](/docs/api/authentication) with API keys, public code, and [self-hosting with Docker](/docs/self-hosting/docker).
 
 <Clip id="ai-plan" caption="Claude plans the afternoon over MCP, and each time block appears live." />
@@ -160,6 +160,7 @@ Critics also say you can end up having to [reverse engineer](https://iphoneclean
 
 - A guided morning plan, workload totals, and an evening shutdown.
 - Imports from Asana, ClickUp, GitHub, Gmail, Jira, Linear, Notion, Slack, Todoist, Trello and more.
+- Autoplan (beta), an AI agent that drafts your day for you to review. It does not re-plan when meetings move.
 - Sunny, an AI assistant that can create and move tasks and clean up your backlog. Since October 2026 it can also search connected accounts for tasks.
 - [Autoplan](https://help.sunsama.com/docs/usage-guides/daily-planning/), in beta, drafts your day from a short prompt in about 2–4 minutes, and you review it.
 - An official MCP server and apps for every platform, including Linux, iOS and Android.

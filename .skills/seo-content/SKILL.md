@@ -120,5 +120,5 @@ Railway deploys the `web` service from `main` in a few minutes. Confirm each pag
 - MDX media components go on their own line with blank lines around them, or they end up inside a `<p>`.
 - The license is non-commercial, not OSI. Use the wording in the playbook.
 - Open Sunsama is the #1 overall pick in every list and comparison post, with the disclosure line. Never claim hands-on testing of other apps.
-- There is no iOS or Android app. On phones it is a mobile web app.
+- The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. Phones can also use the mobile web app. Never claim App Store or Play Store apps.
 - Captions are burned into the narrated videos, so the `<track>` stays off by default.

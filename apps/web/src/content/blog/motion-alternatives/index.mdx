@@ -2,7 +2,7 @@ export const frontmatter = {
   title: "8 Best Motion Alternatives in 2026 (Auto-Scheduling and Manual)",
   description: "The 8 best Motion alternatives in 2026, compared. Auto-schedulers like Reclaim and FlowSavvy, or planners where you (or your AI agent) stay in control.",
   date: "2026-09-24",
-  updated: "2026-09-24",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["motion", "alternatives", "comparison", "ai-scheduling", "time-blocking"],
   readingTime: 10,
@@ -14,7 +14,7 @@ export const frontmatter = {
     { question: "Is Motion good for ADHD?", answer: "It removes daily planning choices, which helps some people. Others find a calendar that keeps moving stressful. If that is you, try a manual planner with rollover, like Sunsama or Open Sunsama." },
     { question: "Does Motion work with Claude or ChatGPT?", answer: "Motion has a public REST API, but we found no official MCP server. Reclaim, Sunsama, Akiflow, FlowSavvy (Pro) and Open Sunsama all offer MCP servers." },
     { question: "Can AI plan my day without auto-scheduling?", answer: "Yes. Connect Claude or ChatGPT to a planner with an MCP server and ask it to plan your day. With Open Sunsama, the agent creates tasks and time blocks you can see and change, and nothing moves until you ask." },
-    { question: "Which Motion alternative has the best mobile app?", answer: "FlowSavvy has full iOS and Android apps, and Morgen, Sunsama and Akiflow have phone apps too. Reclaim has no native app, and SkedPal's apps are companions. Open Sunsama runs in your phone's browser." },
+    { question: "Which Motion alternative has the best mobile app?", answer: "FlowSavvy has full iOS and Android apps, and Morgen, Sunsama and Akiflow have phone apps too. Reclaim has no native app, and SkedPal's apps are companions. Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet." },
   ],
 };
 
@@ -22,7 +22,7 @@ The best Motion alternative for most people is **Open Sunsama**. It is an open-s
 
 We build Open Sunsama, so we put it first — here is why, and where others fit better. If you want software to schedule your day, **FlowSavvy** is the closest match for one person. **Reclaim** is the best auto-scheduler for teams.
 
-**Morgen** suggests a plan you approve, and **Sunsama** guides a calm, manual plan. This Motion alternative guide covers eight apps, with prices checked in September 2026.
+**Morgen** suggests a plan you approve, and **Sunsama** guides a calm plan, and its beta Autoplan agent can draft it for you to review. This Motion alternative guide covers eight apps, with prices checked in September 2026.
 
 ## Key takeaways
 
@@ -32,7 +32,7 @@ We build Open Sunsama, so we put it first — here is why, and where others fit 
 - **Most control over the algorithm:** SkedPal. Deep rules, steep learning curve.
 - **Best if you used Motion for projects:** ClickUp. Huge project features, basic auto-scheduling.
 - **AI that asks before it moves anything:** Morgen.
-- **Calm manual planning:** Sunsama.
+- **Calm guided planning:** Sunsama.
 - **Fast capture from every tool:** Akiflow.
 
 ## The real choice: autopilot or control
@@ -53,7 +53,7 @@ Our top pick, Open Sunsama, sits in the middle. You plan, or your own AI agent p
 
 1. **Auto-schedulers** do what Motion does, often for less money: Reclaim, FlowSavvy, SkedPal and ClickUp.
 2. **AI assistants that ask first** suggest a plan and wait for your OK: Morgen and Akiflow's chat assistant.
-3. **Manual planners** keep you in charge: Sunsama guides your plan each morning.
+3. **Guided planners** keep you in charge: Sunsama guides your plan each morning, and its beta Autoplan agent can draft it for you to review.
 
 ## Motion alternatives compared
 
@@ -61,13 +61,13 @@ Prices are for one person, checked on each vendor's site in September 2026.
 
 | App | Type | Moves tasks without asking? | Best for | Phone apps | Price |
 |---|---|---|---|---|---|
-| **Open Sunsama** | Manual, or your AI agent on request | No | Best overall: control, open source, any AI agent | No, mobile web app | Self-host for personal use; hosted app at opensunsama.com |
+| **Open Sunsama** | Manual, or your AI agent on request | No | Best overall: control, open source, any AI agent | Early Android APK and iOS TestFlight | Self-host for personal use; hosted app at opensunsama.com |
 | **FlowSavvy** | Auto-scheduler | Yes | One person who wants Motion's core | iOS, Android (full apps) | Free plan; Pro $14/mo, or $10/mo yearly |
 | **Reclaim** | Auto-scheduler | Yes, by priority | Teams on Google or Outlook | No, web app only | Free plan; Starter $12/seat/mo, or $10 yearly |
 | **SkedPal** | Auto-scheduler | When you click "Update schedule" | Fine control over rules | Companion apps | Core $9.95/mo, Pro $14.95/mo, billed yearly; no free plan |
 | **ClickUp** | Project tool with auto-schedule | Only when you click | Teams that used Motion for projects | Yes | Free plan; Unlimited $10/seat/mo, or $7 yearly |
 | **Morgen** | AI suggests, you approve | No | Many calendars and task apps | Yes | $30/mo, or $15/mo yearly; 14-day trial |
-| **Sunsama** | Manual, guided | No | Calm daily planning | Yes | $22/mo, or $17/mo yearly; 14-day trial |
+| **Sunsama** | Guided, or an Autoplan draft you review (beta) | No | Calm daily planning | Yes | $22/mo, or $17/mo yearly; 14-day trial |
 | **Akiflow** | Manual, plus chat assistant | Only via its optimizer | Capture from every tool | Yes | $34/mo, or $19/mo yearly; no free plan |
 | *Motion (for reference)* | *Auto-scheduler* | *Yes* | *Hands-off planning and projects* | *iOS, Android* | *Pro AI $19/seat/mo, Business AI $29; no free plan* |
 
@@ -116,7 +116,7 @@ Several apps in this list have an MCP server too, including Reclaim, Sunsama and
 
 **What works**
 
-- A [hosted MCP server](/docs/mcp/overview) with 24 tools, plus a public [REST API](/docs/api/authentication) with API keys.
+- A [hosted MCP server](/docs/mcp/overview) with 47 tools, plus a public [REST API](/docs/api/authentication) with API keys.
 - Public code on GitHub that you can read, change and [self-host with Docker](/docs/self-hosting/docker).
 - Focus mode with a timer that tracks planned vs actual time.
 - Cmd+K command palette and keyboard-first navigation.
@@ -128,7 +128,7 @@ Several apps in this list have an MCP server too, including Reclaim, Sunsama and
 
 - No built-in auto-scheduler. If you want the app to plan without being asked, pick FlowSavvy or Reclaim.
 - Built for one person. There are no team projects like Motion's.
-- No iOS or Android app yet, only the mobile web app.
+- The mobile app is an early Android APK and an iOS TestFlight build, not in the app stores yet.
 - The code uses a non-commercial license. You can read it, run it and self-host it for personal use. Companies need a commercial license.
 
 **Pick it if** you want the planning help without the black box. See the full [Open Sunsama vs Motion](/alternative/motion) page, or [compare it with Sunsama](/alternative/sunsama).
@@ -256,7 +256,7 @@ You accept, change or reject the plan. When a meeting lands on a task, Morgen as
 
 **Pick it if** you want AI to do the math and you to make the call.
 
-## 7. Sunsama guides a calm, manual plan
+## 7. Sunsama guides a calm plan you sign off on
 
 **Verdict:** the best Motion alternative if you want to plan with intent, not hand your day to software.
 
@@ -264,13 +264,13 @@ You accept, change or reject the plan. When a meeting lands on a task, Morgen as
 
 Sunsama is Motion's opposite. Each morning it walks you through what fits today.
 
-You drag tasks onto your calendar yourself. It warns you when you plan more hours than you have.
+You drag tasks onto your calendar yourself, or let [Autoplan](https://help.sunsama.com/docs/usage-guides/daily-planning/), a beta AI agent that new workspaces start with, draft the day for you to review. It does not re-plan when meetings move. It warns you when you plan more hours than you have.
 
 **What works**
 
 - A daily planning ritual and a shutdown ritual.
 - Two-way sync with about 20 task tools, plus Google, Outlook and iCloud calendars.
-- An AI assistant called Sunny and an [official MCP server](https://help.sunsama.com/docs/mcp-model-context-protocol) for Claude and ChatGPT.
+- Autoplan (beta), which drafts your day, an AI assistant called Sunny and an [official MCP server](https://help.sunsama.com/docs/mcp-model-context-protocol) for Claude and ChatGPT.
 
 **Where it falls short**
 

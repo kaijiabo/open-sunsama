@@ -1,7 +1,8 @@
 export const frontmatter = {
   title: "Jira vs Sunsama: Team Tracking vs Personal Planning (2026)",
-  description: "Compare Jira and Sunsama for task management. Enterprise issue tracking vs daily planning, plus a free alternative.",
+  description: "Compare Jira and Sunsama for task management. Enterprise issue tracking vs daily planning, plus an open-source alternative.",
   date: "2026-02-01",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["comparison", "jira", "productivity"],
   readingTime: 11,
@@ -12,7 +13,7 @@ Jira and Sunsama exist in completely different universes—yet developers consta
 
 But here's the reality: **Jira is an enterprise issue tracking platform** built for teams to coordinate complex software projects across sprints, releases, and departments. **Sunsama is a personal daily planner** built for individuals to intentionally decide what they'll accomplish today. Choosing between them misses the point—they solve fundamentally different problems.
 
-In this comprehensive Jira vs Sunsama comparison, we'll break down what each tool actually does, when you need one or both, and why many developers find they need a personal planning layer on top of their team's issue tracker. We'll also introduce Open Sunsama—a free, open-source daily planner that gives you Sunsama's calendar-first approach without the $240/year subscription.
+In this comprehensive Jira vs Sunsama comparison, we'll break down what each tool actually does, when you need one or both, and why many developers find they need a personal planning layer on top of their team's issue tracker. We'll also introduce Open Sunsama—an open-source daily planner that gives you Sunsama's calendar-first approach without the $240/year subscription.
 
 ## Quick Comparison: Jira vs Sunsama vs Open Sunsama
 
@@ -21,8 +22,7 @@ Before diving into details, here's how these three tools compare at a glance:
 | Feature | Jira | Sunsama | Open Sunsama |
 |---------|------|---------|--------------|
 | **Primary Purpose** | Enterprise issue tracking | Personal daily planning | Personal daily planning |
-| **Price (Free)** | ✅ Free for 10 users | ❌ No free tier | ✅ Free forever |
-| **Price (Paid)** | $8.15-16/user/month | $240/year | Free |
+| **Price (Paid)** | $8.15-16/user/month | $240/year | Hosted app, or self-host for personal use |
 | **Team Collaboration** | ✅ Built for teams | ❌ Individual only | ❌ Individual only |
 | **Issue Tracking** | ✅ Core feature | ❌ Imports only | ❌ Not designed for this |
 | **Agile/Scrum Support** | ✅ Comprehensive | ❌ No | ❌ No |
@@ -257,19 +257,19 @@ Jira is optimized for team visibility and process enforcement, not individual pr
 
 This is why even developers who live in Jira for team work often maintain separate systems for personal planning—whether that's a paper notebook, a todo app, or a dedicated daily planner. For similar comparisons with other team tools, see [Linear vs Sunsama](/blog/linear-vs-sunsama) or [Monday.com vs Sunsama](/blog/monday-vs-sunsama).
 
-## Open Sunsama: Free Personal Planning for Jira Users
+## Open Sunsama: Open-Source Personal Planning for Jira Users
 
-What if you want Sunsama's daily planning philosophy without the $240/year subscription? What if you use Jira for team work but need a personal planning layer?
+What if you want Sunsama's daily planning philosophy in an app you can own? What if you use Jira for team work but need a personal planning layer?
 
-Open Sunsama is a free, open-source daily planner that fills this gap.
+Open Sunsama is an open-source daily planner that fills this gap.
 
 ### Calendar-First Planning (Like Sunsama)
 
-Open Sunsama centers on your calendar. Your day isn't an endless task list—it's a schedule of time blocks. Drag tasks onto specific times, visualize your commitments, and plan with intention. The same philosophy that makes Sunsama effective, without the premium price.
+Open Sunsama centers on your calendar. Your day isn't an endless task list—it's a schedule of time blocks. Drag tasks onto specific times, visualize your commitments, and plan with intention. The same philosophy that makes Sunsama effective.
 
-### Completely Free (Unlike Sunsama)
+### Open Source and AI Native
 
-Open Sunsama has no pricing tiers, no premium features locked away, no subscriptions. Everything is free for everyone, forever. You get time blocking, focus mode, and calendar sync without paying $240/year on top of your existing Jira subscription.
+The code is public on GitHub, and you can self-host it for personal use under its non-commercial license. Any AI agent, like Claude, ChatGPT or Cursor, can run your planner through a hosted MCP server with 47 tools, and a public REST API covers everything else.
 
 ### Key Features
 
@@ -278,7 +278,7 @@ Open Sunsama has no pricing tiers, no premium features locked away, no subscript
 - **Calendar sync**: Two-way sync with Google Calendar, Outlook, and iCloud
 - **Kanban workflow**: Visual daily planning with intuitive drag-and-drop
 - **Desktop app**: Native application for Windows, macOS, and Linux
-- **Mobile app**: Native iOS and Android apps
+- **Mobile app**: An early Android APK and iOS TestFlight build, not in the app stores yet
 - **Full REST API**: Build custom integrations and automations
 
 ### Open Source Benefits
@@ -302,7 +302,7 @@ Open Sunsama doesn't replace Jira—it complements it. Use Jira for team sprint 
 
 ### API and MCP Tools for Developers
 
-Open Sunsama includes a full REST API and 24 MCP (Model Context Protocol) tools for AI assistants:
+Open Sunsama includes a full REST API and 47 MCP (Model Context Protocol) tools for AI assistants:
 
 | Category | Tools |
 |----------|-------|
@@ -316,16 +316,6 @@ This enables AI-assisted planning workflows like:
 - "Schedule 2 hours of focus time for code review"
 - "What's on my calendar for today?"
 
-### Cost Comparison
-
-| Setup | Annual Cost |
-|-------|-------------|
-| Jira Free + Sunsama | $240/year |
-| Jira Standard (10 users) + Sunsama (10 users) | $978 + $2,400 = $3,378/year |
-| Jira Free + Open Sunsama | $0/year |
-| Jira Standard (10 users) + Open Sunsama | $978/year |
-
-For a 10-person development team already using Jira, switching from Sunsama to Open Sunsama saves $2,400/year while maintaining daily planning capabilities.
 
 ## Frequently Asked Questions
 
@@ -349,9 +339,9 @@ Not natively. Jira shows due dates and sprint assignments but doesn't let you sc
 
 Most software developers need both—or equivalents of both. Use **Jira** (or Linear, GitHub Issues, etc.) for team issue tracking and sprint planning. Use **Sunsama** or **Open Sunsama** for personal daily planning and time blocking. They're complementary tools serving different purposes.
 
-### Is there a free alternative to Sunsama for Jira users?
+### Is there an open-source alternative to Sunsama for Jira users?
 
-Yes—**Open Sunsama** is a free, open-source daily planner with [time blocking](/features/time-blocking), [calendar sync](/features/calendar-sync), and focus mode. It provides the personal planning layer that Jira lacks without the $240/year Sunsama subscription. Combined with Jira's free tier, you can have complete team issue tracking plus personal daily planning at no cost. See our complete guide to [free Sunsama alternatives](/blog/best-free-sunsama-alternatives).
+Yes—**Open Sunsama** is an open-source daily planner with [time blocking](/features/time-blocking), [calendar sync](/features/calendar-sync), and focus mode. It provides the personal planning layer that Jira lacks, with a public REST API you can connect to Jira yourself. Combined with Jira's free tier, you can have complete team issue tracking plus personal daily planning. See our complete guide to [Sunsama alternatives](/blog/best-free-sunsama-alternatives).
 
 ### Can I self-host something like Sunsama?
 
@@ -363,7 +353,7 @@ Sunsama cannot be self-hosted—it's only available as a cloud service. However,
 
 ### Is Sunsama worth $240/year if I already pay for Jira?
 
-It depends on how much you value structured daily planning. Many developers find Sunsama worth the price because it transforms their mornings from reactive task-checking to intentional time-blocking. However, Open Sunsama offers similar daily planning benefits for free, making it worth trying before committing to Sunsama's annual cost.
+It depends on how much you value structured daily planning. Many developers find Sunsama worth the price because it transforms their mornings from reactive task-checking to intentional time-blocking. However, Open Sunsama offers similar daily planning in an open-source app with a public API, making it worth trying before committing to Sunsama's annual cost.
 
 ### Can I use Open Sunsama with my team's Jira instance?
 
@@ -385,15 +375,15 @@ The Jira vs Sunsama comparison reveals a fundamental truth: **these tools aren't
 
 **Choose a daily planner** for personal productivity and time management. Time blocking, focus mode, and intentional planning help you decide what YOU will accomplish today—regardless of what's in your sprint backlog.
 
-**Choose Open Sunsama** if you want powerful daily planning without the $240/year subscription. As a [free Sunsama alternative](/alternative/sunsama), Open Sunsama offers:
+**Choose Open Sunsama** if you want daily planning you own. As an [open-source Sunsama alternative](/alternative/sunsama), Open Sunsama offers:
 - Calendar-first time blocking like Sunsama
 - Focus mode with Pomodoro timer
 - Full REST API and MCP tools for developers
 - Self-hosting for data sovereignty
-- No cost on top of your existing Jira subscription
+- A public REST API you can connect to Jira yourself
 
-The smartest workflow for most developers combines **Jira for team coordination** with **Open Sunsama for personal planning**—giving you robust issue tracking and intentional daily productivity without paying for two premium subscriptions.
+The smartest workflow for most developers combines **Jira for team coordination** with **Open Sunsama for personal planning**—giving you robust issue tracking and intentional daily productivity.
 
 ---
 
-Ready to add intentional daily planning to your Jira workflow? [Get started with Open Sunsama for free](/register) and discover how time blocking transforms your productivity—without the premium price tag.
+Ready to add intentional daily planning to your Jira workflow? [Get started with Open Sunsama](/register) and discover how time blocking transforms your productivity.

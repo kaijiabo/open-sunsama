@@ -245,7 +245,7 @@ export default defineMarketingPage({
       heading: "Your scripts and your AI agent use the same API as the app",
       lead: "Every task and time block is one HTTP call away. Connect an agent with one URL, or point a coding agent at the repo and change the planner itself.",
       body: [
-        "The hosted MCP server lives at https://api.opensunsama.com/mcp. Claude, ChatGPT, Cursor or any MCP client signs in with OAuth and gets 24 tools. A self-hosted server serves the same tools at your own API address plus /mcp. See the [MCP guide](/docs/mcp/overview).",
+        "The hosted MCP server lives at https://api.opensunsama.com/mcp. Claude, ChatGPT, Cursor or any MCP client signs in with OAuth and gets 47 tools. A self-hosted server serves the same tools at your own API address plus /mcp. See the [MCP guide](/docs/mcp/overview).",
         "The REST API covers tasks, subtasks and time blocks. Create an API key in Settings, pick its scopes, and send it in the X-API-Key header. See the [API reference](/docs/api/authentication).",
         "The code is public, so a coding agent like Claude Code or Cursor can read it and add the feature you want. The repo ships an AGENTS.md file that maps the code for them.",
       ],
@@ -339,7 +339,7 @@ export default defineMarketingPage({
         {
           feature: "MCP for AI agents",
           cells: [
-            { mark: "yes", text: "Hosted, OAuth, 24 tools" },
+            { mark: "yes", text: "Hosted, OAuth, 47 tools" },
             { mark: "partial", text: "Community servers" },
             { mark: "partial", text: "Community plugins" },
             { mark: "yes", text: "Built in, 59 tools" },
@@ -378,7 +378,7 @@ export default defineMarketingPage({
       id: "numbers",
       items: [
         { value: "1", label: "Command to self-host" },
-        { value: "24", label: "MCP tools" },
+        { value: "47", label: "MCP tools" },
         { value: "3", label: "Desktop apps" },
         { live: "github-stars", label: "GitHub stars" },
       ],
@@ -416,7 +416,7 @@ export default defineMarketingPage({
       {
         question: "Is there a mobile app?",
         answer:
-          "Open Sunsama runs as a mobile web app in your phone's browser and syncs in real time. There is no native phone app yet.",
+          "Open Sunsama runs as a mobile web app in your phone's browser and syncs in real time. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet.",
       },
       {
         question: "Are there desktop apps for Linux?",
@@ -427,7 +427,7 @@ export default defineMarketingPage({
       {
         question: "Can AI agents use my tasks?",
         answer:
-          "Yes. Add https://api.opensunsama.com/mcp to Claude, ChatGPT, Cursor or any MCP client and sign in. Your agent gets 24 tools for tasks, subtasks and time blocks. A self-hosted server serves the same thing at your API address plus /mcp.",
+          "Yes. Add https://api.opensunsama.com/mcp to Claude, ChatGPT, Cursor or any MCP client and sign in. Your agent gets 47 tools for tasks, subtasks, time blocks and Ideas boards. A self-hosted server serves the same thing at your API address plus /mcp.",
         link: { label: "Connect your AI", href: "/docs/mcp/overview" },
       },
       {
@@ -516,7 +516,7 @@ export default defineMarketingPage({
       "Google Calendar, Outlook and iCloud sync",
       "Focus mode with planned vs actual time",
       "Public REST API with scoped API keys",
-      "Hosted MCP server with 24 tools for Claude, ChatGPT and any AI agent",
+      "Hosted MCP server with 47 tools for Claude, ChatGPT and any AI agent",
       "Desktop apps for Mac, Windows and Linux",
     ],
   },

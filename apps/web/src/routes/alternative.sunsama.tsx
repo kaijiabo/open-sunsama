@@ -95,7 +95,7 @@ const LOOP: MediaRow[] = [
   {
     title: "Take your plan with you",
     body: [
-      "Use Open Sunsama on the web, as a desktop app for Mac, Windows and Linux, or in your phone's browser. Changes sync across devices in real time, so the plan you made at your desk is in your pocket.",
+      "Use Open Sunsama on the web, as a desktop app for Mac, Windows and Linux, or on your phone, in the browser or the early Android APK and iOS TestFlight build. Changes sync across devices in real time, so the plan you made at your desk is in your pocket.",
     ],
     media: { shot: "mobile-tasks", alt: "Open Sunsama task list on a phone", caption: "Your day on your phone." },
     link: { label: "Download the desktop app", href: "/download" },
@@ -121,12 +121,12 @@ const FEATURES: Array<{ name: string; os: Cell; sunsama: Cell }> = [
   { name: "Weekly planning and review", os: false, sunsama: true },
   { name: "Built-in task integrations", os: "Via API or agent", sunsama: "About 20 tools" },
   { name: "Team workspace", os: false, sunsama: true },
-  { name: "AI assistant", os: "Bring any agent", sunsama: "Sunny" },
+  { name: "AI assistant", os: "Bring any agent", sunsama: "Sunny, and Autoplan (beta) drafts your day" },
   { name: "MCP server for AI agents", os: true, sunsama: true },
   { name: "Public REST API with API keys", os: true, sunsama: false },
   { name: "Source code you can read and change", os: true, sunsama: false },
   { name: "Self-hosting", os: "Docker", sunsama: false },
-  { name: "Apps", os: "Web, Mac, Windows, Linux, mobile web", sunsama: "Web, Mac, Windows, Linux, iOS, Android" },
+  { name: "Apps", os: "Web, Mac, Windows, Linux; early Android APK and iOS TestFlight", sunsama: "Web, Mac, Windows, Linux, iOS, Android" },
 ];
 
 const toCell = (value: Cell) => (value === true ? "yes" : value === false ? "no" : { text: value });
@@ -170,12 +170,12 @@ const GIVE_UPS = [
     body: "Sunsama pulls tasks from about 20 tools, like Asana, Jira, Linear, Notion, Trello, Slack and Gmail. Open Sunsama syncs your calendars only. Other tasks come in through the REST API or your AI agent.",
   },
   {
-    title: "Native phone apps",
-    body: "Sunsama has iOS and Android apps. Open Sunsama runs on your phone in the browser, and it has desktop apps for Mac, Windows and Linux.",
+    title: "Phone apps in the app stores",
+    body: "Sunsama has iOS and Android apps in the stores. Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser, and it has desktop apps for Mac, Windows and Linux.",
   },
   {
     title: "Auto-scheduling",
-    body: "Sunsama can drop a task into the next open slot for you. In Open Sunsama you place each block yourself, or ask your agent to do it.",
+    body: "Sunsama can drop a task into the next open slot, and its beta Autoplan agent drafts your whole day for you to review. In Open Sunsama you place each block yourself, or ask your agent to do it.",
   },
   {
     title: "Team workspaces",
@@ -254,7 +254,7 @@ export const FAQS: MarketingFaq[] = [
   {
     question: "Does Sunsama have an MCP server?",
     answer:
-      "Yes. Sunsama's MCP server and its Sunny assistant are live and come with its Pro plan. Open Sunsama has an MCP server too, plus a public REST API, public code and self-hosting.",
+      "Yes. Sunsama's official MCP server and its Sunny assistant left beta in August 2026, and Autoplan, a beta agent, drafts your day. They come with its Pro plan. Open Sunsama has an MCP server too, plus a public REST API, public code and self-hosting.",
   },
   {
     question: "Can I control Open Sunsama from Claude or ChatGPT?",
@@ -380,7 +380,7 @@ export default function AlternativeSunsamaPage() {
       <AgentPanel
         id="ai"
         heading="Any AI agent can plan your day in Open Sunsama"
-        lead="Paste one URL into Claude, ChatGPT, Cursor, Claude Code or any MCP client, then sign in. No API key needed. Your agent gets 24 tools for tasks, subtasks, time blocks and your calendar meetings, so it sees your meetings and tasks in one call and plans around them."
+        lead="Paste one URL into Claude, ChatGPT, Cursor, Claude Code or any MCP client, then sign in. No API key needed. Your agent gets 47 tools for tasks, subtasks, time blocks, Ideas boards and your calendar meetings, so it sees your meetings and tasks in one call and plans around them."
         body={[
           "Sunsama has an MCP server too, and it works well. The difference is what sits behind it. Our code is public, so your agent can read it and even add the feature you want. And you can run the whole thing, agent access included, on your own server.",
         ]}

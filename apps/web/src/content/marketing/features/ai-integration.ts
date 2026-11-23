@@ -3,7 +3,7 @@
  * works with Claude", "planner that works with ChatGPT", "MCP task manager".
  *
  * The tool list mirrors mcp/src/tools/*.ts and the read-only / destructive
- * flags in mcp/src/lib/define-tool.ts (24 tools). Update both when a tool is
+ * flags in mcp/src/lib/define-tool.ts (47 tools). Update both when a tool is
  * added. Competitor facts come from /blog/best-task-managers-with-mcp and
  * each app's docs, checked September 2026.
  */
@@ -76,6 +76,35 @@ export const TOOL_GROUPS: McpToolGroup[] = [
     ],
   },
   {
+    title: "Ideas",
+    note: "Someday boards with columns, cards and checklists.",
+    tools: [
+      { name: "list_idea_boards", does: "List your Ideas boards", access: "read" },
+      { name: "create_idea_board", does: "Add a board", access: "write" },
+      { name: "update_idea_board", does: "Rename a board", access: "write" },
+      { name: "reorder_idea_boards", does: "Set the order of your boards", access: "write" },
+      { name: "delete_idea_board", does: "Delete a board and everything on it", access: "delete" },
+      { name: "list_idea_columns", does: "List a board's columns", access: "read" },
+      { name: "create_idea_column", does: "Add a column to a board", access: "write" },
+      { name: "update_idea_column", does: "Rename a column", access: "write" },
+      { name: "reorder_idea_columns", does: "Set the order of a board's columns", access: "write" },
+      { name: "delete_idea_column", does: "Delete a column and its cards", access: "delete" },
+      { name: "list_ideas", does: "List the cards on a board or in a column", access: "read" },
+      { name: "get_idea", does: "Read one card with its checklist", access: "read" },
+      { name: "create_idea", does: "Add a card", access: "write" },
+      { name: "update_idea", does: "Edit, complete or move a card", access: "write" },
+      { name: "reorder_ideas", does: "Set the order of cards in a column", access: "write" },
+      { name: "delete_idea", does: "Delete a card", access: "delete" },
+      { name: "promote_idea", does: "Turn a card into a planner task", access: "write" },
+      { name: "list_idea_subtasks", does: "List a card's checklist", access: "read" },
+      { name: "create_idea_subtask", does: "Add a checklist item", access: "write" },
+      { name: "update_idea_subtask", does: "Rename or check off a checklist item", access: "write" },
+      { name: "reorder_idea_subtasks", does: "Set the order of a card's checklist", access: "write" },
+      { name: "delete_idea_subtask", does: "Delete a checklist item", access: "delete" },
+      { name: "bulk_ideas", does: "Make up to 50 Ideas changes in one call, deletes included", access: "delete" },
+    ],
+  },
+  {
     title: "Profile",
     note: "So times land in your time zone.",
     tools: [
@@ -115,7 +144,7 @@ export default defineMarketingPage({
     chips: [
       { tone: "agent", title: "Claude connected", detail: "Blocked 3 tasks around your meetings" },
       { tone: "block", title: "Deep work: Q4 roadmap", detail: "9:30 - 11:00 AM" },
-      { tone: "timer", title: "24 tools", detail: "Tasks, time blocks, meetings" },
+      { tone: "timer", title: "47 tools", detail: "Tasks, time blocks, Ideas, meetings" },
     ],
     secondary: { video: "ai", label: "Watch the AI demo" },
   },
@@ -128,14 +157,14 @@ export default defineMarketingPage({
       heading: "An AI daily planner here means your own agent plans with your real data",
       body: [
         "Open Sunsama is an AI daily planner that works with Claude, ChatGPT, Cursor and any other MCP client. There is no AI of our own to learn. You connect the agent you already talk to.",
-        "It is also an MCP task manager. One hosted server gives your agent 24 tools for tasks, subtasks, time blocks and your synced meetings.",
+        "It is also an MCP task manager. One hosted server gives your agent 47 tools for tasks, subtasks, time blocks, Ideas boards and your synced meetings.",
         "You stay in charge. Every change shows up live in the app, calendar events are read-only, and you can cut off an agent in one click.",
       ],
       pointsTitle: "In short",
       points: [
         "One URL: https://api.opensunsama.com/mcp",
         "Works in Claude, ChatGPT, Claude Code, Cursor and VS Code.",
-        "24 tools for tasks, subtasks, time blocks and meetings.",
+        "47 tools for tasks, subtasks, time blocks, Ideas boards and meetings.",
         "OAuth sign-in: your agent never sees your password.",
         "Meetings are read-only. Deletes are flagged, so apps ask first.",
       ],
@@ -213,8 +242,8 @@ export default defineMarketingPage({
     {
       kind: "custom",
       id: "tools",
-      eyebrow: "All 24 tools",
-      heading: "Your agent gets 24 tools, and your meetings stay read-only",
+      eyebrow: "All 47 tools",
+      heading: "Your agent gets 47 tools, and your meetings stay read-only",
       lead: "Each tool is marked read, change or delete. Apps like Claude and ChatGPT use those marks to ask you before a delete.",
       body: TOOL_GROUPS.map(
         (group) =>
@@ -268,7 +297,7 @@ export default defineMarketingPage({
       kind: "stats",
       id: "numbers",
       items: [
-        { value: "24", label: "MCP tools" },
+        { value: "47", label: "MCP tools" },
         { value: "1", label: "URL for any agent" },
         { value: "3", label: "Calendar providers" },
         { live: "github-stars", label: "GitHub stars" },
@@ -299,7 +328,7 @@ export default defineMarketingPage({
       kind: "comparison",
       id: "compare",
       eyebrow: "Compare",
-      heading: "Open Sunsama gives any agent your tasks, time blocks and meetings in one server",
+      heading: "Open Sunsama gives any agent your tasks, time blocks, Ideas boards and meetings in one server",
       lead: "Sunsama, Akiflow and Todoist run official MCP servers too. Motion has only community-built ones. Here is what each lets your agent do.",
       columns: ["Open Sunsama", "Sunsama", "Motion", "Akiflow", "Todoist"],
       rows: [
@@ -316,7 +345,7 @@ export default defineMarketingPage({
         {
           feature: "What your agent can reach",
           cells: [
-            { text: "Tasks, subtasks, time blocks, meetings" },
+            { text: "Tasks, subtasks, time blocks, Ideas boards, meetings" },
             { text: "Tasks, notes, channels, comments" },
             { text: "Depends on the tool" },
             { text: "Tasks, calendar, time slots, meeting notes" },
@@ -468,7 +497,7 @@ export default defineMarketingPage({
   software: {
     featureList: [
       "Hosted MCP server at https://api.opensunsama.com/mcp",
-      "24 MCP tools for tasks, subtasks, time blocks and calendar events",
+      "47 MCP tools for tasks, subtasks, time blocks, Ideas boards and calendar events",
       "OAuth 2.1 sign-in for Claude, ChatGPT, Cursor and any MCP client",
       "Read-only access to Google, Outlook and iCloud events",
       "Local MCP server with API keys",

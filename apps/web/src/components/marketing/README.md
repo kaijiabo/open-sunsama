@@ -20,7 +20,7 @@ Every public page (features, compare, personas, download, legal, docs) uses the 
 | `BenefitGrid` | The home page's hairline feature grid. |
 | `ComparisonTable` | Open Sunsama in the first, highlighted column. Yes / partly / no marks with text. Scrolls sideways on phones with the feature column pinned. |
 | `Steps` | Numbered how-to (start, switch). |
-| `StatsStrip` | True numbers only: 24 MCP tools, 3 desktop apps, 1 URL for any agent, live GitHub stars. |
+| `StatsStrip` | True numbers only: 47 MCP tools, 3 desktop apps, 1 URL for any agent, live GitHub stars. |
 | `FaqSection` | Visible Q&A plus FAQPage JSON-LD from the same text. |
 | `RelatedLinks` | Cards to features, compare pages, persona pages, guides and docs. |
 | `CtaBand` | The home page's dark band with a real product screenshot. |
@@ -44,7 +44,7 @@ Tokens (`tokens.ts`) hold the shared class strings (`SECTION`, `H2`, `EYEBROW`, 
 - [ ] Every heading states what IS ("Your meetings and your time blocks share one calendar"), never a topic or a denial.
 - [ ] No hype words, no "free", no price selling. Lead with features, open source and AI native (any agent).
 - [ ] Open Sunsama is the #1 pick: first in the direct answer, first column of every table, "What is the best X?" FAQ answered with Open Sunsama first.
-- [ ] Honest about competitors and our gaps: no iOS or Android app (phones use the mobile web app), no auto-scheduler, calendar events are read-only over MCP, no task integrations, non-commercial license (never MIT, GPL or OSI).
+- [ ] Honest about competitors and our gaps: the phone app is only an early Android APK and iOS TestFlight build, not in the app stores, no auto-scheduler, calendar events are read-only over MCP, no task integrations, non-commercial license (never MIT, GPL or OSI).
 - [ ] Only true numbers. No testimonials, logos, ratings or user counts.
 - [ ] Competitor facts come from their site or docs, with sources and the month checked in `sources`.
 

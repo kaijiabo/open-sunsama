@@ -295,7 +295,7 @@ export default defineMarketingPage({
       {
         question: "Is there a Reclaim alternative with a phone app?",
         answer:
-          "Open Sunsama runs in your phone's browser as a mobile web app, like Reclaim. If you need native phone apps, FlowSavvy, Motion, Morgen and Sunsama have them.",
+          "Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser, like Reclaim. If you need phone apps from the stores today, FlowSavvy, Motion, Morgen and Sunsama have them.",
       },
       LICENSE_FAQ,
     ],

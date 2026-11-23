@@ -81,7 +81,7 @@ opensunsama/
 | `/uploads/*`            | Yes   | S3 file uploads                  |
 
 **Auth:** JWT (`Bearer <token>`), API Key (`X-API-Key: os_<key>`), or MCP OAuth token (`Bearer osat_<token>`)  
-**Scopes:** `tasks:read`, `tasks:write`, `time-blocks:read`, `time-blocks:write`, `calendar:read`, `user:read`, `user:write`
+**Scopes:** `tasks:read`, `tasks:write`, `time-blocks:read`, `time-blocks:write`, `calendar:read`, `ideas:read`, `ideas:write`, `user:read`, `user:write`
 
 ### Web (`apps/web`)
 
@@ -130,7 +130,7 @@ opensunsama/
 
 ---
 
-## MCP (24 tools)
+## MCP (47 tools)
 
 Two ways in, same tools (`mcp/src/tools`, shared via `@open-sunsama/mcp/server`):
 
@@ -144,6 +144,7 @@ E2E test of the OAuth flow against a local API: `MCP_E2E_API_URL=http://localhos
 | Tasks       | `list_tasks`, `get_task`, `create_task`, `update_task`, `complete_task`, `uncomplete_task`, `delete_task`, `schedule_task`, `reorder_tasks`            |
 | Time Blocks | `list_time_blocks`, `get_time_block`, `create_time_block`, `update_time_block`, `delete_time_block`, `link_task_to_time_block`, `get_schedule_for_day` |
 | Calendar    | `list_calendar_events` (read-only events synced from Google/Outlook/iCloud; also shown in `get_schedule_for_day`)                                   |
+| Ideas       | `list_idea_boards`, `create_idea_board`, `update_idea_board`, `delete_idea_board`, `reorder_idea_boards`, `list_idea_columns`, `create_idea_column`, `update_idea_column`, `delete_idea_column`, `reorder_idea_columns`, `list_ideas`, `get_idea`, `create_idea`, `update_idea`, `delete_idea`, `reorder_ideas`, `promote_idea`, `list_idea_subtasks`, `create_idea_subtask`, `update_idea_subtask`, `delete_idea_subtask`, `reorder_idea_subtasks`, `bulk_ideas` |
 | Subtasks    | `list_subtasks`, `create_subtask`, `toggle_subtask`, `update_subtask`, `delete_subtask`                                                                |
 | User        | `get_user_profile`, `update_user_profile`                                                                                                              |
 

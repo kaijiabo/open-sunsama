@@ -1,7 +1,8 @@
 export const frontmatter = {
   title: "Morgen vs Sunsama: Calendar Planners Compared (2026)",
-  description: "Compare Morgen and Sunsama for calendar-based planning. Features, pricing, and discover Open Sunsama as a free alternative.",
+  description: "Compare Morgen and Sunsama for calendar-based planning. Features, pricing, and discover Open Sunsama as an open-source alternative.",
   date: "2026-02-01",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["comparison", "morgen", "calendar"],
   readingTime: 11,
@@ -14,7 +15,7 @@ Morgen positions itself as a calendar unification layer. It aggregates all your 
 
 Sunsama takes a task-first approach wrapped in calendar integration. It guides you through daily planning rituals, pulls tasks from dozens of productivity tools, and helps you deliberately schedule work onto your calendar. At $20/month (billed annually), it's aimed at knowledge workers who want to be more intentional about their daily choices.
 
-In this comprehensive Morgen vs Sunsama comparison, we'll examine both calendar planner apps in detail—features, pricing, platform support, and ideal use cases. We'll also introduce Open Sunsama, a free open-source alternative that combines the best of both approaches.
+In this comprehensive Morgen vs Sunsama comparison, we'll examine both calendar planner apps in detail—features, pricing, platform support, and ideal use cases. We'll also introduce Open Sunsama, an open-source alternative that combines the best of both approaches.
 
 ## Quick Comparison: Morgen vs Sunsama vs Open Sunsama
 
@@ -22,9 +23,8 @@ Before diving into details, here's how these three best calendar planner apps co
 
 | Feature | Morgen | Sunsama | Open Sunsama |
 |---------|--------|---------|--------------|
-| **Price (Annual)** | $168/year | $240/year | Free |
-| **Free Tier** | ✅ Limited | ❌ None | ✅ Full features |
-| **Platforms** | All platforms | Web, Mac, Windows, iOS, Android | All platforms |
+| **Price (Annual)** | $168/year | $240/year | Hosted app, or self-host for personal use |
+| **Platforms** | All platforms | Web, Mac, Windows, Linux, iOS, Android | Web, Mac, Windows, Linux; early Android APK and iOS TestFlight |
 | **Calendar Unification** | ✅ Core feature | ⚠️ View only | ✅ Full sync |
 | **Scheduling Links** | ✅ Built-in | ❌ No | ❌ No |
 | **Daily Planning Ritual** | ❌ No | ✅ Guided | ✅ Kanban workflow |
@@ -34,7 +34,7 @@ Before diving into details, here's how these three best calendar planner apps co
 | **Integrations** | ⚠️ Growing | ✅ Extensive | ✅ Growing |
 | **Open Source** | ❌ No | ❌ No | ✅ Yes |
 | **Self-Hostable** | ❌ No | ❌ No | ✅ Yes |
-| **AI Features** | ✅ AI planner | ❌ No | ❌ No |
+| **AI Features** | ✅ AI planner | ✅ Sunny assistant, Autoplan (beta) | ✅ Any AI agent over MCP |
 | **Team Features** | ⚠️ Basic | ❌ No | ❌ No |
 
 Now let's examine each daily planner app in detail.
@@ -216,9 +216,9 @@ Let's compare these calendar planner apps across the features that matter most f
 
 **Morgen**: Windows, macOS, Linux, iOS, Android, web browser. True cross-platform coverage, though mobile requires paid subscription.
 
-**Sunsama**: Web, Mac, Windows, iOS, Android. No Linux support. Mobile apps exist but are secondary to desktop experience.
+**Sunsama**: Web, Mac, Windows, Linux, iOS, Android. Its mobile apps are companions to the desktop experience.
 
-**Verdict**: Morgen wins slightly for Linux support and web-first design. Both offer solid cross-platform coverage.
+**Verdict**: A tie. Both run on Linux as well as Mac, Windows and phones.
 
 ## Pricing Comparison: Morgen vs Sunsama
 
@@ -236,7 +236,7 @@ Over three years, Sunsama costs $216 more than Morgen. The question is whether S
 
 **Sunsama makes sense** if you need extensive integrations, guided daily planning, and task-first workflow. The price premium buys significantly more productivity methodology.
 
-**Neither makes sense** if you want full features without subscription costs—which brings us to Open Sunsama.
+**Neither makes sense** if you want open code, self-hosting and any AI agent, which brings us to Open Sunsama.
 
 ## When Morgen Makes Sense
 
@@ -247,7 +247,7 @@ Morgen is the right choice if you:
 - **Want a better calendar experience**: Morgen's interface is significantly more polished than native Google Calendar or Outlook.
 - **Prefer flexibility over process**: You don't want guided planning rituals—just a better calendar with basic task support.
 - **Need team scheduling features**: Finding meeting times across team members' calendars is a regular need.
-- **Use Linux**: Morgen's Linux support makes it one of few options for Linux users seeking premium calendar experiences.
+- **Use Linux and want many calendars in one view**: Morgen's Linux app covers that.
 
 **Best for**: Calendar power users, meeting schedulers, multi-calendar managers, and those who want to enhance rather than replace their existing calendar workflow. Also compare [Google Calendar vs Sunsama](/blog/google-calendar-vs-sunsama) and [Fantastical vs Sunsama](/blog/fantastical-vs-sunsama).
 
@@ -264,11 +264,11 @@ Sunsama is the right choice if you:
 
 **Best for**: Knowledge workers, professionals using multiple project management systems, and those who value mindfulness in productivity.
 
-## Open Sunsama: The Free Calendar-Integrated Planner
+## Open Sunsama: The Open-Source Calendar-Integrated Planner
 
 What if you want Morgen's calendar focus with Sunsama's task management—but don't want to pay $168-240/year? What if you want features neither tool offers, like open source transparency and self-hosting?
 
-Open Sunsama is a free, open-source daily planner that bridges the gap between these two approaches.
+Open Sunsama is an open-source daily planner that bridges the gap between these two approaches.
 
 ### Calendar Integration Like Morgen
 
@@ -286,9 +286,9 @@ Open Sunsama combines calendar timeline views with kanban-style task organizatio
 
 When it's time to execute, Open Sunsama's focus mode provides a dedicated deep work environment with Pomodoro timer support. Minimize distractions and concentrate on one task at a time.
 
-### Completely Free, Forever
+### Open Source and AI Native
 
-Unlike Morgen's $168/year Pro tier or Sunsama's $240/year subscription, Open Sunsama has no pricing tiers. Everything is free for everyone. No trials, no paywalls, no premium upgrades. Full features, zero cost.
+The code is public on GitHub, and you can self-host it for personal use under its non-commercial license. Any AI agent, like Claude, ChatGPT or Cursor, can run your planner through a hosted MCP server with 47 tools, and a public REST API covers everything else.
 
 ### Open Source Transparency
 
@@ -305,7 +305,7 @@ For maximum privacy and control, run Open Sunsama on your own infrastructure. Yo
 - **Calendar sync**: Two-way sync with Google Calendar, Outlook, and iCloud
 - **Kanban workflow**: Visual task management for daily planning
 - **Desktop app**: Native application for Windows, macOS, and Linux
-- **Mobile app**: Native iOS and Android apps
+- **Mobile app**: An early Android APK and iOS TestFlight build, not in the app stores yet
 - **Subtasks**: Break down complex tasks into manageable steps
 - **Rich notes**: Add detailed notes to tasks using a full-featured editor
 
@@ -325,7 +325,7 @@ Technically yes—Morgen can serve as your calendar layer while Sunsama handles 
 
 ### Which is better for a best calendar planner app?
 
-It depends on your priorities. **Morgen** is better if calendar unification and scheduling links are primary needs. **Sunsama** is better if task management and intentional daily planning are primary needs. **Open Sunsama** is best if you want comprehensive features without subscription costs.
+It depends on your priorities. **Morgen** is better if calendar unification and scheduling links are primary needs. **Sunsama** is better if task management and intentional daily planning are primary needs. **Open Sunsama** is best if you want open code, self-hosting and any AI agent.
 
 ### Does Morgen have a free tier?
 
@@ -339,9 +339,9 @@ Morgen's scheduling links compete with Calendly for basic booking needs—defini
 
 Sunsama's value depends on how central daily planning is to your productivity. Users who benefit from guided planning rituals, extensive integrations with tools like Asana and Notion, and focus mode support often find the investment worthwhile. If you have simpler needs, the cost may be harder to justify.
 
-### What's the best free alternative to both Morgen and Sunsama?
+### What's the best open-source alternative to both Morgen and Sunsama?
 
-**Open Sunsama** offers comprehensive daily planning features—[time blocking](/features/time-blocking), calendar sync, task management, and focus mode—completely free. It combines Morgen's calendar integration with Sunsama's task-first approach at no cost, with the added benefits of open source transparency and self-hosting capability. See our full guide to [free Sunsama alternatives](/blog/best-free-sunsama-alternatives).
+**Open Sunsama** offers daily planning features—[time blocking](/features/time-blocking), calendar sync, task management, and focus mode—in an open-source app. It combines Morgen's calendar integration with Sunsama's task-first approach, and any AI agent can run it over MCP.
 
 ### Which has better integrations: Morgen or Sunsama?
 
@@ -349,7 +349,7 @@ Sunsama's value depends on how central daily planning is to your productivity. U
 
 ### Does Morgen work on Linux?
 
-Yes. Morgen is one of few premium calendar/planning tools that supports Linux alongside Windows, macOS, iOS, Android, and web browsers. Sunsama does not have a Linux application.
+Yes. Morgen supports Linux alongside Windows, macOS, iOS, Android, and web browsers. Sunsama has a Linux desktop app too.
 
 ### Can I self-host Morgen or Sunsama?
 
@@ -363,10 +363,10 @@ The Morgen vs Sunsama decision ultimately comes down to your primary productivit
 
 **Choose Sunsama** if intentional task planning is your main need. You use multiple productivity tools, benefit from guided daily planning rituals, and want focus mode support for deep work. Sunsama's extensive integrations, planning methodology, and task management depth justify its $20/month premium for knowledge workers who value mindful productivity.
 
-**Choose Open Sunsama** if you want comprehensive features without subscription costs—or value open source transparency and self-hosting capability. As the only [free Sunsama alternative](/alternative/sunsama) that combines calendar integration with task-first planning, Open Sunsama offers time blocking, focus mode, and full calendar sync at no cost.
+**Choose Open Sunsama** if you value open source transparency, self-hosting and working with any AI agent. As an [open-source Sunsama alternative](/alternative/sunsama) that combines calendar integration with task-first planning, Open Sunsama offers time blocking, focus mode and calendar sync.
 
-The best calendar planner is ultimately one you'll use consistently. Morgen's free tier and Sunsama's 14-day trial let you experience both approaches before committing. And if subscription costs give you pause, or you prefer open source software, Open Sunsama is always free to try.
+The best calendar planner is ultimately one you'll use consistently. Morgen's free tier and Sunsama's 14-day trial let you experience both approaches before committing. If you prefer open source software, try Open Sunsama too.
 
 ---
 
-Ready to experience calendar-integrated daily planning without subscription costs? [Get started with Open Sunsama for free](/register) and discover a more intentional way to plan your days.
+Ready to experience calendar-integrated daily planning? [Get started with Open Sunsama](/register) and discover a more intentional way to plan your days.

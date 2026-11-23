@@ -273,7 +273,7 @@ export default defineMarketingPage({
           feature: "Who decides when tasks happen",
           cells: [
             { text: "You, or your agent when you ask" },
-            { text: "You, in a guided ritual" },
+            { text: "You, in a guided ritual, or an Autoplan draft you review (beta)" },
             { text: "The AI scheduler" },
             { text: "You, on a timeline" },
           ],
@@ -291,7 +291,7 @@ export default defineMarketingPage({
           feature: "AI help",
           cells: [
             { mark: "yes", text: "Any agent over MCP" },
-            { mark: "yes", text: "Sunny assistant, MCP" },
+            { mark: "yes", text: "Sunny, Autoplan (beta), MCP" },
             { mark: "yes", text: "AI scheduler and chat" },
             { mark: "yes", text: "AI task input" },
           ],
@@ -300,7 +300,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
@@ -347,7 +347,7 @@ export default defineMarketingPage({
       {
         question: "Does Open Sunsama work on my phone?",
         answer:
-          "Yes, in your phone's browser. It works as a mobile web app and syncs with your computer in real time. There is no native phone app yet; desktop apps are ready for Mac, Windows and Linux.",
+          "Yes, in your phone's browser. It works as a mobile web app and syncs with your computer in real time. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet; desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
       {

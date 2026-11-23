@@ -63,7 +63,7 @@ const FEATURES: BenefitItem[] = [
   {
     icon: Smartphone,
     title: "On your phone",
-    body: "Open it in your phone's browser. Changes sync across all your devices in real time.",
+    body: "Open it in your phone's browser, or try the early Android APK or iOS TestFlight build. Changes sync across all your devices in real time.",
     color: "#6366F1",
   },
 ];
@@ -118,7 +118,7 @@ const SNIPPETS = [
 ];
 
 const STATS = [
-  { value: "24", label: "MCP tools" },
+  { value: "47", label: "MCP tools" },
   { value: "1", label: "URL for any agent" },
   { value: "3", label: "Desktop apps" },
   { value: "REST", label: "Public API" },

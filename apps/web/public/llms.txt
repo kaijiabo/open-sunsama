@@ -1,6 +1,6 @@
 # Open Sunsama
 
-> Open Sunsama is an open-source daily planner for time blocking and focused work. Plan tasks on a kanban board, block time on a calendar, work in focus mode, and control it all from any AI agent (Claude, ChatGPT, Cursor, Claude Code or any MCP client). It runs on the web, macOS, Windows, Linux and mobile, and you can self-host it.
+> Open Sunsama is an open-source daily planner for time blocking and focused work. Plan tasks on a kanban board, block time on a calendar, work in focus mode, and control it all from any AI agent (Claude, ChatGPT, Cursor, Claude Code or any MCP client). It runs on the web and as desktop apps for macOS, Windows and Linux. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet, and phones can also use the web app. You can self-host it.
 
 ## Product
 

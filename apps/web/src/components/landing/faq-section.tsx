@@ -38,7 +38,7 @@ export const FAQS: MarketingFaq[] = [
   {
     question: "Is there a phone app?",
     answer:
-      "Not in the app stores yet. On your phone, open Open Sunsama in the browser. It works as a mobile web app and syncs with your other devices. Desktop apps are ready for Mac, Windows and Linux.",
+      "Not in the app stores yet. The phone app is an early Android APK and an iOS TestFlight build. You can also open Open Sunsama in your phone's browser, where it works as a mobile web app and syncs with your other devices. Desktop apps are ready for Mac, Windows and Linux.",
     link: { label: "Get the desktop app", href: "/download" },
   },
 ];

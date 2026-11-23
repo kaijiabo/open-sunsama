@@ -3,7 +3,7 @@ export const frontmatter = {
   description:
     "Plan your day with Claude: connect your tasks and calendar over MCP in 2 minutes, then use 9 copy-paste prompts for morning plans, re-plans and shutdowns.",
   date: "2026-09-24",
-  updated: "2026-09-24",
+  updated: "2026-11-23",
   author: "Open Sunsama Team",
   tags: ["claude", "mcp", "ai", "daily-planning", "time-blocking"],
   readingTime: 9,
@@ -37,7 +37,7 @@ export const frontmatter = {
     {
       question: "Is there a Claude task management app that works on my phone?",
       answer:
-        "Yes. A custom connector added on claude.ai also works in the Claude mobile apps. Open Sunsama runs on the web, on Mac, Windows and Linux, and in your phone's browser, so you can check the plan anywhere.",
+        "Yes. A custom connector added on claude.ai also works in the Claude mobile apps. Open Sunsama runs on the web, on Mac, Windows and Linux, in your phone's browser, and as an early Android APK and iOS TestFlight build, so you can check the plan anywhere.",
     },
     {
       question: "Does the same setup work with ChatGPT or Cursor?",
@@ -112,7 +112,7 @@ Claude asks before each tool call. Once you trust it, open the connector and set
 
 ## What Claude does when you say "plan my day"
 
-It helps to know what happens behind the scenes. Open Sunsama gives Claude [24 tools](/docs/mcp/overview) for tasks, subtasks, time blocks and your synced meetings. A morning plan uses a handful of them, in this order:
+It helps to know what happens behind the scenes. Open Sunsama gives Claude [47 tools](/docs/mcp/overview) for tasks, subtasks, time blocks, Ideas boards and your synced meetings. A morning plan uses a handful of them, in this order:
 
 1. **Checks your timezone** with `get_user_profile`, so "today" means your today.
 2. **Reads your list** with `list_tasks`: today's tasks, overdue ones and their time estimates.
@@ -243,7 +243,7 @@ Open Sunsama isn't the only planner with an MCP server. Here is a fair look at t
 
 | App | How it connects to Claude | Best for |
 | --- | --- | --- |
-| **Open Sunsama** | Hosted MCP with OAuth, 24 tools | Tasks and time blocks in one place, open code, self-hosting |
+| **Open Sunsama** | Hosted MCP with OAuth, 47 tools | Tasks and time blocks in one place, open code, self-hosting |
 | **Todoist** | [Official hosted MCP](https://www.todoist.com/help/todoist/todoist-and-ai/connect-todoist-to-an-ai-assistant-xMSzFfHng) at `ai.todoist.net/mcp` | A mature task list you already use |
 | **Sunsama** | [Official MCP server](https://help.sunsama.com/docs/mcp-model-context-protocol), included in its Pro plan | Guided daily planning rituals |
 | **Google Calendar** | Claude's built-in connector | Meetings and events only |

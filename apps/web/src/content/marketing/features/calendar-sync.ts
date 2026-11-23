@@ -160,7 +160,7 @@ export default defineMarketingPage({
       heading: "Your AI agent reads your meetings and plans around them",
       lead: "Connect Claude, ChatGPT, Cursor or any MCP client with one URL. One call returns your meetings and time blocks for a day.",
       body: [
-        "Open Sunsama's hosted MCP server has 24 tools. Two of them read your synced calendars, so your agent plans around real meetings without a second calendar connector.",
+        "Open Sunsama's hosted MCP server has 47 tools. Two of them read your synced calendars, so your agent plans around real meetings without a second calendar connector.",
         "Calendar access is read-only. Your agent can add and move time blocks, but it can't create, move or cancel a meeting.",
       ],
       prompts: [
@@ -289,7 +289,7 @@ export default defineMarketingPage({
       {
         question: "Can I see my calendar on my phone?",
         answer:
-          "Yes, in your phone's browser. Open Sunsama works as a mobile web app with a calendar view. There is no native phone app yet; desktop apps are ready for Mac, Windows and Linux.",
+          "Yes, in your phone's browser. Open Sunsama works as a mobile web app with a calendar view. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet; desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
     ],

@@ -143,7 +143,7 @@ export default defineMarketingPage({
       heading: "Your AI agent can move cards on the board for you",
       lead: "Connect Claude, ChatGPT, Cursor or any MCP client with one URL. Your agent reads the board and moves tasks between days, just like you do.",
       body: [
-        "Open Sunsama has a hosted MCP server with 24 tools. Your agent can list a day, create tasks, reorder them and schedule them to another day or the backlog.",
+        "Open Sunsama has a hosted MCP server with 47 tools. Your agent can list a day, create tasks, reorder them and schedule them to another day or the backlog.",
         "Every change shows up live on your board. If you don't like a move, drag the card back.",
       ],
       prompts: [
@@ -157,7 +157,7 @@ export default defineMarketingPage({
       links: [
         { label: "Claude setup", href: "/docs/mcp/claude" },
         { label: "ChatGPT setup", href: "/docs/mcp/chatgpt" },
-        { label: "All 24 tools", href: "/features/ai-integration" },
+        { label: "All 47 tools", href: "/features/ai-integration" },
       ],
     },
     {
@@ -251,7 +251,7 @@ export default defineMarketingPage({
         {
           feature: "Phone",
           cells: [
-            { mark: "partial", text: "Mobile web app" },
+            { mark: "partial", text: "Early Android APK and iOS TestFlight; mobile web app" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
             { mark: "yes", text: "iOS and Android" },
@@ -313,7 +313,7 @@ export default defineMarketingPage({
       {
         question: "Can I use the kanban board on my phone?",
         answer:
-          "Yes, in your phone's browser. Open Sunsama works as a mobile web app and syncs in real time. There is no native phone app yet; desktop apps are ready for Mac, Windows and Linux.",
+          "Yes, in your phone's browser. Open Sunsama works as a mobile web app and syncs in real time. The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet; desktop apps are ready for Mac, Windows and Linux.",
         link: { label: "Get the desktop app", href: "/download" },
       },
       {

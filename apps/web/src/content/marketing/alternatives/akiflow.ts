@@ -34,7 +34,7 @@ const giveUps: AlternativeExtras["giveUps"] = [
   },
   {
     title: "Native phone apps",
-    body: "Akiflow has apps for iOS and Android. Open Sunsama runs in your phone's browser as a mobile web app, and has desktop apps for Mac, Windows and Linux.",
+    body: "Akiflow has apps for iOS and Android. Open Sunsama's phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser, and has desktop apps for Mac, Windows and Linux.",
   },
   {
     title: "A guided planning ritual",
@@ -102,7 +102,7 @@ export default defineMarketingPage({
         "Time blocking next to Google, Outlook and iCloud events.",
         "One MCP URL for Claude, ChatGPT, Cursor or any agent.",
         "Public code, self-hosting and a REST API with API keys.",
-        "Honest gaps: no universal inbox and no native phone app.",
+        "Honest gaps: no universal inbox, and the phone app is still an early Android APK and iOS TestFlight build.",
       ],
     },
     verdictSection(verdict, {
@@ -159,7 +159,7 @@ export default defineMarketingPage({
       body: [
         "Akiflow has its own MCP connector now, and it works well. It launched in June 2026 and comes with the Pro plan.",
         "The difference is what sits behind the URL. Open Sunsama's code is public, so your agent can read it and even add the feature you want. You can run all of it, agent access included, on your own server.",
-        "Your agent gets 24 tools. It can read your calendar events but can't change them. It adds and moves your tasks and time blocks.",
+        "Your agent gets 47 tools. It can read your calendar events but can't change them. It adds and moves your tasks and time blocks.",
       ],
       prompts: [
         "Here are my Slack to-dos. Turn them into tasks for this week.",
@@ -218,7 +218,7 @@ export default defineMarketingPage({
         {
           feature: "MCP server for AI agents",
           cells: [
-            { mark: "yes", text: "Hosted, 24 tools" },
+            { mark: "yes", text: "Hosted, 47 tools" },
             { mark: "yes", text: "Hosted, 19 actions" },
           ],
         },
@@ -311,7 +311,7 @@ export default defineMarketingPage({
       {
         question: "Does Open Sunsama have a phone app?",
         answer:
-          "It runs in your phone's browser as a mobile web app and syncs in real time. There is no native app for iOS or Android yet.",
+          "The phone app is an early Android APK and an iOS TestFlight build, not in the app stores yet. It also runs in your phone's browser as a mobile web app and syncs in real time.",
       },
       LICENSE_FAQ,
     ],

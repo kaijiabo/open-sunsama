@@ -70,7 +70,7 @@ Technical details for client developers:
 
 ## Available tools
 
-The server provides 45 tools. Each is annotated as read-only or destructive, so your assistant can ask before it deletes anything.
+The server provides 47 tools: 9 for tasks, 7 for time blocks, 1 for calendar events, 23 for Ideas, 5 for subtasks and 2 for your profile. Each is annotated as read-only or destructive, so your assistant can ask before it deletes anything.
 
 ### Tasks
 
@@ -113,9 +113,10 @@ The Ideas section has boards, columns, cards, and card checklists. The assistant
 | --- | --- |
 | `list_idea_boards`, `create_idea_board`, `update_idea_board`, `delete_idea_board`, `reorder_idea_boards` | Manage boards and their display order |
 | `list_idea_columns`, `create_idea_column`, `update_idea_column`, `delete_idea_column`, `reorder_idea_columns` | Manage columns within a board |
-| `list_ideas`, `create_idea`, `update_idea`, `delete_idea`, `reorder_ideas` | Manage cards, completion, and movement between columns |
+| `list_ideas`, `get_idea`, `create_idea`, `update_idea`, `delete_idea`, `reorder_ideas` | Manage cards, completion, and movement between columns; `get_idea` reads one card with its checklist |
 | `promote_idea` | Create a planner task from an idea |
 | `list_idea_subtasks`, `create_idea_subtask`, `update_idea_subtask`, `delete_idea_subtask`, `reorder_idea_subtasks` | Manage a card's checklist |
+| `bulk_ideas` | Create, update, move, complete, or delete up to 50 boards, columns, cards, or checklist items in one call |
 
 ### Subtasks
 

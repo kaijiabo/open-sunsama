@@ -5,7 +5,7 @@ import { GITHUB_URL, useGitHubStars } from "./site-header";
 import { CONTAINER } from "./tokens";
 
 /**
- * A strip of true numbers only: 24 MCP tools, desktop apps for 3 OSes, the
+ * A strip of true numbers only: 47 MCP tools, desktop apps for 3 OSes, the
  * live GitHub star count. Never user counts, ratings or logos we can't back.
  */
 export function StatsStrip({ items, className }: { items: StatItem[]; className?: string }) {

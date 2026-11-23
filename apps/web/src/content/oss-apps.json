@@ -43,7 +43,7 @@
       "mcp": {
         "kind": "official",
         "url": "https://opensunsama.com/docs/mcp/overview",
-        "note": "Hosted MCP server at api.opensunsama.com/mcp with OAuth sign-in; 24 tools for tasks, subtasks, time blocks and calendar events."
+        "note": "Hosted MCP server at api.opensunsama.com/mcp with OAuth sign-in; 47 tools for tasks, subtasks, time blocks, Ideas boards and calendar events."
       },
       "status": "active",
       "caveat": "The code is public under a non-commercial license: you can read, run and self-host it for personal use. Companies need a commercial license.",

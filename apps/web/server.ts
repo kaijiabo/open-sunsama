@@ -73,6 +73,13 @@ function parseRange(header: string | null, size: number) {
   return start > end || start >= size ? "unsatisfiable" : { start, end };
 }
 
+// Permanent moves. Old URLs keep their links and rankings through a 301.
+const MOVED: Record<string, string> = {
+  "/free-time-blocking-app": "/features/time-blocking",
+  "/blog/best-free-sunsama-alternatives": "/blog/best-sunsama-alternatives",
+  "/blog/best-free-daily-planner-apps": "/blog/best-daily-planner-apps",
+};
+
 async function respond(req: Request) {
   if (new URL(req.url).pathname === "/health") {
     return Response.json({ status: "ok" }, { headers: { "X-Robots-Tag": "noindex" } });
@@ -83,8 +90,9 @@ async function respond(req: Request) {
   } catch {
     return new Response("Bad Request", { status: 400 });
   }
-  if (pathname === "/free-time-blocking-app") {
-    return new Response(null, { status: 301, headers: { Location: "/features/time-blocking" + new URL(req.url).search } });
+  const moved = MOVED[pathname.replace(/\/+$/, "")];
+  if (moved) {
+    return new Response(null, { status: 301, headers: { Location: moved + new URL(req.url).search } });
   }
 
   // One public URL per document; preserve query strings through redirects.

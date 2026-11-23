@@ -42,7 +42,7 @@
 - [How to plan your day](https://opensunsama.com/blog/how-to-plan-your-day): Ten steps for a planned workday
 - [The complete guide to daily planning](https://opensunsama.com/blog/complete-daily-planning-guide): Methods, habits and tools
 - [Switching from Sunsama to Open Sunsama](https://opensunsama.com/blog/replace-sunsama-open-sunsama): A step-by-step migration
-- [Sunsama alternatives compared](https://opensunsama.com/blog/best-free-sunsama-alternatives): Daily planners side by side
+- [Sunsama alternatives compared](https://opensunsama.com/blog/best-sunsama-alternatives): Daily planners side by side
 - [Motion vs Sunsama](https://opensunsama.com/blog/motion-vs-sunsama): Two AI planners compared
 - [Open-source productivity apps](https://opensunsama.com/blog/best-open-source-productivity-apps): Self-hostable tools for tasks, notes and time
 - [All blog posts](https://opensunsama.com/blog): Every guide and comparison

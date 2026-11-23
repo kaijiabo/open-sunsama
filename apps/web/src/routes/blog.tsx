@@ -21,7 +21,7 @@ const POSTS_PER_PAGE = 18;
 
 /** Pillar guides shown under the featured post, in this order. */
 const START_HERE = [
-  "best-free-sunsama-alternatives",
+  "best-sunsama-alternatives",
   "best-calendar-apps-time-blocking",
   "plan-your-day-with-claude",
 ];

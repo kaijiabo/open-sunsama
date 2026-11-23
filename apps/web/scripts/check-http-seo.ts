@@ -40,6 +40,8 @@ try {
     ["/docs/mcp/overview.html?source=test", "/docs/mcp/overview?source=test", 308],
     ["/index.html", "/", 308],
     ["/free-time-blocking-app?source=test", "/features/time-blocking?source=test", 301],
+    ["/blog/best-free-sunsama-alternatives", "/blog/best-sunsama-alternatives", 301],
+    ["/blog/best-free-daily-planner-apps/", "/blog/best-daily-planner-apps", 301],
   ] as const) {
     const response = await get(pathname);
     assert.equal(response.status, status, pathname);

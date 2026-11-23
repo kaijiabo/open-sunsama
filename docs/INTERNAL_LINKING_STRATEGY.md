@@ -151,7 +151,7 @@ A comprehensive internal linking matrix to improve SEO, user navigation, and con
 | `reclaim-ai-vs-motion-vs-sunsama` | Reclaim vs Motion | reclaim vs motion vs sunsama |
 | `akiflow-vs-sunsama-vs-motion` | Akiflow comparison | akiflow vs sunsama |
 | `clockify-vs-toggl-vs-open-sunsama` | Time trackers | clockify vs toggl |
-| `best-free-sunsama-alternatives` | Sunsama alternatives | free sunsama alternative |
+| `best-sunsama-alternatives` | Sunsama alternatives | free sunsama alternative |
 | `replace-sunsama-open-sunsama` | Sunsama replacement | replace sunsama |
 
 **"Best For Audience" Articles:**
@@ -176,7 +176,7 @@ A comprehensive internal linking matrix to improve SEO, user navigation, and con
 |------|----------|------------------|
 | `best-calendar-apps-time-blocking` | Time blocking | calendar apps time blocking |
 | `best-focus-apps-deep-work` | Deep work | focus apps deep work |
-| `best-free-daily-planner-apps` | Free planners | free daily planner apps |
+| `best-daily-planner-apps` | Free planners | free daily planner apps |
 | `best-pomodoro-apps-task-management` | Pomodoro | pomodoro apps |
 | `best-habit-tracker-task-management` | Habit tracking | habit tracker task management |
 | `best-work-life-balance-apps` | Work-life balance | work-life balance apps |
@@ -200,7 +200,7 @@ Link to these high-value articles in relevant sections:
 | Section | Linked Articles | Anchor Text |
 |---------|-----------------|-------------|
 | Hero/Features | `what-is-time-blocking` | "Learn about time blocking" |
-| Social Proof | `best-free-sunsama-alternatives` | "See how we compare" |
+| Social Proof | `best-sunsama-alternatives` | "See how we compare" |
 | Features | `complete-guide-time-blocking` | "Time blocking guide" |
 | Features | `how-to-plan-your-day` | "Daily planning guide" |
 | Footer/Blog | `best-productivity-apps-adhd` | "Best for ADHD" |
@@ -210,7 +210,7 @@ Link to these high-value articles in relevant sections:
 | Section | Linked Articles | Anchor Text |
 |---------|-----------------|-------------|
 | Comparison | `motion-vs-sunsama` | "Motion vs Sunsama comparison" |
-| Why Switch | `best-free-sunsama-alternatives` | "free Sunsama alternatives" |
+| Why Switch | `best-sunsama-alternatives` | "free Sunsama alternatives" |
 | Features | `what-is-time-blocking` | "time blocking" |
 | Features | `what-is-daily-planner` | "daily planner" |
 | Use Cases | `best-productivity-apps-adhd` | "ADHD productivity" |
@@ -279,7 +279,7 @@ Link to these high-value articles in relevant sections:
 | Guide | `complete-guide-time-blocking` | "complete time blocking guide" |
 | Guide | `getting-started-with-time-blocking` | "getting started" |
 | Comparison | `best-calendar-apps-time-blocking` | "best time blocking apps" |
-| Comparison | `best-free-daily-planner-apps` | "free daily planner apps" |
+| Comparison | `best-daily-planner-apps` | "free daily planner apps" |
 | VS | `time-blocking-vs-todo-lists` | "time blocking vs to-do lists" |
 
 ### `/open-source-task-manager` (Open Source)
@@ -421,7 +421,7 @@ Each comparison should link to the relevant alternative page:
 | `trello-vs-sunsama` | `/features/kanban` | "kanban feature" | Body |
 | `notion-vs-sunsama-daily-planning` | `/` | "Open Sunsama" | CTA |
 | `google-calendar-vs-sunsama` | `/features/calendar-sync` | "calendar sync" | Body |
-| `best-free-sunsama-alternatives` | `/alternative/sunsama` | "free Sunsama alternative" | CTA |
+| `best-sunsama-alternatives` | `/alternative/sunsama` | "free Sunsama alternative" | CTA |
 | `replace-sunsama-open-sunsama` | `/alternative/sunsama` | "Sunsama alternative" | CTA |
 | `jira-vs-sunsama` | `/for/developers` | "developer planner" | Body |
 | `linear-vs-sunsama` | `/for/developers` | "developer planner" | Body |
@@ -445,7 +445,7 @@ Each comparison should link to the relevant alternative page:
 | `best-calendar-apps-time-blocking` | `/features/time-blocking` | "time blocking feature" | Body |
 | `best-calendar-apps-time-blocking` | `/free-time-blocking-app` | "free time blocking app" | CTA |
 | `best-focus-apps-deep-work` | `/features/focus-mode` | "focus mode" | CTA |
-| `best-free-daily-planner-apps` | `/` | "Open Sunsama" | CTA |
+| `best-daily-planner-apps` | `/` | "Open Sunsama" | CTA |
 | `best-pomodoro-apps-task-management` | `/features/focus-mode` | "focus mode with timer" | CTA |
 | `best-work-life-balance-apps` | `/for/remote-workers` | "remote work planner" | Body |
 
@@ -488,11 +488,11 @@ Each comparison should link to the relevant alternative page:
 **MOFU → BOFU (Method → Best Tools):**
 | From Article | Link To | Anchor Text |
 |--------------|---------|-------------|
-| `gtd-method-explained` | `best-free-daily-planner-apps` | "best daily planner apps" |
+| `gtd-method-explained` | `best-daily-planner-apps` | "best daily planner apps" |
 | `pomodoro-technique-guide` | `best-pomodoro-apps-task-management` | "best Pomodoro apps" |
 | `deep-work-cal-newport-guide` | `best-focus-apps-deep-work` | "best focus apps" |
 | `complete-guide-time-blocking` | `best-calendar-apps-time-blocking` | "best time blocking apps" |
-| `how-to-plan-your-day` | `best-free-daily-planner-apps` | "best daily planner apps" |
+| `how-to-plan-your-day` | `best-daily-planner-apps` | "best daily planner apps" |
 | `how-to-protect-focus-time` | `best-focus-apps-deep-work` | "focus apps" |
 | `productive-working-from-home` | `best-daily-planner-remote-workers` | "best planners for remote work" |
 | `morning-routine-productivity` | `best-daily-planner-managers` | "best daily planners" |
@@ -619,7 +619,7 @@ These links should be added first for maximum SEO and user journey impact:
 
 **Add to `/alternative/sunsama`:**
 ```markdown
-- Link "free alternatives" to /blog/best-free-sunsama-alternatives
+- Link "free alternatives" to /blog/best-sunsama-alternatives
 - Link "Motion comparison" to /blog/motion-vs-sunsama
 - Link "migration guide" to /blog/replace-sunsama-open-sunsama
 ```
@@ -660,7 +660,7 @@ or try [Open Sunsama's focus mode](/features/focus-mode) free.
 ```markdown
 - Link to /alternative/motion as "Motion alternative"
 - Link to /alternative/sunsama as "Sunsama alternative"
-- Link to /blog/best-free-sunsama-alternatives as "free alternatives"
+- Link to /blog/best-sunsama-alternatives as "free alternatives"
 - Link to /blog/reclaim-ai-vs-motion-vs-sunsama as "Reclaim comparison"
 ```
 

@@ -312,7 +312,7 @@ const RELATED: RelatedLink[] = [
     kind: "guide",
     title: "9 best Sunsama alternatives",
     description: "Every serious option, compared.",
-    href: "/blog/best-free-sunsama-alternatives",
+    href: "/blog/best-sunsama-alternatives",
   },
   {
     kind: "guide",

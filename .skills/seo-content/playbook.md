@@ -2,7 +2,7 @@
 
 Read this fully before writing. These rules are hard: every post ships only when it meets all of them.
 
-Posts live at `apps/web/src/content/blog/<slug>/index.mdx`. Look at two recent posts for the file format (for example `sunsama-mcp` and `best-free-sunsama-alternatives`).
+Posts live at `apps/web/src/content/blog/<slug>/index.mdx`. Look at two recent posts for the file format (for example `sunsama-mcp` and `best-sunsama-alternatives`).
 
 Research inputs:
 - [personas.md](personas.md): who reads us, their pains, and their exact words (research from 24 Sep 2026; refresh when it feels stale).

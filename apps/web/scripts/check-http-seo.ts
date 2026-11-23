@@ -23,7 +23,7 @@ try {
     const response = await get(pathname);
     assert.equal(response.status, 200, pathname);
     assert.equal(response.headers.get("x-robots-tag"), null, pathname);
-    assert.match(await response.text(), /<noscript>[\s\S]*<h1/);
+    assert.match(await response.text(), /<div id="root"><div data-prerendered>[\s\S]*<h1/);
   }
   for (const pathname of ["/missing-seo-test", "/docs/missing-seo-test", "/blog/missing-seo-test", "/missing.js", "/landing/missing.webp", "/blog-media/missing.mp4"]) {
     const response = await get(pathname);

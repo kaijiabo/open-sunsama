@@ -18,7 +18,9 @@ for (const url of urls) {
   if (titles.length !== 1 || !titles[0]?.[1]) errors.push(`${pathname}: expected one title`);
   if (canonicals.length !== 1 || canonicals[0]?.[1] !== url) errors.push(`${pathname}: incorrect canonical`);
   if ((html.match(/<h1\b/g) ?? []).length !== 1) errors.push(`${pathname}: expected one H1`);
-  if (!/<noscript>[\s\S]{200,}<\/noscript>/.test(html)) errors.push(`${pathname}: no readable crawler content`);
+  const crawlerText = html.match(/<div data-prerendered>([\s\S]*)<\/div><\/div>/)?.[1] ?? "";
+  if (crawlerText.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length < 100) errors.push(`${pathname}: no readable crawler content`);
+  if (/<noscript>/.test(html)) errors.push(`${pathname}: crawler content inside <noscript>, which text extractors drop`);
   for (const match of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
     try { JSON.parse(match[1]!); } catch { errors.push(`${pathname}: invalid JSON-LD`); }
   }

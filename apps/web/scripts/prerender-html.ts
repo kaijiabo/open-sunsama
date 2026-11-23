@@ -1,8 +1,11 @@
 /**
  * Shared by the prerender scripts (prerender-blog-meta.ts,
  * prerender-marketing.ts): each writes copies of dist/index.html with one
- * page's meta tags, JSON-LD and <noscript> HTML baked in, so link-preview and
- * AI crawlers that don't run JavaScript see the page. server.ts serves
+ * page's meta tags, JSON-LD and the page text baked in, so link-preview and
+ * AI crawlers that don't run JavaScript see the page. The text sits inside
+ * #root as ordinary HTML, not <noscript>: many HTML-to-text extractors drop
+ * <noscript>, so crawlers saw a nearly empty page. A class set by an inline
+ * script hides it for browsers until React's first render replaces it. server.ts serves
  * dist/<path>.html for <path> when the file exists.
  *
  * The tags mirror src/components/seo/seo-head.tsx and src/hooks/useSEO.ts.
@@ -31,7 +34,7 @@ export interface PageMeta {
   author?: string;
   /** JSON-LD blocks for <head>, keyed by script id */
   jsonLd?: Record<string, object>;
-  /** HTML for crawlers without JavaScript, put in <noscript> */
+  /** HTML for crawlers without JavaScript, rendered inside #root */
   noscript?: string;
 }
 
@@ -127,6 +130,11 @@ export function renderTags(page: PageMeta): string {
   ].join("\n    ");
 }
 
+// Browsers with JavaScript hide the crawler copy until React replaces #root's
+// children; crawlers and browsers without JavaScript read it as normal text.
+const PRERENDER_HIDE =
+  '<style>html.js [data-prerendered]{display:none}</style><script>document.documentElement.classList.add("js")</script>';
+
 export function renderPage(template: string, page: PageMeta): string {
   let html = template;
   for (const tag of REPLACED_TAGS) {
@@ -154,7 +162,14 @@ export function renderPage(template: string, page: PageMeta): string {
     html = html.replace("</head>", () => `  ${scripts.join("\n    ")}\n  </head>`);
   }
   if (page.noscript) {
-    html = html.replace(root, () => `${root}\n    <noscript>${page.noscript}</noscript>`);
+    html = html.replace(
+      "</head>",
+      () => `  ${PRERENDER_HIDE}\n  </head>`
+    );
+    html = html.replace(
+      root,
+      () => `<div id="root"><div data-prerendered>${page.noscript}</div></div>`
+    );
   }
   return html;
 }

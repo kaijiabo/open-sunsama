@@ -4,10 +4,9 @@
  * keeps no server-side state until the user actually approves.
  */
 
-import jwt from "jsonwebtoken";
+import { signJwt, verifyJwt } from "../jwt.js";
 import { CONSENT_REQUEST_TTL_SECONDS } from "./config.js";
 
-const SECRET = process.env.JWT_SECRET || "open-sunsama-dev-secret-change-in-production";
 const AUDIENCE = "open-sunsama:oauth-consent";
 
 export interface ConsentRequest {
@@ -20,7 +19,7 @@ export interface ConsentRequest {
 }
 
 export function signConsentRequest(request: ConsentRequest): string {
-  return jwt.sign({ req: request }, SECRET, {
+  return signJwt({ req: request }, {
     audience: AUDIENCE,
     expiresIn: CONSENT_REQUEST_TTL_SECONDS,
   });
@@ -28,7 +27,7 @@ export function signConsentRequest(request: ConsentRequest): string {
 
 export function verifyConsentRequest(token: string): ConsentRequest | null {
   try {
-    const decoded = jwt.verify(token, SECRET, { audience: AUDIENCE }) as { req?: ConsentRequest };
+    const decoded = verifyJwt(token, { audience: AUDIENCE }) as { req?: ConsentRequest };
     return decoded.req ?? null;
   } catch {
     return null;

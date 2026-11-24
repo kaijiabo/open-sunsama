@@ -94,6 +94,7 @@ if (mode === "all" || mode === "api") {
     MIGRATIONS_DIR: path.join(root, "packages/database/drizzle"),
     JWT_SECRET: process.env.JWT_SECRET ?? "local-dev-only-jwt-secret-not-for-production",
     // Nothing below may reach production services from a laptop.
+    JWT_SECRET_NEXT: "",
     REDIS_URL: "",
     RESEND_API_KEY: "",
     ROLLOVER_ENABLED: "false",

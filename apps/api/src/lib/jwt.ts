@@ -6,7 +6,7 @@
 import jwt from 'jsonwebtoken';
 import type { JwtPayload as JwtClaims, Secret, SignOptions, VerifyOptions } from 'jsonwebtoken';
 
-const JWT_SECRET: Secret = process.env.JWT_SECRET || 'open-sunsama-dev-secret-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET || undefined;
 /**
  * Rotates JWT_SECRET without signing anyone out: new tokens are signed with
  * JWT_SECRET_NEXT, and tokens signed with JWT_SECRET keep verifying. Once the
@@ -14,8 +14,10 @@ const JWT_SECRET: Secret = process.env.JWT_SECRET || 'open-sunsama-dev-secret-ch
  * JWT_REFRESH_LEEWAY_DAYS), move this value into JWT_SECRET and unset it.
  */
 const JWT_SECRET_NEXT = process.env.JWT_SECRET_NEXT || undefined;
-const SIGNING_SECRET: Secret = JWT_SECRET_NEXT ?? JWT_SECRET;
-const VERIFYING_SECRETS: Secret[] = JWT_SECRET_NEXT ? [JWT_SECRET_NEXT, JWT_SECRET] : [JWT_SECRET];
+// The public dev default applies only when no secret is configured at all.
+const SIGNING_SECRET: Secret = JWT_SECRET_NEXT ?? JWT_SECRET ?? 'open-sunsama-dev-secret-change-in-production';
+const VERIFYING_SECRETS: Secret[] =
+  JWT_SECRET_NEXT && JWT_SECRET ? [JWT_SECRET_NEXT, JWT_SECRET] : [SIGNING_SECRET];
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 
 /**
@@ -87,7 +89,11 @@ export function signToken(userId: string): string {
  * @throws Error if token is invalid or expired
  */
 export function verifyToken(token: string): { userId: string } {
-  const decoded = verifyJwt(token) as JwtPayload;
+  const decoded = verifyJwt(token) as Partial<JwtPayload>;
+  // OAuth consent requests share the secret but carry no userId: never a session.
+  if (typeof decoded.userId !== 'string' || !decoded.userId) {
+    throw new Error('Token is missing userId claim');
+  }
   return { userId: decoded.userId };
 }
 

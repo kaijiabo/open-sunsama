@@ -153,7 +153,7 @@ describe("consent request", () => {
     expect(rotated.verifyConsentRequest(signedAfter)?.clientId).toBe("osc_x");
     // The pre-rotation module only knows JWT_SECRET, so it can't read the new request.
     expect(consent.verifyConsentRequest(signedAfter)).toBeNull();
-    // A session token is still not a consent request.
-    expect(rotated.verifyConsentRequest(rotatedJwt.signToken("user-1"))).toBeNull();
+    // The audience check still applies: the same payload without it is refused.
+    expect(rotated.verifyConsentRequest(rotatedJwt.signJwt({ req: request }, { expiresIn: 60 }))).toBeNull();
   });
 });

@@ -17,6 +17,10 @@ export type WebSocketEventType =
   | "task-series:created"
   | "task-series:updated"
   | "task-series:deleted"
+  // Project events
+  | "project:created"
+  | "project:updated"
+  | "project:deleted"
   // Time block events
   | "timeblock:created"
   | "timeblock:updated"

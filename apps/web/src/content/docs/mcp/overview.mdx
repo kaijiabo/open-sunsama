@@ -70,13 +70,13 @@ Technical details for client developers:
 
 ## Available tools
 
-The server provides 47 tools: 9 for tasks, 7 for time blocks, 1 for calendar events, 23 for Ideas, 5 for subtasks and 2 for your profile. Each is annotated as read-only or destructive, so your assistant can ask before it deletes anything.
+The server provides 51 tools: 9 for tasks, 4 for projects, 7 for time blocks, 1 for calendar events, 23 for Ideas, 5 for subtasks and 2 for your profile. Each is annotated as read-only or destructive, so your assistant can ask before it deletes anything.
 
 ### Tasks
 
 | Tool | Description |
 | --- | --- |
-| `list_tasks` | List tasks by date, date range, backlog, or completion |
+| `list_tasks` | List tasks by date, date range, backlog, completion, or project |
 | `get_task` | Get a task by ID |
 | `create_task` | Create a task (title, notes, date, priority, estimate) |
 | `update_task` | Update task details |
@@ -84,6 +84,15 @@ The server provides 47 tools: 9 for tasks, 7 for time blocks, 1 for calendar eve
 | `delete_task` | Delete a task |
 | `schedule_task` | Move a task to a date or the backlog |
 | `reorder_tasks` | Change task order within a day |
+
+### Projects
+
+| Tool | Description |
+| --- | --- |
+| `list_projects` | List projects with their open and backlog task counts |
+| `create_project` | Create a project |
+| `update_project` | Rename, recolor, archive, or restore a project |
+| `delete_project` | Delete a project; its tasks are kept without a project |
 
 ### Time blocks
 

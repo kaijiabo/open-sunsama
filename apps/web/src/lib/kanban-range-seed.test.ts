@@ -23,6 +23,7 @@ function task(id: string): Task {
     position: 0,
     completedAt: null,
     subtasksHidden: false,
+    projectId: null,
     seriesId: null,
     seriesInstanceNumber: null,
     timerStartedAt: null,

@@ -17,6 +17,7 @@ import { users } from "./users";
 import { timeBlocks } from "./time-blocks";
 import { attachments } from "./attachments";
 import { taskSeries } from "./task-series";
+import { projects } from "./projects";
 import { taskExternalLinks } from "./task-external-links";
 
 export const tasks = pgTable(
@@ -35,6 +36,14 @@ export const tasks = pgTable(
     completedAt: timestamp("completed_at"),
     position: integer("position").notNull().default(0),
     subtasksHidden: boolean("subtasks_hidden").notNull().default(false),
+
+    /**
+     * Project this task belongs to. Null = no project.
+     * When a project is deleted its tasks stay, without a project.
+     */
+    projectId: uuid("project_id").references(() => projects.id, {
+      onDelete: "set null",
+    }),
 
     // Recurring task fields
     /**
@@ -69,6 +78,8 @@ export const tasks = pgTable(
     index("tasks_user_scheduled_incomplete_idx")
       .on(table.userId, table.scheduledDate)
       .where(sql`${table.completedAt} IS NULL`),
+    // Index for a project's tasks (its backlog and its planned work)
+    index("tasks_project_idx").on(table.projectId),
     // Index for finding all instances of a series
     index("tasks_series_idx").on(table.seriesId),
     // Unique constraint to prevent duplicate recurring task instances
@@ -97,6 +108,10 @@ export const tasksRelations = relations(tasks, ({ one, many }) => ({
   series: one(taskSeries, {
     fields: [tasks.seriesId],
     references: [taskSeries.id],
+  }),
+  project: one(projects, {
+    fields: [tasks.projectId],
+    references: [projects.id],
   }),
 }));
 

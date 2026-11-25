@@ -99,6 +99,7 @@ export async function processGenerateRecurringTask(
       scheduledDate: targetDate,
       estimatedMins: series.estimatedMins,
       priority: series.priority,
+      projectId: series.projectId,
       position,
       seriesId: series.id,
       seriesInstanceNumber: instanceNumber,

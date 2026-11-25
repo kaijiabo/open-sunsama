@@ -107,11 +107,13 @@ export class ApiClient {
     to?: string;
     completed?: boolean;
     backlog?: boolean;
+    projectId?: string;
     sortBy?: "priority" | "position" | "createdAt";
     page?: number;
     limit?: number;
   }) {
     return this.request<Task[]>("GET", "/tasks", undefined, {
+      projectId: params?.projectId,
       date: params?.date,
       from: params?.from,
       to: params?.to,
@@ -141,6 +143,28 @@ export class ApiClient {
 
   async reorderTasks(date: string | "backlog", taskIds: string[]) {
     return this.request<Task[]>("POST", "/tasks/reorder", { date, taskIds });
+  }
+
+  // Projects
+  async listProjects(params?: { includeArchived?: boolean }) {
+    return this.request<Project[]>("GET", "/projects", undefined, {
+      includeArchived: params?.includeArchived ? true : undefined,
+    });
+  }
+
+  async createProject(data: { name: string; color?: string }) {
+    return this.request<Project>("POST", "/projects", data);
+  }
+
+  async updateProject(
+    id: string,
+    data: { name?: string; color?: string; archived?: boolean }
+  ) {
+    return this.request<Project>("PATCH", `/projects/${id}`, data);
+  }
+
+  async deleteProject(id: string) {
+    return this.request<{ message: string }>("DELETE", `/projects/${id}`);
   }
 
   // Subtasks
@@ -406,11 +430,22 @@ export interface UpdateIdeaSubtaskInput {
   position?: number;
 }
 
+export interface Project {
+  id: string;
+  name: string;
+  color: string;
+  position: number;
+  archivedAt: string | null;
+  openTaskCount?: number;
+  backlogTaskCount?: number;
+}
+
 export interface Task {
   id: string;
   userId: string;
   title: string;
   notes: string | null;
+  projectId?: string | null;
   scheduledDate: string | null;
   estimatedMins: number | null;
   actualMins: number | null;
@@ -428,6 +463,7 @@ export interface CreateTaskInput {
   estimatedMins?: number;
   priority?: TaskPriority;
   position?: number;
+  projectId?: string | null;
 }
 
 export interface UpdateTaskInput {
@@ -439,6 +475,7 @@ export interface UpdateTaskInput {
   priority?: TaskPriority;
   completedAt?: string | null;
   position?: number;
+  projectId?: string | null;
 }
 
 export interface Subtask {

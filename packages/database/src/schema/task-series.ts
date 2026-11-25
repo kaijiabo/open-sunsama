@@ -18,6 +18,7 @@ import { relations, sql } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { users } from "./users";
+import { projects } from "./projects";
 
 /**
  * Recurrence types supported
@@ -59,6 +60,10 @@ export const taskSeries = pgTable(
     notes: text("notes"),
     estimatedMins: integer("estimated_mins"),
     priority: varchar("priority", { length: 2 }).notNull().default("P2"),
+    /** Project inherited by generated instances. Null = no project. */
+    projectId: uuid("project_id").references(() => projects.id, {
+      onDelete: "set null",
+    }),
 
     // Recurrence configuration
     recurrenceType: varchar("recurrence_type", { length: 20 })

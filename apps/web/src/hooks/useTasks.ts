@@ -251,6 +251,7 @@ export function useCreateTask() {
         position: Number.MAX_SAFE_INTEGER,
         completedAt: null,
         subtasksHidden: false,
+        projectId: data.projectId ?? null,
         seriesId: null,
         seriesInstanceNumber: null,
         timerStartedAt: null,

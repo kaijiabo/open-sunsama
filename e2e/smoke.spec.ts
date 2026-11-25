@@ -916,3 +916,33 @@ test('Ideas surfaces stay neutral across accent colors and adapt to light and da
   expect(colors[2]).toBe(colors[3]);
   expect(colors[0]).not.toBe(colors[2]);
 });
+
+test("a routine files its tasks under its project and moves them when it changes", async () => {
+  const session = await register();
+  const work = await api<{ id: string }>("POST", "/projects", { name: "Work" }, session.token);
+  const house = await api<{ id: string }>("POST", "/projects", { name: "House" }, session.token);
+  const other = await register();
+  const foreign = await api<{ id: string }>("POST", "/projects", { name: "Theirs" }, other.token);
+
+  const { series } = await api<{ series: { id: string; projectId: string | null } }>(
+    "POST",
+    "/task-series",
+    { title: "Weekly report", recurrenceType: "daily", projectId: work.id },
+    session.token
+  );
+  expect(series.projectId).toBe(work.id);
+  const instances = () =>
+    api<Array<{ projectId: string | null }>>("GET", `/task-series/${series.id}/instances`, undefined, session.token);
+  expect((await instances()).map((t) => t.projectId)).toEqual([work.id]);
+
+  await api("PATCH", `/task-series/${series.id}`, { projectId: house.id }, session.token);
+  expect((await instances()).map((t) => t.projectId)).toEqual([house.id]);
+
+  // Someone else's project can't be used.
+  await expect(
+    api("PATCH", `/task-series/${series.id}`, { projectId: foreign.id }, session.token)
+  ).rejects.toThrow(/400/);
+  await expect(
+    api("POST", "/tasks", { title: "x", projectId: foreign.id }, session.token)
+  ).rejects.toThrow(/400/);
+});

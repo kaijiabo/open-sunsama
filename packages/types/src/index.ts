@@ -53,6 +53,14 @@ export type {
   TaskWithMeta,
 } from "./task.js";
 
+// Project types
+export type {
+  Project,
+  CreateProjectInput,
+  UpdateProjectInput,
+} from "./project.js";
+export { PROJECT_COLORS } from "./project.js";
+
 // Task Series (Recurring Tasks) types
 export type {
   TaskSeries,

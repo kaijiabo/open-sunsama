@@ -218,6 +218,17 @@ If you prefer Bun over Node.js:
 | `schedule_task` | Move a task to a specific date or backlog |
 | `reorder_tasks` | Reorder tasks within a date |
 
+### Projects
+
+| Tool | Description |
+|------|-------------|
+| `list_projects` | List projects with their open and backlog task counts |
+| `create_project` | Create a project (name, color) |
+| `update_project` | Rename, recolor, archive or restore a project |
+| `delete_project` | Delete a project; its tasks are kept without a project |
+
+`list_tasks`, `create_task` and `update_task` take a `projectId`. A project's backlog is `list_tasks` with its `projectId`, `backlog: true` and `completed: false`.
+
 ### Subtask Management
 
 | Tool | Description |

@@ -3,7 +3,7 @@ mod menu;
 mod recovery;
 mod tray;
 
-use tauri::{Emitter, Manager};
+use tauri::{Emitter, Manager, WindowEvent};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
 
@@ -12,6 +12,10 @@ pub fn run() {
 
     // Register plugins
     builder = builder
+        // Must stay first, so a second launch exits before anything else starts.
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            show_main_window(app);
+        }))
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_autostart::init(
@@ -46,6 +50,12 @@ pub fn run() {
 
             Ok(())
         })
+        .on_window_event(|window, event| {
+            if let WindowEvent::CloseRequested { api, .. } = event {
+                api.prevent_close();
+                let _ = window.hide();
+            }
+        })
         .invoke_handler(tauri::generate_handler![
             commands::show_notification,
             commands::get_auto_launch,
@@ -61,11 +71,40 @@ pub fn run() {
             // An updater restart launches the executable directly. macOS can
             // leave that process behind other apps unless we activate it once
             // the event loop and main window are ready.
-            tauri::RunEvent::Ready => show_main_window(app),
+            tauri::RunEvent::Ready => {
+                // `updated` has to be checked on every launch, so it goes first.
+                if updated_since_last_launch(app) || !launched_minimized() {
+                    show_main_window(app);
+                }
+            }
             #[cfg(target_os = "macos")]
             tauri::RunEvent::Reopen { .. } => show_main_window(app),
             _ => {}
         });
+}
+
+fn launched_minimized() -> bool {
+    std::env::args().any(|argument| argument == "--minimized")
+}
+
+/// True on the first launch of a new version. An update restarts the app with
+/// the arguments it started with, so one that began at login would otherwise
+/// come back hidden after the user clicked "update".
+fn updated_since_last_launch(app: &tauri::AppHandle) -> bool {
+    let version = app.package_info().version.to_string();
+    let Ok(dir) = app.path().app_data_dir() else {
+        return false;
+    };
+    let file = dir.join("last-launched-version");
+    if std::fs::read_to_string(&file).is_ok_and(|last| last == version) {
+        return false;
+    }
+    if let Err(error) = std::fs::create_dir_all(&dir).and_then(|()| std::fs::write(&file, &version))
+    {
+        eprintln!("Failed to record the launched version: {error}");
+        return false;
+    }
+    true
 }
 
 fn show_main_window(app: &tauri::AppHandle) {
@@ -123,6 +162,12 @@ fn handle_global_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut) {
 }
 
 fn bring_to_front(window: &tauri::WebviewWindow) {
+    // On Linux `unminimize` alone can leave the window minimized (and
+    // `set_focus` does nothing while it is), so map it afresh.
+    #[cfg(target_os = "linux")]
+    if window.is_minimized().unwrap_or(false) {
+        let _ = window.hide();
+    }
     let _ = window.unminimize();
     let _ = window.show();
     let _ = window.set_focus();
